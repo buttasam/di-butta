@@ -4,6 +4,7 @@ package cvut.fit.di.container;
  *
  * Hlavni API trida.
  *
+ * @author Samuel Butta
  */
 public class DIContainer {
 
@@ -11,7 +12,7 @@ public class DIContainer {
     /**
      * Inicializace probiha po zavolani konstruktoru.
      */
-    public void DIContainer() {
+    public DIContainer() {
         init();
     }
 
