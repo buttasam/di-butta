@@ -1,11 +1,11 @@
 package cvut.fit.di.testEntity.managed.subManaged;
 
-import cvut.fit.di.anotation.Managed;
+import cvut.fit.di.anotation.Prototype;
 
 /**
  * Created by samik on 28.11.16.
  */
 
-@Managed
+@Prototype
 public class SubmanagedTwo {
 }

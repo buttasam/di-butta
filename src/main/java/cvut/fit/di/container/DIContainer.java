@@ -1,5 +1,7 @@
 package cvut.fit.di.container;
 
+import cvut.fit.di.repository.store.BeanStore;
+
 /**
  *
  * Hlavni API trida.
@@ -7,6 +9,11 @@ package cvut.fit.di.container;
  * @author Samuel Butta
  */
 public class DIContainer {
+
+    /**
+     * Uloziste spravovanych bean.
+     */
+    private BeanStore beanStore;
 
 
     /**

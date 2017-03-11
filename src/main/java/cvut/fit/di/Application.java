@@ -1,15 +1,13 @@
 package cvut.fit.di;
 
-import cvut.fit.di.builder.Finder;
+import cvut.fit.di.container.DIContainer;
 
 
 public class Application {
 
     public static void main(String[] args) {
 
-        Finder finder = new Finder();
-
-        finder.findManagedBeans("cvut.fit.di.testEntity");
+        DIContainer container = new DIContainer();
     }
 
 }

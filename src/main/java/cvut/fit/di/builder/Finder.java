@@ -1,6 +1,6 @@
 package cvut.fit.di.builder;
 
-import cvut.fit.di.anotation.Managed;
+import cvut.fit.di.anotation.Prototype;
 import org.reflections.Reflections;
 
 import java.util.Set;
@@ -15,7 +15,7 @@ public class Finder {
 
 
     /**
-     * Metoda najde vsechny tridy anotovane @Managed
+     * Metoda najde vsechny tridy anotovane @Prototype
      *
      * @param packagePrefix
      * @return
@@ -23,7 +23,7 @@ public class Finder {
     public Set<Class<?>> findManagedBeans(String packagePrefix) {
         Reflections reflections = new Reflections(packagePrefix);
 
-        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Managed.class);
+        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Prototype.class);
 
         return annotated;
     }

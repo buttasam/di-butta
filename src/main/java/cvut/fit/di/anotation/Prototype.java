@@ -1,4 +1,4 @@
-package cvut.fit.di.reflextion;
+package cvut.fit.di.anotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Wired {
+@Target(ElementType.TYPE)
+public @interface Prototype {
 }

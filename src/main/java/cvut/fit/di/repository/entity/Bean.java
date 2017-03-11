@@ -1,5 +1,9 @@
 package cvut.fit.di.repository.entity;
 
+import cvut.fit.di.anotation.Prototype;
+
+import javax.inject.Singleton;
+
 /**
  * Reprezentuje Bean.
  * Udrzuje informaci o rozhrani a implementaci.
@@ -50,6 +54,7 @@ public class Bean {
     public Bean(Class classImpl) {
         this.classImpl = classImpl;
         this.hasInterface = false;
+        findAndSetBeanScope(classImpl);
     }
 
     /**
@@ -64,13 +69,30 @@ public class Bean {
         this.classImpl = classImpl;
 
         this.hasInterface = true;
+        findAndSetBeanScope(classImpl);
+    }
+
+    /**
+     * Podle anotace urci scope beany.
+     * @param clazz
+     */
+    private void findAndSetBeanScope(Class clazz) {
+        if(clazz.isAnnotationPresent(Singleton.class)) {
+            beanScope = BeanScope.SINGLETON;
+        } else if(clazz.isAnnotationPresent(Prototype.class)) {
+            beanScope = BeanScope.PROTOTYPE;
+        }
     }
 
     public BeanScope getBeanScope() {
         return beanScope;
     }
 
-    public void setBeanScope(BeanScope beanScope) {
-        this.beanScope = beanScope;
+    public Class getClassInterface() {
+        return classInterface;
+    }
+
+    public Class getClassImpl() {
+        return classImpl;
     }
 }
