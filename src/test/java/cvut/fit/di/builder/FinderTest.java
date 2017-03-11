@@ -1,5 +1,10 @@
 package cvut.fit.di.builder;
 
+import cvut.fit.di.exception.AmbiguousImplementationException;
+import cvut.fit.di.exception.MissingImplementationException;
+import cvut.fit.di.testEntity.managed.withInterface.Mailer;
+import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailMailer;
+import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +46,18 @@ public class FinderTest {
         Set<Class<?>> annotated = finder.findManagedBeans(MANAGE_TEST_ENTITY_SUBPACKAGE);
 
         Assert.assertEquals(2, annotated.size());
+    }
+
+    @Test
+    public void testFindImplementation() throws MissingImplementationException, AmbiguousImplementationException {
+        Class uniqueImp = finder.findImplementation(UniqueMailer.class);
+
+        Assert.assertEquals(UniqueMailMailer.class, uniqueImp);
+    }
+
+    @Test(expected = AmbiguousImplementationException.class)
+    public void testAmbiguousImplementation() throws MissingImplementationException, AmbiguousImplementationException {
+        finder.findImplementation(Mailer.class);
     }
 
 }
