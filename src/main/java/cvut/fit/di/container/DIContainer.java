@@ -31,4 +31,12 @@ public class DIContainer {
     private void init() {
 
     }
+
+    public <T> void addBean(Class<T> beanClass) {
+        beanStore.addBean(beanClass);
+    }
+
+    public <T> void addBean(Class<T> beanInterface, Class<? extends T> beanImpl)  {
+        beanStore.addBean(beanInterface, beanImpl);
+    }
 }

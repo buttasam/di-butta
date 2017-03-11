@@ -8,4 +8,9 @@ import cvut.fit.di.anotation.Prototype;
 
 @Prototype
 public class ManagedOne {
+
+    public void print() {
+        System.out.println("Manage One");
+    }
+
 }

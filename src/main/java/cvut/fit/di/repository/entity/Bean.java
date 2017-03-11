@@ -1,6 +1,7 @@
 package cvut.fit.di.repository.entity;
 
 import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.builder.Creator;
 
 import javax.inject.Singleton;
 
@@ -35,6 +36,11 @@ public class Bean {
      */
     private boolean hasInterface;
 
+
+    /**
+     * Ulozena instance, pokud se jedna o singleton.
+     */
+    private Object singletonInstance;
 
     /**
      * Enum urcuje scope (dobu zivota) beany.
@@ -74,12 +80,13 @@ public class Bean {
 
     /**
      * Podle anotace urci scope beany.
+     *
      * @param clazz
      */
     private void findAndSetBeanScope(Class clazz) {
-        if(clazz.isAnnotationPresent(Singleton.class)) {
+        if (clazz.isAnnotationPresent(Singleton.class)) {
             beanScope = BeanScope.SINGLETON;
-        } else if(clazz.isAnnotationPresent(Prototype.class)) {
+        } else if (clazz.isAnnotationPresent(Prototype.class)) {
             beanScope = BeanScope.PROTOTYPE;
         }
     }
@@ -95,4 +102,41 @@ public class Bean {
     public Class getClassImpl() {
         return classImpl;
     }
+
+    /**
+     *
+     * Vraci instanci podle scopu.
+     *
+     * @return
+     */
+    public Object getInstance() {
+        Object result = null;
+
+        switch (beanScope) {
+            case PROTOTYPE:
+                Creator creator = new Creator();
+                result = creator.createNewInstance(classImpl);
+                break;
+            case SINGLETON:
+                result = lazySingletonInit();
+                break;
+        }
+        return result;
+    }
+
+    /**
+     *
+     * Lazy inicializace instance pokud se jedna o singleton.
+     *
+     * @return
+     */
+    private Object lazySingletonInit() {
+        if(singletonInstance == null) {
+            Creator creator = new Creator();
+            singletonInstance = creator.createNewInstance(classImpl);
+        }
+        return singletonInstance;
+    }
+
+
 }
