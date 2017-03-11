@@ -16,8 +16,8 @@ public class Creator {
      * //TODO
      * zatim bere pouze konstruktor bez parametru.
      * Pokud nastane chyba vypise se vyjimka, vrati null.
-     * @param clazz
-     * @return
+     * @param clazz typ tridy
+     * @return nove vytvorena instance
      */
     public Object createNewInstance(Class clazz) {
         Class<?> c = null;

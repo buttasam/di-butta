@@ -22,8 +22,8 @@ public class Finder {
     /**
      * Metoda najde vsechny tridy anotovane @Prototype
      *
-     * @param packagePrefix
-     * @return
+     * @param packagePrefix prefix balicku v kterem se beany hledaji
+     * @return mnozina bean
      */
     public Set<Class<?>> findManagedBeans(String packagePrefix) {
         Reflections reflections = new Reflections(packagePrefix);

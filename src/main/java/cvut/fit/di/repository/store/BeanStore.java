@@ -67,7 +67,7 @@ public class BeanStore {
     }
 
     /**
-     * Vraci pocet managovanych bean.
+     * @return Vraci pocet managovanych bean.
      */
     public int managedBeansCount() {
         return managedBeans.size();

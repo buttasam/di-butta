@@ -107,7 +107,7 @@ public class Bean {
      *
      * Vraci instanci podle scopu.
      *
-     * @return
+     * @return instance podle scopu
      */
     public Object getInstance() {
         Object result = null;
