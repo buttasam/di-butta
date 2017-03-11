@@ -2,6 +2,7 @@ package cvut.fit.di.builder;
 
 import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
+import cvut.fit.di.testEntity.managed.injected.UserService;
 import cvut.fit.di.testEntity.managed.withInterface.Mailer;
 import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailMailer;
 import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailer;
@@ -9,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
@@ -60,4 +62,10 @@ public class FinderTest {
         finder.findImplementation(Mailer.class);
     }
 
+    @Test
+    public void testFindInjectedSetters() {
+        Set<Method> methods = finder.findInjectedSetters(UserService.class);
+
+        Assert.assertEquals(2, methods.size());
+    }
 }

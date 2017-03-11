@@ -5,10 +5,13 @@ import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
 import org.reflections.Reflections;
 
+import javax.inject.Inject;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- *
  * Trida pomoci reflexe hleda beany
  *
  * @author Samuel Butta
@@ -32,6 +35,7 @@ public class Finder {
 
     /**
      * Najde ve vsech podbaliccich podle parametru packagePrefix.
+     *
      * @param packagePrefix
      * @param clazz
      * @return
@@ -43,10 +47,10 @@ public class Finder {
 
         Set<Class<?>> subtypes = reflections.getSubTypesOf(clazz);
 
-        if(subtypes.isEmpty()) {
+        if (subtypes.isEmpty()) {
             throw new MissingImplementationException();
         }
-        if(subtypes.size() != 1) {
+        if (subtypes.size() != 1) {
             throw new AmbiguousImplementationException();
         }
 
@@ -56,7 +60,7 @@ public class Finder {
 
     /**
      * Vyhleda implementace rozhrani
-     * 
+     *
      * @param clazz
      * @return
      * @throws MissingImplementationException
@@ -66,6 +70,19 @@ public class Finder {
         String packagePrefix = clazz.getPackage().getName();
 
         return findImplementation(packagePrefix, clazz);
+    }
+
+    /**
+     * Najde a vrati mnozinu setterů anotovanych @inject
+     *
+     * @param clazz
+     */
+    public Set<Method> findInjectedSetters(Class clazz) {
+        Set<Method> methods = Arrays.stream(clazz.getMethods())
+                .filter(m -> m.isAnnotationPresent(Inject.class) && m.getName().startsWith("set"))
+                .collect(Collectors.toSet());
+
+        return methods;
     }
 
 }
