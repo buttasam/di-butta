@@ -31,4 +31,11 @@ public class UserService {
         this.name = name;
     }
 
+    public CarDao getCarDao() {
+        return carDao;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
 }
