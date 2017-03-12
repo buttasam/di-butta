@@ -35,7 +35,7 @@ public class BeanStore {
      * @param beanClass
      * @param <T>
      */
-    public <T> void addBean(Class<T> beanClass) {
+    public synchronized <T> void addBean(Class<T> beanClass) {
         // pokud jiz beana ve storu je, neprida se, zaloguje se warning
         if (findBean(beanClass).isPresent()) {
             // vyhodit vyjimku
@@ -53,7 +53,7 @@ public class BeanStore {
      * @param beanImpl
      * @param <T>
      */
-    public <T> void addBean(Class<T> beanInterface, Class<? extends T> beanImpl) {
+    public synchronized <T> void addBean(Class<T> beanInterface, Class<? extends T> beanImpl) {
         // pokus se najit tuto beanu
         Bean bean = new Bean(beanInterface, beanImpl);
 
