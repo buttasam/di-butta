@@ -1,4 +1,4 @@
-package cvut.fit.di.builder;
+package cvut.fit.di.builder.helper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

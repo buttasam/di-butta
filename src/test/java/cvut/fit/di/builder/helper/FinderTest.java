@@ -1,9 +1,7 @@
-package cvut.fit.di.builder;
+package cvut.fit.di.builder.helper;
 
 import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
-import cvut.fit.di.testEntity.Car;
-import cvut.fit.di.testEntity.managed.injected.CarDao;
 import cvut.fit.di.testEntity.managed.injected.UserService;
 import cvut.fit.di.testEntity.managed.withInterface.Mailer;
 import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailMailer;
@@ -12,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
 
@@ -72,56 +69,4 @@ public class FinderTest {
         Assert.assertEquals(2, methods.size());
     }
 
-    @Test
-    public void setServicesTest() {
-        Set<Method> methods = finder.findInjectedSetters(UserService.class);
-
-        Creator creator = new Creator();
-        UserService userService = new UserService();
-
-        methods.stream().forEach(method -> {
-            Class<?>[] paramTypes = method.getParameterTypes();
-
-            Class cls = null;
-            try {
-                cls = Class.forName("cvut.fit.di.testEntity.managed.injected.UserService");
-                Object obj = cls.newInstance();
-
-
-                for (Class paramType: paramTypes) {
-                    System.out.println(method.getName());
-                    method.invoke(userService, creator.createNewInstance(paramType));
-                }
-
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(userService);
-            System.out.println(userService);
-
-
-
-/*            for (Class paramType: paramTypes) {
-                System.out.println(paramType.getName());
-                try {
-                    System.out.println(method.getName());
-
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            }*/
-
-            System.out.println(method.getParameterCount());
-        });
-
-    }
 }

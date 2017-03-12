@@ -1,4 +1,4 @@
-package cvut.fit.di.builder;
+package cvut.fit.di.builder.helper;
 
 import cvut.fit.di.anotation.Prototype;
 import cvut.fit.di.exception.AmbiguousImplementationException;

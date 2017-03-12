@@ -1,7 +1,7 @@
 package cvut.fit.di.repository.entity;
 
 import cvut.fit.di.anotation.Prototype;
-import cvut.fit.di.builder.Creator;
+import cvut.fit.di.builder.helper.Creator;
 
 import javax.inject.Singleton;
 
