@@ -60,7 +60,7 @@ public class BeanStore {
         managedBeans.add(bean);
     }
 
-    public <T> Object getInstace(Class<T> beanClass) {
+    public <T> Object getInstance(Class<T> beanClass) {
         Optional<Bean> beanOpt = findBean(beanClass);
         Bean bean = beanOpt.get();
         return bean.getInstance();
@@ -75,6 +75,38 @@ public class BeanStore {
 
 
     private <T> Optional<Bean> findBean(Class<T> beanClass) {
-        return managedBeans.stream().filter(b -> b.getClassImpl().equals(beanClass)).findAny();
+        return managedBeans.stream().filter(b -> b.getClassImpl().equals(beanClass)).findFirst();
+    }
+
+    /**
+     * Pokusi se najit v ulozisti beanu.
+     * Pokud jiz existuje vrati jeji instanci.
+     * Pokud ne, beana se prida a vrati jeji instance.
+     *
+     * TODO zatim bez rozhrani
+     * @param clazz
+     * @return
+     */
+    public Object getOrCreateInstance(Class clazz) {
+        return getOrCreateBean(clazz).getInstance();
+    }
+
+    /**
+     * Pokusi se najit v ulozisti beanu.
+     * Pokud jiz existuje vrati jeji instanci.
+     * Pokud ne, beana se prida a vrati jeji instance.
+     *
+     * TODO zatim bez rozhrani
+     * @param clazz
+     * @return
+     */
+    public Bean getOrCreateBean(Class clazz) {
+        // hledana beana
+        Optional<Bean> foundBean = findBean(clazz);
+        if(!foundBean.isPresent()) {
+            addBean(clazz);
+        }
+        foundBean = findBean(clazz);
+        return  foundBean.get();
     }
 }

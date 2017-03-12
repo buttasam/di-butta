@@ -1,6 +1,8 @@
 package cvut.fit.di.container;
 
+import cvut.fit.di.builder.Executor;
 import cvut.fit.di.repository.store.BeanStore;
+import cvut.fit.di.repository.store.BeanStoreFactory;
 
 /**
  *
@@ -15,6 +17,7 @@ public class DIContainer {
      */
     private BeanStore beanStore;
 
+    private Executor executor;
 
     /**
      * Inicializace probiha po zavolani konstruktoru.
@@ -29,7 +32,8 @@ public class DIContainer {
      * Vola buildera, ktery vytvori objektovy graf.
      */
     private void init() {
-
+        executor = new Executor();
+        beanStore = BeanStoreFactory.getBeanStore();
     }
 
     public <T> void addBean(Class<T> beanClass) {
@@ -38,5 +42,9 @@ public class DIContainer {
 
     public <T> void addBean(Class<T> beanInterface, Class<? extends T> beanImpl)  {
         beanStore.addBean(beanInterface, beanImpl);
+    }
+
+    public Object getInstance(Class clazz) {
+        return executor.initObjectGraph(clazz);
     }
 }

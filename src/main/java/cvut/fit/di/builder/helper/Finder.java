@@ -8,6 +8,7 @@ import org.reflections.Reflections;
 import javax.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -83,6 +84,16 @@ public class Finder {
                 .collect(Collectors.toSet());
 
         return methods;
+    }
+
+    public Set<Class<?>> findInjectedSettersDependencies(Class clazz) {
+        Set<Method> setters = findInjectedSetters(clazz);
+
+        Set<Class<?>> dependencyTypes = new HashSet<>();
+
+        setters.forEach(s -> dependencyTypes.add(s.getParameterTypes()[0]));
+
+        return dependencyTypes;
     }
 
 }

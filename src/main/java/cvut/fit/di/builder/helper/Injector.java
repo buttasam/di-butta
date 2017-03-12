@@ -1,5 +1,8 @@
 package cvut.fit.di.builder.helper;
 
+import cvut.fit.di.repository.store.BeanStore;
+import cvut.fit.di.repository.store.BeanStoreFactory;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -32,7 +35,9 @@ public class Injector {
                 // pro vsechny typy parametru vytvor novou instanci
                 for (Class paramType: paramTypes) {
                     System.out.println(method.getName());
-                    method.invoke(object, creator.createNewInstance(paramType));
+                    System.out.println(paramType);
+                    BeanStore beanStore = BeanStoreFactory.getBeanStore();
+                    method.invoke(object, beanStore.getOrCreateBean(paramType).getInstance());
                 }
 
             } catch (IllegalAccessException e) {

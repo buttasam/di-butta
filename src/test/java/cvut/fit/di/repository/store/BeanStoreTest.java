@@ -21,7 +21,7 @@ public class BeanStoreTest {
         beanStore.addBean(ManagedOne.class);
 
 
-        ManagedOne managedOne = (ManagedOne) beanStore.getInstace(ManagedOne.class);
+        ManagedOne managedOne = (ManagedOne) beanStore.getInstance(ManagedOne.class);
         managedOne.print();
 
         Assert.assertEquals(1, beanStore.managedBeansCount());
@@ -41,8 +41,8 @@ public class BeanStoreTest {
         BeanStore beanStore = new BeanStore();
         beanStore.addBean(PrototypeEntity.class);
 
-        PrototypeEntity prototype1 = (PrototypeEntity) beanStore.getInstace(PrototypeEntity.class);
-        PrototypeEntity prototype2 = (PrototypeEntity) beanStore.getInstace(PrototypeEntity.class);
+        PrototypeEntity prototype1 = (PrototypeEntity) beanStore.getInstance(PrototypeEntity.class);
+        PrototypeEntity prototype2 = (PrototypeEntity) beanStore.getInstance(PrototypeEntity.class);
 
         Assert.assertNotEquals(prototype1, prototype2);
     }
@@ -52,8 +52,8 @@ public class BeanStoreTest {
         BeanStore beanStore = new BeanStore();
         beanStore.addBean(SingletonEntity.class);
 
-        SingletonEntity singleton1 = (SingletonEntity) beanStore.getInstace(SingletonEntity.class);
-        SingletonEntity singleton2 = (SingletonEntity) beanStore.getInstace(SingletonEntity.class);
+        SingletonEntity singleton1 = (SingletonEntity) beanStore.getInstance(SingletonEntity.class);
+        SingletonEntity singleton2 = (SingletonEntity) beanStore.getInstance(SingletonEntity.class);
 
         Assert.assertEquals(singleton1, singleton2);
     }
