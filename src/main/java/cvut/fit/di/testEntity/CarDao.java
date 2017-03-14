@@ -1,12 +1,14 @@
 package cvut.fit.di.testEntity;
 
+import cvut.fit.di.anotation.Prototype;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
  * @author Samuel Butta
  */
-@Singleton
+@Prototype
 public class CarDao {
 
     private RadioDao radioDao;

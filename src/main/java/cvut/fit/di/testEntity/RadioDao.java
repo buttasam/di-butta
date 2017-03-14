@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 /**
  * @author Samuel Butta
  */
-@Singleton
+@Prototype
 public class RadioDao {
 
     private ButtonDao buttonDao;

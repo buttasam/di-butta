@@ -49,9 +49,12 @@ public class ObjectGraph {
             node.setChildren(children);
         }
 
-
-
         return node;
+    }
+
+    public ClassNode getNode(Class clazz) {
+
+        return allNodes.get(clazz);
     }
 
 }

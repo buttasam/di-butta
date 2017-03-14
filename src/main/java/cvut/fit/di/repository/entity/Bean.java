@@ -138,5 +138,7 @@ public class Bean {
         return singletonInstance;
     }
 
-
+    public Object getSingletonInstance() {
+        return singletonInstance;
+    }
 }

@@ -4,6 +4,8 @@ import cvut.fit.di.builder.Executor;
 import cvut.fit.di.repository.store.BeanStore;
 import cvut.fit.di.repository.store.BeanStoreFactory;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  *
  * Hlavni API trida.
@@ -44,7 +46,7 @@ public class DIContainer {
         beanStore.addBean(beanInterface, beanImpl);
     }
 
-    public Object getInstance(Class clazz) {
-        return executor.initObjectGraph(clazz);
+    public Object getInstance(Class clazz) throws InvocationTargetException, IllegalAccessException {
+        return executor.getInstance(clazz);
     }
 }
