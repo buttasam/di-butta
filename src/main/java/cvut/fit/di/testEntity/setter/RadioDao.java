@@ -1,9 +1,8 @@
-package cvut.fit.di.testEntity;
+package cvut.fit.di.testEntity.setter;
 
 import cvut.fit.di.anotation.Prototype;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * @author Samuel Butta

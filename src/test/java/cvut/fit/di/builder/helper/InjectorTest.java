@@ -22,7 +22,6 @@ public class InjectorTest {
     }
 
 
-    @Test
     public void testInjectSetterDependencies() {
         Finder finder = new Finder();
         Set<Method> setters = finder.findInjectedSetters(UserService.class);

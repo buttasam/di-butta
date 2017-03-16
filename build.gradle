@@ -9,6 +9,13 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'

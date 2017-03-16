@@ -1,23 +1,36 @@
 package cvut.fit.di.graph;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Trida reprezentuje jeden uzel objektoveho grafu.
  */
 public class ClassNode {
 
-    Class clazz;
+    /**
+     * Typ tridy daneho uzlu
+     */
+    private Class clazz;
 
-    List<ClassNode> children;
+    /**
+     * Potomci daneho uzlu
+     */
+    private Set<ClassNode> children;
 
     public ClassNode(Class clazz) {
         this.clazz = clazz;
+        children = new HashSet<>();
     }
 
-    public void setChildren(List<ClassNode> children) {
-        this.children = children;
+    /**
+     * Prida potomka
+     * @param child
+     */
+    public void addChild(ClassNode child) {
+        children.add(child);
     }
 
 }

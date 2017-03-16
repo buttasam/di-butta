@@ -1,9 +1,9 @@
-package cvut.fit.di.testEntity;
+package cvut.fit.di.testEntity.field;
 
 import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.testEntity.setter.RadioDao;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * @author Samuel Butta

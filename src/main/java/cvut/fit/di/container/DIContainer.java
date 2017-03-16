@@ -1,6 +1,7 @@
 package cvut.fit.di.container;
 
 import cvut.fit.di.builder.Executor;
+import cvut.fit.di.container.type.InjectionType;
 import cvut.fit.di.repository.store.BeanStore;
 import cvut.fit.di.repository.store.BeanStoreFactory;
 
@@ -19,15 +20,33 @@ public class DIContainer {
      */
     private BeanStore beanStore;
 
+    /**
+     * Servisni trida, ktera predava
+     */
     private Executor executor;
+
+    /**
+     * Typ injek
+     */
+    private final InjectionType injectionType;
 
     /**
      * Inicializace probiha po zavolani konstruktoru.
      */
     public DIContainer() {
+        this.injectionType = InjectionType.SETTER;
         init();
     }
 
+
+    /**
+     *
+     * @param injectionType typ injektaze
+     */
+    public DIContainer(InjectionType injectionType) {
+        this.injectionType = injectionType;
+        init();
+    }
 
     /**
      * Zakladni inicializacni metoda.
@@ -46,7 +65,7 @@ public class DIContainer {
         beanStore.addBean(beanInterface, beanImpl);
     }
 
-    public Object getInstance(Class clazz) throws InvocationTargetException, IllegalAccessException {
+    public <T> Object getInstance(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
         return executor.getInstance(clazz);
     }
 }

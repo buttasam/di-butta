@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity;
+package cvut.fit.di.testEntity.setter;
 
 import javax.inject.Singleton;
 

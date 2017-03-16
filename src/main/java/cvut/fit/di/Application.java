@@ -1,7 +1,7 @@
 package cvut.fit.di;
 
 import cvut.fit.di.container.DIContainer;
-import cvut.fit.di.testEntity.UserService;
+import cvut.fit.di.testEntity.setter.UserService;
 
 import java.lang.reflect.InvocationTargetException;
 
