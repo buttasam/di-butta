@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Set;
 
@@ -67,6 +68,15 @@ public class FinderTest {
         Set<Method> methods = finder.findInjectedSetters(UserService.class);
 
         Assert.assertEquals(2, methods.size());
+    }
+
+
+    @Test
+    public void testFindInjectedFields() {
+        Set<Field> fields = finder.findInjectedFields(cvut.fit.di.testEntity.field.UserService.class);
+
+        Assert.assertEquals(1, fields.size());
+
     }
 
 }

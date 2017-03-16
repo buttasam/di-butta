@@ -6,6 +6,7 @@ import cvut.fit.di.exception.MissingImplementationException;
 import org.reflections.Reflections;
 
 import javax.inject.Inject;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -74,7 +75,7 @@ public class Finder {
     }
 
     /**
-     * Najde a vrati mnozinu setterů anotovanych @inject
+     * Najde a vrati mnozinu setterů anotovanych @Inject
      *
      * @param clazz
      */
@@ -84,6 +85,23 @@ public class Finder {
                 .collect(Collectors.toSet());
 
         return methods;
+    }
+
+
+    /**
+     * Vrati mnozinu filedu @Inject
+     *
+     * @param clazz
+     * @return
+     */
+    public Set<Field> findInjectedFields(Class clazz) {
+        Creator creator = new Creator();
+
+        Set<Field> fields = Arrays.stream(clazz.getDeclaredFields())
+                .filter(f -> f.isAnnotationPresent(Inject.class))
+                .collect(Collectors.toSet());
+
+        return fields;
     }
 
     public Set<Class<?>> findInjectedSettersDependencies(Class clazz) {

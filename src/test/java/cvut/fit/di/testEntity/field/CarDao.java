@@ -1,6 +1,7 @@
 package cvut.fit.di.testEntity.field;
 
 import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.testEntity.setter.RadioDao;
 
 import javax.inject.Inject;
 
@@ -15,9 +16,5 @@ public class CarDao {
 
     public RadioDao getRadioDao() {
         return radioDao;
-    }
-
-    public void print() {
-        System.out.println("car dao");
     }
 }

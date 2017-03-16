@@ -10,6 +10,7 @@ import cvut.fit.di.repository.entity.BeanScope;
 import cvut.fit.di.repository.store.BeanStore;
 import cvut.fit.di.repository.store.BeanStoreFactory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -75,6 +76,45 @@ public class Executor {
                 for(Method setter : setters) {
                     Object setterParam = getInstance(setter.getParameterTypes()[0]);
                     setter.invoke(parent, setterParam);
+                }
+
+                return parent;
+            }
+
+        } else {
+           // TODO vyhod vyjimku
+            return null;
+        }
+    }
+    public Object getInstanceByFields(Class initClass) throws InvocationTargetException, IllegalAccessException {
+        objectGraph.initNode(initClass);
+        // TODO
+        Finder finder = new Finder();
+
+        // overit zda takova trida existuje v objektovem grafu
+        ClassNode node = objectGraph.getNode(initClass);
+
+        // pokud existuje
+        if(node != null) {
+
+            // ziskej nebo vytvor beanu
+            Bean bean = beanStore.getOrCreateBean(initClass);
+
+            // pokud je singleton a je jiz inicializovana vrat ji
+            if(bean.getBeanScope().equals(BeanScope.SINGLETON) && bean.getSingletonInstance() != null) {
+                return bean.getSingletonInstance();
+            } else {
+                //jinak vytvorit novou
+                Object parent = bean.getInstance();
+                // a na vsechny jeji zavislosti ve fieldech zavola stejnou metodu
+                Set<Field> fields = finder.findInjectedFields(initClass);
+
+                for(Field field : fields) {
+                    // TODO pouze u private a protected (pak vratit)
+                    // nastavit field jako zapisovatelny
+                    field.setAccessible(true);
+                    Class classType = field.getType();
+                    field.set(parent, getInstanceByFields(classType));
                 }
 
                 return parent;
