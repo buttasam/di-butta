@@ -1,7 +1,11 @@
 package cvut.fit.di.builder.helper;
 
+import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
+import cvut.fit.di.testEntity.constructor.AConst;
+import cvut.fit.di.testEntity.constructor.BConst;
+import cvut.fit.di.testEntity.constructor.exception.ConstWithMoreInjectConstructors;
 import cvut.fit.di.testEntity.managed.injected.UserService;
 import cvut.fit.di.testEntity.managed.withInterface.Mailer;
 import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailMailer;
@@ -10,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -79,4 +84,21 @@ public class FinderTest {
 
     }
 
+    @Test
+    public void testFindInjectedConstructor() throws AmbiguousConstructorException {
+        Constructor constructor = finder.findInjectedConstructor(AConst.class);
+        Assert.assertNotNull(constructor);
+    }
+
+    @Test
+    public void testFindInjectedConstructorWithNull() throws AmbiguousConstructorException {
+        Constructor constructor = finder.findInjectedConstructor(BConst.class);
+        Assert.assertNull(constructor);
+    }
+
+
+    @Test(expected = AmbiguousConstructorException.class)
+    public void testFindInjectedConstructorWithException() throws AmbiguousConstructorException {
+        finder.findInjectedConstructor(ConstWithMoreInjectConstructors.class);
+    }
 }

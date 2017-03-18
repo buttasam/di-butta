@@ -17,6 +17,11 @@ public class Application {
 
         service.getCarDao().getRadioDao().getUserService().print();
 
+        UserService service2 = (UserService) container.getInstanceByFields(UserService.class);
+        service2.getCarDao().print();
+
+        service2.getCarDao().getRadioDao().getUserService().print();
+
 
     }
 

@@ -1,15 +1,18 @@
 package cvut.fit.di.builder.helper;
 
 import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
 import org.reflections.Reflections;
 
 import javax.inject.Inject;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -112,6 +115,28 @@ public class Finder {
         setters.forEach(s -> dependencyTypes.add(s.getParameterTypes()[0]));
 
         return dependencyTypes;
+    }
+
+
+    /**
+     *
+     * @param clazz
+     * @return
+     * @throws AmbiguousConstructorException
+     */
+    public Constructor findInjectedConstructor(Class clazz) throws AmbiguousConstructorException {
+        List<Constructor> constructors = Arrays.stream(clazz.getConstructors())
+                .filter(c -> c.isAnnotationPresent(Inject.class))
+                .collect(Collectors.toList());
+
+        switch (constructors.size()) {
+            case 0:
+                return null;
+            case 1:
+                return constructors.get(0);
+            default:
+                throw new AmbiguousConstructorException();
+        }
     }
 
 }
