@@ -1,10 +1,12 @@
 package cvut.fit.di.testEntity.constructor;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * @author Samuel Butta
  */
+@Singleton
 public class AConst {
 
     private BConst bConst;
@@ -14,4 +16,7 @@ public class AConst {
         this.bConst = bConst;
     }
 
+    public BConst getbConst() {
+        return bConst;
+    }
 }

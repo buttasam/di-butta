@@ -2,6 +2,7 @@ package cvut.fit.di.container;
 
 import cvut.fit.di.builder.Executor;
 import cvut.fit.di.container.type.InjectionType;
+import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.repository.store.BeanStore;
 import cvut.fit.di.repository.store.BeanStoreFactory;
 
@@ -75,7 +76,7 @@ public class DIContainer {
     }
 
     // TODO
-    public <T> Object getInstanceByConstructor(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
+    public <T> Object getInstanceByConstructor(Class<T> clazz) throws InvocationTargetException, IllegalAccessException, AmbiguousConstructorException, InstantiationException {
         return executor.getInstanceByConstructor(clazz);
     }
 }
