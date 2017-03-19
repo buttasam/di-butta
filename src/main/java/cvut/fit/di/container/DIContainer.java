@@ -69,14 +69,5 @@ public class DIContainer {
     public <T> Object getInstance(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
         return executor.getInstance(clazz);
     }
-
-    // TODO
-    public <T> Object getInstanceByFields(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
-        return executor.getInstanceByFields(clazz);
-    }
-
-    // TODO
-    public <T> Object getInstanceByConstructor(Class<T> clazz) throws InvocationTargetException, IllegalAccessException, AmbiguousConstructorException, InstantiationException {
-        return executor.getInstanceByConstructor(clazz);
-    }
+    
 }
