@@ -27,7 +27,7 @@ public class DIContainer {
     private Executor executor;
 
     /**
-     * Typ injek
+     * Typ injekaze
      */
     private final InjectionType injectionType;
 
@@ -54,7 +54,7 @@ public class DIContainer {
      * Vola buildera, ktery vytvori objektovy graf.
      */
     private void init() {
-        executor = new Executor();
+        executor = new Executor(injectionType);
         beanStore = BeanStoreFactory.getBeanStore();
     }
 

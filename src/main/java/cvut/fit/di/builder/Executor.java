@@ -2,7 +2,10 @@ package cvut.fit.di.builder;
 
 import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
-import cvut.fit.di.builder.helper.Injector;
+import cvut.fit.di.builder.injector.FieldInjector;
+import cvut.fit.di.builder.injector.Injector;
+import cvut.fit.di.builder.injector.SetterInjector;
+import cvut.fit.di.container.type.InjectionType;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.graph.ClassNode;
 import cvut.fit.di.graph.ObjectGraph;
@@ -26,69 +29,42 @@ public class Executor {
 
     private Creator creator;
     private Finder finder;
-    private Injector injector;
 
     private BeanStore beanStore;
 
     // objektovy graf reprezentujici zavisle tridy
     private ObjectGraph objectGraph;
 
-    public Executor() {
+    private Injector injector;
+
+    public Executor(InjectionType injectionType) {
         creator = new Creator();
         finder = new Finder();
-        injector = new Injector();
 
         beanStore = BeanStoreFactory.getBeanStore();
         objectGraph = new ObjectGraph();
+
+        initInjectorByType(injectionType);
     }
 
 
-    /**
-     * Metoda nastavy vsechny zavislosti
-     * rekurzicne se hledaji zavislosti podle vstupni tridy
-     *
-     * @param initClass vstupni trida
-     */
-    public void initObjectGraph(Class initClass) {
-
+    private void initInjectorByType(InjectionType injectionType) {
+        switch (injectionType) {
+            case FIELD:
+                this.injector = new FieldInjector();
+                break;
+            case SETTER:
+                this.injector = new SetterInjector();
+                break;
+            case CONSTRUCTOR:
+                this.injector = new FieldInjector();
+                break;
+        }
     }
 
 
     public Object getInstance(Class initClass) throws InvocationTargetException, IllegalAccessException {
-        objectGraph.initNode(initClass);
-        // TODO
-        Finder finder = new Finder();
-
-        // overit zda takova trida existuje v objektovem grafu
-        ClassNode node = objectGraph.getNode(initClass);
-
-        // pokud existuje
-        if (node != null) {
-
-            // ziskej nebo vytvor beanu
-            Bean bean = beanStore.getOrCreateBean(initClass);
-
-            // pokud je singleton a je jiz inicializovana vrat ji
-            if (bean.getBeanScope().equals(BeanScope.SINGLETON) && bean.getSingletonInstance() != null) {
-                return bean.getSingletonInstance();
-            } else {
-                //jinak vytvorit novou
-                Object parent = bean.getInstance();
-                // a na vsechny jeji zavislosti v setterech zavola stejnou metodu
-                Set<Method> setters = finder.findInjectedSetters(initClass);
-
-                for (Method setter : setters) {
-                    Object setterParam = getInstance(setter.getParameterTypes()[0]);
-                    setter.invoke(parent, setterParam);
-                }
-
-                return parent;
-            }
-
-        } else {
-            // TODO vyhod vyjimku
-            return null;
-        }
+        return injector.getInstance(initClass);
     }
 
     public Object getInstanceByFields(Class initClass) throws InvocationTargetException, IllegalAccessException {
