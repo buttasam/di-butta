@@ -1,8 +1,8 @@
 package cvut.fit.di.container;
 
 import cvut.fit.di.builder.Executor;
-import cvut.fit.di.container.type.InjectionType;
-import cvut.fit.di.exception.AmbiguousConstructorException;
+import cvut.fit.di.builder.injector.Injector;
+import cvut.fit.di.builder.injector.SetterInjector;
 import cvut.fit.di.repository.store.BeanStore;
 import cvut.fit.di.repository.store.BeanStoreFactory;
 
@@ -27,25 +27,26 @@ public class DIContainer {
     private Executor executor;
 
     /**
-     * Typ injekaze
+     * Injektor, diky polymorfismu rozlisi o jaky typ injektaze se jedna.
      */
-    private final InjectionType injectionType;
+    private final Injector injector;
 
     /**
      * Inicializace probiha po zavolani konstruktoru.
+     * Vychozi injektor je nastaven na SetterInjector
      */
     public DIContainer() {
-        this.injectionType = InjectionType.SETTER;
+        this.injector = new SetterInjector();
         init();
     }
 
 
     /**
      *
-     * @param injectionType typ injektaze
+     * @param injector
      */
-    public DIContainer(InjectionType injectionType) {
-        this.injectionType = injectionType;
+    public DIContainer(Injector injector) {
+        this.injector = injector;
         init();
     }
 
@@ -54,7 +55,7 @@ public class DIContainer {
      * Vola buildera, ktery vytvori objektovy graf.
      */
     private void init() {
-        executor = new Executor(injectionType);
+        executor = new Executor(injector);
         beanStore = BeanStoreFactory.getBeanStore();
     }
 
