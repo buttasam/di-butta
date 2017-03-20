@@ -1,10 +1,15 @@
 package cvut.fit.di.graph;
 
 import cvut.fit.di.builder.helper.Finder;
+import cvut.fit.di.exception.AmbiguousConstructorException;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Objektova reprezentace
@@ -31,6 +36,7 @@ public class ObjectGraph {
 
 
     public ClassNode initNode(Class clazz) {
+        System.out.println(clazz);
         // pokusi se najit dany node
         ClassNode node = allNodes.get(clazz);
 
@@ -38,12 +44,38 @@ public class ObjectGraph {
         if (node == null) {
             // vytvori ho
             node = createNewNode(clazz);
+
             // najde vsechny jeho zavislosti podle setteru
             Set<Method> setters = finder.findInjectedSetters(clazz);
 
             for (Method setter : setters) {
                 Class<?> paramClass = setter.getParameterTypes()[0];
-                node.addChild(initNode(paramClass));
+                System.out.println(paramClass);
+                node.addSetterChild(initNode(paramClass));
+            }
+
+            // najde vsechny jeho zavislosti podle filedu
+            Set<Field> fields = finder.findInjectedFields(clazz);
+            for(Field field : fields) {
+                node.addFieldChild(initNode(field.getType()));
+            }
+
+
+            // najde vsechny jeho zavislosti podle konstruktoru
+            // TODO nekde overit ze ma pouze jeden konstruktor s @inject --> vyhazuje vyjimku
+            try {
+                Constructor constructor = finder.findInjectedConstructor(clazz);
+
+                if(constructor != null) {
+                    Class[] paramTypes = constructor.getParameterTypes();
+
+                    Set<ClassNode> constructorChildren = Arrays.stream(paramTypes).map(this::initNode).collect(Collectors.toSet());
+
+                    node.addConstructorChildren(constructorChildren);
+                }
+
+            } catch (AmbiguousConstructorException e) {
+                e.printStackTrace();
             }
         }
 

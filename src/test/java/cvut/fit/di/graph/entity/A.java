@@ -3,22 +3,25 @@ package cvut.fit.di.graph.entity;
 import javax.inject.Inject;
 
 /**
- * Created by samik on 14.3.17.
+ * Testovaci entita pro vytvareni objektoveho grafu.
+ *
+ *
+ *
+ * @author Samuel Butta
  */
 public class A {
 
+    @Inject
     private B b;
 
-    private C c;
-
+    private D d;
 
     @Inject
-    public void setB(B b) {
-        this.b = b;
+    public A(D d) {
+        this.d = d;
     }
 
-    @Inject
-    public void setC(C c) {
-        this.c = c;
+    public void setB(B b) {
+        this.b = b;
     }
 }
