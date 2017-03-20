@@ -1,6 +1,6 @@
 package cvut.fit.di.container;
 
-import cvut.fit.di.builder.Executor;
+import cvut.fit.di.builder.Context;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.SetterInjector;
 import cvut.fit.di.repository.store.BeanStore;
@@ -24,7 +24,7 @@ public class DIContainer {
     /**
      * Servisni trida, ktera predava
      */
-    private Executor executor;
+    private Context context;
 
     /**
      * Injektor, diky polymorfismu rozlisi o jaky typ injektaze se jedna.
@@ -55,7 +55,7 @@ public class DIContainer {
      * Vola buildera, ktery vytvori objektovy graf.
      */
     private void init() {
-        executor = new Executor(injector);
+        context = new Context(injector);
         beanStore = BeanStoreFactory.getBeanStore();
     }
 
@@ -68,7 +68,7 @@ public class DIContainer {
     }
 
     public <T> Object getInstance(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
-        return executor.getInstance(clazz);
+        return context.getInstance(clazz);
     }
     
 }

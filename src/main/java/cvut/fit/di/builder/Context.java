@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * @author Samuel Butta
  */
-public class Executor {
+public class Context {
 
 
     private Creator creator;
@@ -25,7 +25,7 @@ public class Executor {
 
     private Injector injector;
 
-    public Executor(Injector injector) {
+    public Context(Injector injector) {
         this.injector = injector;
 
         creator = new Creator();
