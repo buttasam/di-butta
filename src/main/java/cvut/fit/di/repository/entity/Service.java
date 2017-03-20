@@ -6,19 +6,20 @@ import cvut.fit.di.builder.helper.Creator;
 import javax.inject.Singleton;
 
 /**
- * Reprezentuje Bean.
+ * Reprezentuje Service.
  * Udrzuje informaci o rozhrani a implementaci.
  * Muze byt pojmenovata (String).
  *
  * @author Samuel Butta
  */
-public class Bean {
+public class Service {
 
 
+    // TODO
     /**
-     * Pojmenovani beany.
+     * Pojmenovani service.
      */
-    private String beanName;
+    private String serviceName;
 
 
     /**
@@ -32,7 +33,7 @@ public class Bean {
     private Class classImpl;
 
     /**
-     * Priznak, ktery urcuje zda ma beana rozhrani, ktere implementuje.
+     * Priznak, ktery urcuje zda ma servicea rozhrani, ktere implementuje.
      */
     private boolean hasInterface;
 
@@ -43,11 +44,11 @@ public class Bean {
     private Object singletonInstance;
 
     /**
-     * Enum urcuje scope (dobu zivota) beany.
+     * Enum urcuje scope (dobu zivota) servicey.
      */
-    private BeanScope beanScope;
+    private ServiceScope serviceScope;
 
-    private Bean() {
+    private Service() {
         // prazdny privatni konstruktor
     }
 
@@ -57,10 +58,10 @@ public class Bean {
      *
      * @param classImpl trida vcetne implementace
      */
-    public Bean(Class classImpl) {
+    public Service(Class classImpl) {
         this.classImpl = classImpl;
         this.hasInterface = false;
-        findAndSetBeanScope(classImpl);
+        findAndSetServiceScope(classImpl);
     }
 
     /**
@@ -70,29 +71,29 @@ public class Bean {
      * @param classInterface rozhrani
      * @param classImpl      implementace tridy
      */
-    public Bean(Class classInterface, Class classImpl) {
+    public Service(Class classInterface, Class classImpl) {
         this.classInterface = classInterface;
         this.classImpl = classImpl;
 
         this.hasInterface = true;
-        findAndSetBeanScope(classImpl);
+        findAndSetServiceScope(classImpl);
     }
 
     /**
-     * Podle anotace urci scope beany.
+     * Podle anotace urci scope servicey.
      *
      * @param clazz
      */
-    private void findAndSetBeanScope(Class clazz) {
+    private void findAndSetServiceScope(Class clazz) {
         if (clazz.isAnnotationPresent(Singleton.class)) {
-            beanScope = BeanScope.SINGLETON;
+            serviceScope = ServiceScope.SINGLETON;
         } else if (clazz.isAnnotationPresent(Prototype.class)) {
-            beanScope = BeanScope.PROTOTYPE;
+            serviceScope = ServiceScope.PROTOTYPE;
         }
     }
 
-    public BeanScope getBeanScope() {
-        return beanScope;
+    public ServiceScope getServiceScope() {
+        return serviceScope;
     }
 
     public Class getClassInterface() {
@@ -112,7 +113,7 @@ public class Bean {
     public Object getInstance() {
         Object result = null;
 
-        switch (beanScope) {
+        switch (serviceScope) {
             case PROTOTYPE:
                 Creator creator = new Creator();
                 result = creator.createNewInstance(classImpl);

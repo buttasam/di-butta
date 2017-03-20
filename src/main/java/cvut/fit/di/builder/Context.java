@@ -4,8 +4,8 @@ import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.graph.ObjectGraph;
-import cvut.fit.di.repository.store.BeanStore;
-import cvut.fit.di.repository.store.BeanStoreFactory;
+import cvut.fit.di.repository.store.ServiceStore;
+import cvut.fit.di.repository.store.ServiceStoreFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,7 +18,7 @@ public class Context {
     private Creator creator;
     private Finder finder;
 
-    private BeanStore beanStore;
+    private ServiceStore serviceStore;
 
     // objektovy graf reprezentujici zavisle tridy
     private ObjectGraph objectGraph;
@@ -31,7 +31,7 @@ public class Context {
         creator = new Creator();
         finder = new Finder();
 
-        beanStore = BeanStoreFactory.getBeanStore();
+        serviceStore = ServiceStoreFactory.getServiceStore();
         objectGraph = new ObjectGraph();
     }
 

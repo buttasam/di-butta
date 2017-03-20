@@ -1,12 +1,12 @@
 package cvut.fit.di.repository.entity;
 
 /**
- * Scope urcuje dobu zivotnosti Beany.
+ * Scope urcuje dobu zivotnosti Service.
  * Tento enum urcuje typy, ktere DI framework podporuje.
  *
  * @author Samuel Butta
  */
-public enum BeanScope {
+public enum ServiceScope {
 
     /**
      * Jedina instance napric celou aplikaci

@@ -2,8 +2,8 @@ package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.graph.ClassNode;
-import cvut.fit.di.repository.entity.Bean;
-import cvut.fit.di.repository.entity.BeanScope;
+import cvut.fit.di.repository.entity.Service;
+import cvut.fit.di.repository.entity.ServiceScope;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -28,12 +28,12 @@ public class ConstructorInjector extends Injector {
         // pokud existuje
         if (node != null) {
 
-            // ziskej nebo vytvor beanu
-            Bean bean = beanStore.getOrCreateBean(initClass);
+            // ziskej nebo vytvor service
+            Service service = serviceStore.getOrCreateService(initClass);
 
             // pokud je singleton a je jiz inicializovana vrat ji
-            if (bean.getBeanScope().equals(BeanScope.SINGLETON) && bean.getSingletonInstance() != null) {
-                return bean.getSingletonInstance();
+            if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
+                return service.getSingletonInstance();
             } else {
                 // konstruktor s anotaci inject
                 Constructor constructor = null;

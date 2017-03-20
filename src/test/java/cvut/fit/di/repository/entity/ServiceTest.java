@@ -8,20 +8,20 @@ import org.junit.Test;
 /**
  * @author Samuel Butta
  */
-public class BeanTest {
+public class ServiceTest {
 
     @Test
     public void testPrototypeScope() {
-        Bean bean = new Bean(PrototypeEntity.class);
+        Service service = new Service(PrototypeEntity.class);
 
-        Assert.assertEquals(BeanScope.PROTOTYPE, bean.getBeanScope());
+        Assert.assertEquals(ServiceScope.PROTOTYPE, service.getServiceScope());
     }
 
     @Test
     public void testSingletonScope() {
-        Bean bean = new Bean(SingletonEntity.class);
+        Service service = new Service(SingletonEntity.class);
 
-        Assert.assertEquals(BeanScope.SINGLETON, bean.getBeanScope());
+        Assert.assertEquals(ServiceScope.SINGLETON, service.getServiceScope());
     }
 
 }

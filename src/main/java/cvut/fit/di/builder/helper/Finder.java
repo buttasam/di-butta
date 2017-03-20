@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Trida pomoci reflexe hleda beany
+ * Trida pomoci reflexe hleda services
  *
  * @author Samuel Butta
  */
@@ -27,10 +27,10 @@ public class Finder {
     /**
      * Metoda najde vsechny tridy anotovane @Prototype
      *
-     * @param packagePrefix prefix balicku v kterem se beany hledaji
-     * @return mnozina bean
+     * @param packagePrefix prefix balicku v kterem se service hledaji
+     * @return mnozina services
      */
-    public Set<Class<?>> findManagedBeans(String packagePrefix) {
+    public Set<Class<?>> findManagedServices(String packagePrefix) {
         Reflections reflections = new Reflections(packagePrefix);
 
         Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Prototype.class);

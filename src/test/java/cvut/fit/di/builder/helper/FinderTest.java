@@ -41,7 +41,7 @@ public class FinderTest {
      */
     @Test
     public void testManagedClasses() {
-        Set<Class<?>> annotated = finder.findManagedBeans(MANAGE_TEST_ENTITY_PACKAGE);
+        Set<Class<?>> annotated = finder.findManagedServices(MANAGE_TEST_ENTITY_PACKAGE);
 
         Assert.assertEquals(4, annotated.size());
     }
@@ -51,7 +51,7 @@ public class FinderTest {
      */
     @Test
     public void testManagedClassesInSubpackage() {
-        Set<Class<?>> annotated = finder.findManagedBeans(MANAGE_TEST_ENTITY_SUBPACKAGE);
+        Set<Class<?>> annotated = finder.findManagedServices(MANAGE_TEST_ENTITY_SUBPACKAGE);
 
         Assert.assertEquals(2, annotated.size());
     }
