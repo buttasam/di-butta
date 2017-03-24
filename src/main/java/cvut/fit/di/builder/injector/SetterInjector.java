@@ -41,9 +41,7 @@ public class SetterInjector extends Injector {
                     Object setterParam = getInstance(setter.getParameterTypes()[0]);
                     try {
                         setter.invoke(parent, setterParam);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
+                    } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
                 }

@@ -3,6 +3,7 @@ package cvut.fit.di.builder.injector;
 import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.graph.ObjectGraph;
+import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
 import cvut.fit.di.repository.store.ServiceStoreFactory;
 
@@ -24,7 +25,7 @@ public abstract class Injector {
         finder = new Finder();
 
         serviceStore = ServiceStoreFactory.getServiceStore();
-        objectGraph = new ObjectGraph();
+        objectGraph = ObjectGraphFactory.getObjectGraph();
     }
 
     public abstract Object getInstance(Class initClass);
