@@ -15,7 +15,7 @@ public class FieldInjector extends Injector {
     @Override
     public Object getInstance(Class initClass) {
         // TODO
-        objectGraph.initNode(initClass);
+        objectGraph.initSubgraphByNode(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
         ClassNode node = objectGraph.getNode(initClass);

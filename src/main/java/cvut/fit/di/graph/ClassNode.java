@@ -11,7 +11,12 @@ public class ClassNode {
     /**
      * Typ tridy daneho uzlu
      */
-    private Class clazz;
+    private Class clazzInterface;
+
+    /**
+     * Typ tridy daneho uzlu
+     */
+    private Class clazzImpl;
 
     /**
      * Potomci daneho uzlu
@@ -35,8 +40,8 @@ public class ClassNode {
      */
     private Set<ClassNode> constructorChildren;
 
-    public ClassNode(Class clazz) {
-        this.clazz = clazz;
+    public ClassNode(Class clazzImpl) {
+        this.clazzImpl = clazzImpl;
 
         children = new HashSet<>();
         setterChildren = new HashSet<>();
@@ -44,15 +49,6 @@ public class ClassNode {
         constructorChildren = new HashSet<>();
     }
 
-    /**
-     * Prida potomka
-     *
-     * @param child
-     */
-    @Deprecated
-    public void addChild(ClassNode child) {
-        children.add(child);
-    }
 
     public void addSetterChild(ClassNode child) {
         setterChildren.add(child);

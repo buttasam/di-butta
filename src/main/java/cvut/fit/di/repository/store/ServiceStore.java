@@ -25,7 +25,7 @@ public class ServiceStore {
 
 
     public ServiceStore() {
-        managedServices = new HashSet<Service>();
+        managedServices = new HashSet<>();
     }
 
 

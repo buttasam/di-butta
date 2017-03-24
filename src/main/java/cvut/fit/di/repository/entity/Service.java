@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 /**
  * Reprezentuje Service.
  * Udrzuje informaci o rozhrani a implementaci.
+ * Implementace je prave jedna.
  * Muze byt pojmenovata (String).
  *
  * @author Samuel Butta

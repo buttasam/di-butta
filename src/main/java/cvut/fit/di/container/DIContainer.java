@@ -3,8 +3,6 @@ package cvut.fit.di.container;
 import cvut.fit.di.builder.Context;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.SetterInjector;
-import cvut.fit.di.repository.store.ServiceStore;
-import cvut.fit.di.repository.store.ServiceStoreFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -16,10 +14,6 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class DIContainer {
 
-    /**
-     * Uloziste spravovanych service.
-     */
-    private ServiceStore serviceStore;
 
     /**
      * Servisni trida, ktera predava
@@ -56,16 +50,8 @@ public class DIContainer {
      */
     private void init() {
         context = new Context(injector);
-        serviceStore = ServiceStoreFactory.getServiceStore();
     }
 
-    public <T> void addService(Class<T> serviceClass) {
-        serviceStore.addService(serviceClass);
-    }
-
-    public <T> void addService(Class<T> serviceInterface, Class<? extends T> serviceImpl)  {
-        serviceStore.addService(serviceInterface, serviceImpl);
-    }
 
     public <T> Object getInstance(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
         return context.getInstance(clazz);

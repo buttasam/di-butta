@@ -35,7 +35,10 @@ public class ObjectGraph {
     }
 
 
-    public ClassNode initNode(Class clazz) {
+    /**
+     * Inicializuje podgraf podle vstupni tridy.
+     */
+    public ClassNode initSubgraphByNode(Class clazz) {
         System.out.println(clazz);
         // pokusi se najit dany node
         ClassNode node = allNodes.get(clazz);
@@ -51,13 +54,13 @@ public class ObjectGraph {
             for (Method setter : setters) {
                 Class<?> paramClass = setter.getParameterTypes()[0];
                 System.out.println(paramClass);
-                node.addSetterChild(initNode(paramClass));
+                node.addSetterChild(initSubgraphByNode(paramClass));
             }
 
             // najde vsechny jeho zavislosti podle filedu
             Set<Field> fields = finder.findInjectedFields(clazz);
             for(Field field : fields) {
-                node.addFieldChild(initNode(field.getType()));
+                node.addFieldChild(initSubgraphByNode(field.getType()));
             }
 
 
@@ -69,7 +72,7 @@ public class ObjectGraph {
                 if(constructor != null) {
                     Class[] paramTypes = constructor.getParameterTypes();
 
-                    Set<ClassNode> constructorChildren = Arrays.stream(paramTypes).map(this::initNode).collect(Collectors.toSet());
+                    Set<ClassNode> constructorChildren = Arrays.stream(paramTypes).map(this::initSubgraphByNode).collect(Collectors.toSet());
 
                     node.addConstructorChildren(constructorChildren);
                 }
