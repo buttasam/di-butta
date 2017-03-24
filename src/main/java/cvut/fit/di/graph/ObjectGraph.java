@@ -17,7 +17,10 @@ import java.util.stream.Collectors;
 public class ObjectGraph {
 
 
-    // vsechny uzli grafu
+    /**
+     * Vsechny uzli grafu
+     * Klic je trida. V pripade rozhrani a implementace je klic rozhrani.
+     */
     HashMap<Class, ClassNode> allNodes;
 
     // priznak urcuje, zda jiz byl objektovy graf inicializovany
@@ -97,11 +100,28 @@ public class ObjectGraph {
      * @param clazz
      * @return
      */
-    private ClassNode createNewNode(Class clazz) {
+    public synchronized ClassNode createNewNode(Class clazz) {
         ClassNode node = new ClassNode(clazz);
         allNodes.put(clazz, node);
 
         return node;
+    }
+
+
+    public synchronized ClassNode createNewNodeWithImpl(Class clazzInterface, Class clazzImpl) {
+        ClassNode node = new ClassNode(clazzInterface, clazzImpl);
+        allNodes.put(clazzInterface, node);
+
+        return node;
+    }
+
+    /**
+     * Package private metoda
+     *
+     * @return
+     */
+    HashMap<Class, ClassNode> getAllNodes() {
+        return allNodes;
     }
 
 }

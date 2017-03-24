@@ -3,6 +3,7 @@ package cvut.fit.di.container;
 import cvut.fit.di.builder.Context;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.SetterInjector;
+import cvut.fit.di.graph.ObjectGraphAPI;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,6 +25,9 @@ public class DIContainer {
      * Injektor, diky polymorfismu rozlisi o jaky typ injektaze se jedna.
      */
     private final Injector injector;
+
+
+    private ObjectGraphAPI objectGraphAPI;
 
     /**
      * Inicializace probiha po zavolani konstruktoru.
@@ -50,11 +54,17 @@ public class DIContainer {
      */
     private void init() {
         context = new Context(injector);
+        objectGraphAPI = new ObjectGraphAPI();
     }
 
 
     public <T> Object getInstance(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
         return context.getInstance(clazz);
+    }
+
+
+    public ObjectGraphAPI getAPI() {
+        return objectGraphAPI;
     }
     
 }

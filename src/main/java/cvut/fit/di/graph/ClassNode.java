@@ -19,11 +19,6 @@ public class ClassNode {
     private Class clazzImpl;
 
     /**
-     * Potomci daneho uzlu
-     */
-    private Set<ClassNode> children;
-
-    /**
      * Potomci injectovani setterem
      */
     private Set<ClassNode> setterChildren;
@@ -43,12 +38,22 @@ public class ClassNode {
     public ClassNode(Class clazzImpl) {
         this.clazzImpl = clazzImpl;
 
-        children = new HashSet<>();
+        init();
+    }
+
+    public ClassNode(Class clazzInterface, Class clazzImpl) {
+        this.clazzInterface = clazzInterface;
+        this.clazzImpl = clazzImpl;
+
+        init();
+    }
+
+
+    private void init() {
         setterChildren = new HashSet<>();
         fieldChildren = new HashSet<>();
         constructorChildren = new HashSet<>();
     }
-
 
     public void addSetterChild(ClassNode child) {
         setterChildren.add(child);
