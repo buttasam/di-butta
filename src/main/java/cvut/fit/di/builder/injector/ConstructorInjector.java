@@ -2,6 +2,7 @@ package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.AmbiguousConstructorException;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ClassNode;
 import cvut.fit.di.repository.entity.Service;
 import cvut.fit.di.repository.entity.ServiceScope;
@@ -30,7 +31,7 @@ public class ConstructorInjector extends Injector {
 
 
     @Override
-    public Object getInstance(Class initClass) {
+    public Object getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
 
         // inicializace grafu (podgrafu) introspekci
         if(configType.equals(ConfigType.INTROSPECTION)) {
@@ -67,7 +68,12 @@ public class ConstructorInjector extends Injector {
                     // vytvor vsechny argumenty
 
                     params = Arrays.stream(paramTypes).map(p -> {
+                        try {
                             return getInstance(p);
+                        } catch (ServiceIsNotInObjectGraphException e) {
+                            e.printStackTrace();
+                            return null;
+                        }
                     }).collect(Collectors.toList());
                 }
 
@@ -84,9 +90,7 @@ public class ConstructorInjector extends Injector {
             }
 
         } else {
-            System.out.println("not found");
-            // TODO vyhod vyjimku
-            return null;
+            throw new ServiceIsNotInObjectGraphException();
         }
     }
 

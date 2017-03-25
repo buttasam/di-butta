@@ -3,6 +3,7 @@ package cvut.fit.di.container;
 import cvut.fit.di.builder.Context;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.SetterInjector;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraphAPI;
 
 import java.lang.reflect.InvocationTargetException;
@@ -58,8 +59,13 @@ public class DIContainer {
     }
 
 
-    public <T> Object getInstance(Class<T> clazz) throws InvocationTargetException, IllegalAccessException {
-        return context.getInstance(clazz);
+    public <T> Object getInstance(Class<T> clazz) {
+        try {
+            return context.getInstance(clazz);
+        } catch (IllegalAccessException | InvocationTargetException | ServiceIsNotInObjectGraphException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

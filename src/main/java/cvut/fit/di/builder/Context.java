@@ -3,6 +3,7 @@ package cvut.fit.di.builder;
 import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.builder.injector.Injector;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraph;
 import cvut.fit.di.repository.store.ServiceStore;
 import cvut.fit.di.repository.store.ServiceStoreFactory;
@@ -36,7 +37,7 @@ public class Context {
     }
 
 
-    public Object getInstance(Class initClass) throws InvocationTargetException, IllegalAccessException {
+    public Object getInstance(Class initClass) throws InvocationTargetException, IllegalAccessException, ServiceIsNotInObjectGraphException {
         return injector.getInstance(initClass);
     }
 

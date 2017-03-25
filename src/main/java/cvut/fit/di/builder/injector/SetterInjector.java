@@ -1,6 +1,7 @@
 package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.cofig.ConfigType;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ClassNode;
 import cvut.fit.di.repository.entity.Service;
 import cvut.fit.di.repository.entity.ServiceScope;
@@ -26,9 +27,9 @@ public class SetterInjector extends Injector {
 
 
     @Override
-    public Object getInstance(Class initClass) {
-        // TODO
-        objectGraph.initSubgraphByNode(initClass);
+    public Object getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
+
+        this.initSubgraphByIntrospection(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
         ClassNode node = objectGraph.getNode(initClass);
@@ -61,8 +62,7 @@ public class SetterInjector extends Injector {
             }
 
         } else {
-            // TODO vyhod vyjimku
-            return null;
+            throw new ServiceIsNotInObjectGraphException();
         }
     }
 }
