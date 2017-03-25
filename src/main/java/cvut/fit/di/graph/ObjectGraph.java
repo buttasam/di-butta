@@ -1,6 +1,7 @@
 package cvut.fit.di.graph;
 
 import cvut.fit.di.builder.helper.Finder;
+import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 
 import java.lang.reflect.Constructor;

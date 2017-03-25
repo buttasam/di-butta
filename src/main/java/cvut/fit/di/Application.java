@@ -1,10 +1,12 @@
 package cvut.fit.di;
 
 import cvut.fit.di.builder.injector.ConstructorInjector;
+import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.container.DIContainer;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.testEntity.constructor.AConst;
 import cvut.fit.di.testEntity.constructor.AInterface;
+import cvut.fit.di.testEntity.constructor.BConst;
 import cvut.fit.di.testEntity.constructor.exception.AImpl;
 import cvut.fit.di.testEntity.field.UserService;
 
@@ -15,8 +17,10 @@ public class Application {
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, AmbiguousConstructorException, InstantiationException {
 
-        DIContainer container = new DIContainer(new ConstructorInjector());
+        DIContainer container = new DIContainer(new ConstructorInjector(ConfigType.MANUALLY));
         container.getAPI().addClazzWithImpl(AInterface.class, AImpl.class);
+        container.getAPI().addClazzWithoutImpl(AConst.class);
+        container.getAPI().addClazzWithoutImpl(BConst.class);
 
 /*        UserService service = (UserService) container.getInstance(UserService.class);
         service.getCarDao().print();

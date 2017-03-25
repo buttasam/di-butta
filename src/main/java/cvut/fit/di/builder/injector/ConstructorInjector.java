@@ -1,5 +1,6 @@
 package cvut.fit.di.builder.injector;
 
+import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.graph.ClassNode;
 import cvut.fit.di.repository.entity.Service;
@@ -17,10 +18,24 @@ import java.util.stream.Collectors;
  */
 public class ConstructorInjector extends Injector {
 
+
+    public ConstructorInjector() {
+        super();
+    }
+
+    public ConstructorInjector(ConfigType configType) {
+        super();
+        this.configType = configType;
+    }
+
+
     @Override
     public Object getInstance(Class initClass) {
-        // TODO
-        objectGraph.initSubgraphByNode(initClass);
+
+        // inicializace grafu (podgrafu) introspekci
+        if(configType.equals(ConfigType.INTROSPECTION)) {
+            objectGraph.initSubgraphByNode(initClass);
+        }
 
         // overit zda takova trida existuje v objektovem grafu
         ClassNode node = objectGraph.getNode(initClass);
@@ -69,6 +84,7 @@ public class ConstructorInjector extends Injector {
             }
 
         } else {
+            System.out.println("not found");
             // TODO vyhod vyjimku
             return null;
         }

@@ -2,6 +2,7 @@ package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
+import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.graph.ObjectGraph;
 import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
@@ -17,6 +18,11 @@ public abstract class Injector {
 
     protected ServiceStore serviceStore;
 
+    /**
+     * Typ konfigurace objektoveho grafu.
+     */
+    ConfigType configType;
+
     // objektovy graf reprezentujici zavisle tridy
     protected ObjectGraph objectGraph;
 
@@ -26,6 +32,8 @@ public abstract class Injector {
 
         serviceStore = ServiceStoreFactory.getServiceStore();
         objectGraph = ObjectGraphFactory.getObjectGraph();
+
+        configType = ConfigType.INTROSPECTION;
     }
 
     public abstract Object getInstance(Class initClass);

@@ -1,5 +1,6 @@
 package cvut.fit.di.builder.injector;
 
+import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.graph.ClassNode;
 import cvut.fit.di.repository.entity.Service;
 import cvut.fit.di.repository.entity.ServiceScope;
@@ -12,6 +13,16 @@ import java.util.Set;
  * @author Samuel Butta
  */
 public class SetterInjector extends Injector {
+
+
+    public SetterInjector() {
+        super();
+    }
+
+    public SetterInjector(ConfigType configType) {
+        super();
+        this.configType = configType;
+    }
 
 
     @Override
