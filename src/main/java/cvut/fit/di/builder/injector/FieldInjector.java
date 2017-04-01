@@ -1,6 +1,7 @@
 package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.cofig.ConfigType;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 import cvut.fit.di.repository.entity.ServiceScope;
@@ -25,7 +26,6 @@ public class FieldInjector extends Injector {
 
     @Override
     public Object getInstance(Class initClass) {
-        // TODO
         objectGraph.initSubgraphByNode(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
@@ -47,7 +47,7 @@ public class FieldInjector extends Injector {
                 Set<Field> fields = finder.findInjectedFields(initClass);
 
                 for (Field field : fields) {
-                    // TODO pouze u private a protected (pak vratit)
+                    // TODO pouze u private a protected (pak vratit ?)
                     // nastavit field jako zapisovatelny
                     field.setAccessible(true);
                     Class classType = field.getType();
@@ -62,8 +62,7 @@ public class FieldInjector extends Injector {
             }
 
         } else {
-            // TODO vyhod vyjimku
-            return null;
+            throw new ServiceIsNotInObjectGraphException();
         }
     }
 
