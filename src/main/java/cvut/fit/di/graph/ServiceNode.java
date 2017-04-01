@@ -112,6 +112,19 @@ public class ServiceNode {
         return serviceScope;
     }
 
+
+    public Set<ServiceNode> getSetterChildren() {
+        return setterChildren;
+    }
+
+    public Set<ServiceNode> getFieldChildren() {
+        return fieldChildren;
+    }
+
+    public Set<ServiceNode> getConstructorChildren() {
+        return constructorChildren;
+    }
+
     /**
      * Podle anotace urci scope service.
      * Pokud neobsahuje scope vyhodi chybu.

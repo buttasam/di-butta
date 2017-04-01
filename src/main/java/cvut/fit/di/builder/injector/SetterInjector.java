@@ -2,6 +2,7 @@ package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
+import cvut.fit.di.exception.injector.InjectorException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 import cvut.fit.di.repository.entity.ServiceScope;
@@ -27,7 +28,7 @@ public class SetterInjector extends Injector {
 
 
     @Override
-    public Object getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
+    public Object getInstance(Class initClass) {
 
         this.initSubgraphByIntrospection(initClass);
 
@@ -54,7 +55,7 @@ public class SetterInjector extends Injector {
                     try {
                         setter.invoke(parent, setterParam);
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
+                        throw new InjectorException(e);
                     }
                 }
 
