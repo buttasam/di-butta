@@ -1,7 +1,7 @@
 package cvut.fit.di.graph.entity;
 
-/**
- * @author Samuel Butta
- */
+import cvut.fit.di.anotation.Prototype;
+
+@Prototype
 public class D {
 }

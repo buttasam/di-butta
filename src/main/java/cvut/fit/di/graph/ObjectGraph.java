@@ -1,7 +1,6 @@
 package cvut.fit.di.graph;
 
 import cvut.fit.di.builder.helper.Finder;
-import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 
 import java.lang.reflect.Constructor;
@@ -22,7 +21,7 @@ public class ObjectGraph {
      * Vsechny uzli grafu
      * Klic je trida. V pripade rozhrani a implementace je klic rozhrani.
      */
-    HashMap<Class, ClassNode> allNodes;
+    HashMap<Class, ServiceNode> allNodes;
 
     // priznak urcuje, zda jiz byl objektovy graf inicializovany
     private boolean isInit;
@@ -42,10 +41,10 @@ public class ObjectGraph {
     /**
      * Inicializuje podgraf podle vstupni tridy.
      */
-    public ClassNode initSubgraphByNode(Class clazz) {
+    public ServiceNode initSubgraphByNode(Class clazz) {
         System.out.println(clazz);
         // pokusi se najit dany node
-        ClassNode node = allNodes.get(clazz);
+        ServiceNode node = allNodes.get(clazz);
 
         // pokud node neexistuje
         if (node == null) {
@@ -57,7 +56,6 @@ public class ObjectGraph {
 
             for (Method setter : setters) {
                 Class<?> paramClass = setter.getParameterTypes()[0];
-                System.out.println(paramClass);
                 node.addSetterChild(initSubgraphByNode(paramClass));
             }
 
@@ -76,7 +74,7 @@ public class ObjectGraph {
                 if(constructor != null) {
                     Class[] paramTypes = constructor.getParameterTypes();
 
-                    Set<ClassNode> constructorChildren = Arrays.stream(paramTypes).map(this::initSubgraphByNode).collect(Collectors.toSet());
+                    Set<ServiceNode> constructorChildren = Arrays.stream(paramTypes).map(this::initSubgraphByNode).collect(Collectors.toSet());
 
                     node.addConstructorChildren(constructorChildren);
                 }
@@ -89,7 +87,7 @@ public class ObjectGraph {
         return node;
     }
 
-    public ClassNode getNode(Class clazz) {
+    public ServiceNode getNode(Class clazz) {
         return allNodes.get(clazz);
     }
 
@@ -101,16 +99,16 @@ public class ObjectGraph {
      * @param clazz
      * @return
      */
-    public synchronized ClassNode createNewNode(Class clazz) {
-        ClassNode node = new ClassNode(clazz);
+    public synchronized ServiceNode createNewNode(Class clazz) {
+        ServiceNode node = new ServiceNode(clazz);
         allNodes.put(clazz, node);
 
         return node;
     }
 
 
-    public synchronized ClassNode createNewNodeWithImpl(Class clazzInterface, Class clazzImpl) {
-        ClassNode node = new ClassNode(clazzInterface, clazzImpl);
+    public synchronized ServiceNode createNewNodeWithImpl(Class clazzInterface, Class clazzImpl) {
+        ServiceNode node = new ServiceNode(clazzInterface, clazzImpl);
         allNodes.put(clazzInterface, node);
 
         return node;
@@ -121,7 +119,7 @@ public class ObjectGraph {
      *
      * @return
      */
-    HashMap<Class, ClassNode> getAllNodes() {
+    HashMap<Class, ServiceNode> getAllNodes() {
         return allNodes;
     }
 

@@ -1,22 +1,20 @@
-package cvut.fit.di.graph.entity;
+package cvut.fit.di.container.setter.linear;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@Singleton
+
+
 public class A {
 
-    @Inject
     private B b;
 
-    private D d;
-
     @Inject
-    public A(D d) {
-        this.d = d;
-    }
-
     public void setB(B b) {
         this.b = b;
+    }
+
+    public B getB() {
+        return b;
     }
 }

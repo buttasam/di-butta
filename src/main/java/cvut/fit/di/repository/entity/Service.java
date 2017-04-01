@@ -81,7 +81,7 @@ public class Service {
     }
 
     /**
-     * Podle anotace urci scope servicey.
+     * Podle anotace urci scope service.
      *
      * @param clazz
      */
@@ -89,6 +89,9 @@ public class Service {
         if (clazz.isAnnotationPresent(Singleton.class)) {
             serviceScope = ServiceScope.SINGLETON;
         } else if (clazz.isAnnotationPresent(Prototype.class)) {
+            serviceScope = ServiceScope.PROTOTYPE;
+        } else {
+            // nastavi defaultni scope jako Prototype
             serviceScope = ServiceScope.PROTOTYPE;
         }
     }

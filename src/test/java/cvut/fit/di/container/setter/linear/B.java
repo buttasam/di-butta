@@ -1,21 +1,20 @@
-package cvut.fit.di.graph.entity;
-
-import cvut.fit.di.anotation.Prototype;
+package cvut.fit.di.container.setter.linear;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 
-@Prototype
+@Singleton
 public class B {
 
     private C c;
 
-    public C getC() {
-        return c;
-    }
-
     @Inject
     public void setC(C c) {
         this.c = c;
+    }
+
+    public C getC() {
+        return c;
     }
 }

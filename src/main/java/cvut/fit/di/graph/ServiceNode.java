@@ -1,12 +1,17 @@
 package cvut.fit.di.graph;
 
+import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.exception.service.UndefinedScopeOfServiceClassException;
+import cvut.fit.di.repository.entity.ServiceScope;
+
+import javax.inject.Singleton;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Trida reprezentuje jeden uzel objektoveho grafu.
  */
-public class ClassNode {
+public class ServiceNode {
 
     /**
      * Typ tridy daneho uzlu
@@ -21,53 +26,60 @@ public class ClassNode {
     /**
      * Potomci injectovani setterem
      */
-    private Set<ClassNode> setterChildren;
+    private Set<ServiceNode> setterChildren;
 
 
     /**
      * Potomci injectovani fieldem
      */
-    private Set<ClassNode> fieldChildren;
+    private Set<ServiceNode> fieldChildren;
 
+
+    /**
+     * Doba zivota service
+     */
+    private ServiceScope serviceScope;
 
     /**
      * Potomci injectovani konstrutorem
      */
-    private Set<ClassNode> constructorChildren;
+    private Set<ServiceNode> constructorChildren;
 
-    public ClassNode(Class clazzImpl) {
+    public ServiceNode(Class clazzImpl) {
         this.clazzImpl = clazzImpl;
 
-        init();
+        init(clazzImpl);
     }
 
-    public ClassNode(Class clazzInterface, Class clazzImpl) {
+    public ServiceNode(Class clazzInterface, Class clazzImpl) {
         this.clazzInterface = clazzInterface;
         this.clazzImpl = clazzImpl;
 
-        init();
+        init(clazzImpl);
     }
 
 
-    private void init() {
+    private void init(Class clazzImpl) {
         setterChildren = new HashSet<>();
         fieldChildren = new HashSet<>();
         constructorChildren = new HashSet<>();
+
+        findAndSetServiceScope(clazzImpl);
     }
 
-    public void addSetterChild(ClassNode child) {
+    public void addSetterChild(ServiceNode child) {
         setterChildren.add(child);
     }
 
-    public void addFieldChild(ClassNode child) {
+    public void addFieldChild(ServiceNode child) {
         fieldChildren.add(child);
     }
 
-    public void addConstructorChild(ClassNode child) {
+    public void addConstructorChild(ServiceNode child) {
         constructorChildren.add(child);
     }
 
-    public void addConstructorChildren(Set<ClassNode> children) {
+    public void addConstructorChildren(Set<ServiceNode> children) {
         constructorChildren.addAll(children);
     }
 
@@ -95,4 +107,20 @@ public class ClassNode {
         return constructorChildren.size();
     }
 
+
+    /**
+     * Podle anotace urci scope service.
+     * Pokud neobsahuje scope vyhodi chybu.
+     *
+     * @param clazz
+     */
+    private void findAndSetServiceScope(Class clazz) {
+        if (clazz.isAnnotationPresent(Singleton.class)) {
+            serviceScope = ServiceScope.SINGLETON;
+        } else if (clazz.isAnnotationPresent(Prototype.class)) {
+            serviceScope = ServiceScope.PROTOTYPE;
+        } else {
+            throw new UndefinedScopeOfServiceClassException(clazz);
+        }
+    }
 }

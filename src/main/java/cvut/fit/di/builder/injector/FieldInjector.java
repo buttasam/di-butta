@@ -1,7 +1,7 @@
 package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.cofig.ConfigType;
-import cvut.fit.di.graph.ClassNode;
+import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 import cvut.fit.di.repository.entity.ServiceScope;
 
@@ -29,7 +29,7 @@ public class FieldInjector extends Injector {
         objectGraph.initSubgraphByNode(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
-        ClassNode node = objectGraph.getNode(initClass);
+        ServiceNode node = objectGraph.getNode(initClass);
 
         // pokud existuje
         if (node != null) {

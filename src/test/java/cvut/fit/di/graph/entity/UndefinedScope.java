@@ -1,10 +1,9 @@
 package cvut.fit.di.graph.entity;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
-public class A {
+
+public class UndefinedScope {
 
     @Inject
     private B b;
@@ -12,11 +11,12 @@ public class A {
     private D d;
 
     @Inject
-    public A(D d) {
+    public UndefinedScope(D d) {
         this.d = d;
     }
 
     public void setB(B b) {
         this.b = b;
     }
+
 }

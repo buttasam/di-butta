@@ -1,7 +1,8 @@
 package cvut.fit.di.graph.entity;
 
-/**
- * @author Samuel Butta
- */
+import javax.inject.Singleton;
+
+
+@Singleton
 public class C {
 }
