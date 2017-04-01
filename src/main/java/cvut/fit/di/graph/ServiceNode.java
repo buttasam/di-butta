@@ -108,6 +108,10 @@ public class ServiceNode {
     }
 
 
+    public ServiceScope getServiceScope() {
+        return serviceScope;
+    }
+
     /**
      * Podle anotace urci scope service.
      * Pokud neobsahuje scope vyhodi chybu.
