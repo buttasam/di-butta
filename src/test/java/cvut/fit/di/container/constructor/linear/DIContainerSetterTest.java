@@ -8,9 +8,7 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 
-/**
- * Created by samik on 1.4.17.
- */
+
 public class DIContainerSetterTest {
 
     @Test
