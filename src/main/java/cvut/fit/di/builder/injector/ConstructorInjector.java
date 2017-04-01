@@ -34,12 +34,12 @@ public class ConstructorInjector extends Injector {
     public Object getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
 
         // inicializace grafu (podgrafu) introspekci
-        if(configType.equals(ConfigType.INTROSPECTION)) {
-            objectGraph.initSubgraphByNode(initClass);
-        }
+        initSubgraphByIntrospection(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
         ServiceNode node = objectGraph.getNode(initClass);
+
+        // TODO nalezeni cyklu, odstaneni cyklu
 
         // pokud existuje
         if (node != null) {
