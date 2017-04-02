@@ -2,6 +2,7 @@ package cvut.fit.di.graph;
 
 import cvut.fit.di.anotation.Prototype;
 import cvut.fit.di.exception.service.UndefinedScopeOfServiceClassException;
+import cvut.fit.di.graph.dfs.Status;
 import cvut.fit.di.repository.entity.ServiceScope;
 
 import javax.inject.Singleton;
@@ -44,6 +45,14 @@ public class ServiceNode {
      * Potomci injectovani konstrutorem
      */
     private Set<ServiceNode> constructorChildren;
+
+    // Priznamky potrebne pro operace nad grafem
+
+    /**
+     * Priznak, zda byl uzel navstiven.
+     */
+    private Status dfsStatus;
+    private boolean visited;
 
     public ServiceNode(Class clazzImpl) {
         this.clazzImpl = clazzImpl;
@@ -139,5 +148,37 @@ public class ServiceNode {
         } else {
             throw new UndefinedScopeOfServiceClassException(clazz);
         }
+    }
+
+    public Status getDfsStatus() {
+        return dfsStatus;
+    }
+
+    public void setDfsStatus(Status dfsStatus) {
+        this.dfsStatus = dfsStatus;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public Class getClazzInterface() {
+        return clazzInterface;
+    }
+
+    public void setClazzInterface(Class clazzInterface) {
+        this.clazzInterface = clazzInterface;
+    }
+
+    public Class getClazzImpl() {
+        return clazzImpl;
+    }
+
+    public void setClazzImpl(Class clazzImpl) {
+        this.clazzImpl = clazzImpl;
     }
 }

@@ -59,6 +59,10 @@ public class DIContainer {
     }
 
 
+    public void initSubgraph(Class clazz) {
+        injector.initSubgraphByIntrospection(clazz);
+    }
+
     public <T> Object getInstance(Class<T> clazz) {
         try {
             return context.getInstance(clazz);

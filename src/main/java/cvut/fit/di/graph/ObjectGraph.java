@@ -2,6 +2,7 @@ package cvut.fit.di.graph;
 
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.exception.AmbiguousConstructorException;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -42,7 +43,6 @@ public class ObjectGraph {
      * Inicializuje podgraf podle vstupni tridy.
      */
     public ServiceNode initSubgraphByNode(Class clazz) {
-        System.out.println(clazz);
         // pokusi se najit dany node
         ServiceNode node = allNodes.get(clazz);
 
@@ -121,6 +121,16 @@ public class ObjectGraph {
      */
     HashMap<Class, ServiceNode> getAllNodes() {
         return allNodes;
+    }
+
+    /**
+     * Overi zda je uzel pro danou tridu pritomny v objektovem grafu.
+     * Pokud neni, vyhodi runtime vyjimku.
+     */
+    public void isNodePresent(Class clazz) {
+        if(getNode(clazz) == null) {
+            throw new ServiceIsNotInObjectGraphException();
+        }
     }
 
 }

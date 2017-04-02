@@ -46,7 +46,7 @@ public abstract class Injector {
      *
      * @param initClass
      */
-    protected void initSubgraphByIntrospection(Class initClass) {
+    public void initSubgraphByIntrospection(Class initClass) {
         // inicializace grafu (podgrafu) introspekci
         if(configType.equals(ConfigType.INTROSPECTION)) {
             objectGraph.initSubgraphByNode(initClass);
