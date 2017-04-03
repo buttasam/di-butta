@@ -14,8 +14,14 @@ public class ObjectGraphAPI {
 
     private ObjectGraph objectGraph;
 
+    // TODO odstanit
+    @Deprecated
     public ObjectGraphAPI() {
         this.objectGraph = ObjectGraphFactory.getObjectGraph();
+    }
+
+    public ObjectGraphAPI(ObjectGraph objectGraph) {
+        this.objectGraph = objectGraph;
     }
 
     public void addClazzWithImpl(Class clazzInterface, Class clazzImpl) {

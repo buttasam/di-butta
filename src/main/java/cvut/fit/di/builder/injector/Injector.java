@@ -5,6 +5,7 @@ import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraph;
+import cvut.fit.di.graph.ObjectGraphAPI;
 import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
 import cvut.fit.di.repository.store.ServiceStoreFactory;
@@ -27,6 +28,9 @@ public abstract class Injector {
     // objektovy graf reprezentujici zavisle tridy
     protected ObjectGraph objectGraph;
 
+    // API dostupne pro vsechny potomky Injectoru
+    protected ObjectGraphAPI objectGraphAPI;
+
     public Injector() {
         creator = new Creator();
         finder = new Finder();
@@ -35,6 +39,8 @@ public abstract class Injector {
         objectGraph = ObjectGraphFactory.getObjectGraph();
 
         configType = ConfigType.INTROSPECTION;
+
+        objectGraphAPI = new ObjectGraphAPI(objectGraph);
     }
 
     public abstract <T> T getInstance(Class initClass) throws ServiceIsNotInObjectGraphException;

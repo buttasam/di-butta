@@ -13,7 +13,7 @@ import javax.inject.Singleton;
  *
  * @author Samuel Butta
  */
-public class Service {
+public class Service<T> {
 
 
     // TODO
@@ -42,7 +42,7 @@ public class Service {
     /**
      * Ulozena instance, pokud se jedna o singleton.
      */
-    private Object singletonInstance;
+    private T singletonInstance;
 
     /**
      * Enum urcuje scope (dobu zivota) servicey.
@@ -143,7 +143,7 @@ public class Service {
         return singletonInstance;
     }
 
-    public Object getSingletonInstance() {
+    public T getSingletonInstance() {
         return singletonInstance;
     }
 }

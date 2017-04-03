@@ -1,7 +1,6 @@
 package cvut.fit.di.container.constructor.linear;
 
-import cvut.fit.di.builder.injector.ConstructorInjector;
-import cvut.fit.di.builder.injector.SetterInjector;
+import cvut.fit.di.builder.injector.NotCycleConstructorInjector;
 import cvut.fit.di.container.DIContainer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +13,7 @@ public class DIContainerSetterTest {
     @Test
     public void testLinearSetterDI() throws InvocationTargetException, IllegalAccessException {
 
-        DIContainer container = new DIContainer(new ConstructorInjector());
+        DIContainer container = new DIContainer(new NotCycleConstructorInjector());
 
         A a = (A) container.getInstance(A.class);
 

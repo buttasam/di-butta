@@ -2,6 +2,7 @@ package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.AmbiguousConstructorException;
+import cvut.fit.di.exception.CircularDependencyFoundException;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
@@ -15,23 +16,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Injektor pro konstruktorovou injektaz.
+ * Pokud dojde k nalezni cyklu, vyhodi vyjimku.
+ *
  * @author Samuel Butta
  */
-public class ConstructorInjector extends Injector {
+public class NotCycleConstructorInjector extends Injector {
 
+    // priznak, zda je byl hledan cyklus
+    private boolean cycleWasSearched = false;
 
-    public ConstructorInjector() {
+    public NotCycleConstructorInjector() {
         super();
     }
 
-    public ConstructorInjector(ConfigType configType) {
+    public NotCycleConstructorInjector(ConfigType configType) {
         super();
         this.configType = configType;
     }
 
 
     @Override
-    public Object getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
+    public <T> T getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
 
         // inicializace grafu (podgrafu) introspekci
         initSubgraphByIntrospection(initClass);
@@ -40,6 +46,13 @@ public class ConstructorInjector extends Injector {
         ServiceNode node = objectGraph.getNode(initClass);
 
         // TODO nalezeni cyklu, odstaneni cyklu
+        if (!cycleWasSearched) {
+            if (objectGraphAPI.detectCycle(initClass)) {
+                throw new CircularDependencyFoundException();
+            }
+
+            cycleWasSearched = false;
+        }
 
         // pokud existuje
         if (node != null) {
@@ -49,7 +62,7 @@ public class ConstructorInjector extends Injector {
 
             // pokud je singleton a je jiz inicializovana vrat ji
             if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
-                return service.getSingletonInstance();
+                return (T) service.getSingletonInstance();
             } else {
                 // konstruktor s anotaci inject
                 Constructor constructor = null;
@@ -61,7 +74,7 @@ public class ConstructorInjector extends Injector {
 
                 List<Object> params = new ArrayList<>();
 
-                if(constructor != null) {
+                if (constructor != null) {
                     // vsechny typy jeho argumenty
                     Class[] paramTypes = constructor.getParameterTypes();
 
@@ -77,9 +90,9 @@ public class ConstructorInjector extends Injector {
                     }).collect(Collectors.toList());
                 }
 
-                if(params.size() != 0) {
+                if (params.size() != 0) {
                     try {
-                        return constructor.newInstance(params.toArray());
+                        return (T) constructor.newInstance(params.toArray());
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                         return null;

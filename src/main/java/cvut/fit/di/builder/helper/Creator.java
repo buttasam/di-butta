@@ -19,12 +19,12 @@ public class Creator {
      * @param clazz typ tridy
      * @return nove vytvorena instance
      */
-    public Object createNewInstance(Class clazz) {
+    public <T> T createNewInstance(Class clazz) {
         Class<?> c = null;
         try {
             c = Class.forName(clazz.getName());
             Constructor<?> cons = c.getConstructor();
-            return cons.newInstance();
+            return (T) cons.newInstance();
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             return null;
