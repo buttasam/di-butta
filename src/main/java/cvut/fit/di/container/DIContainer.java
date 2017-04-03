@@ -63,7 +63,7 @@ public class DIContainer {
         injector.initSubgraphByIntrospection(clazz);
     }
 
-    public <T> Object getInstance(Class<T> clazz) {
+    public <T> T getInstance(Class<T> clazz) {
         try {
             return context.getInstance(clazz);
         } catch (IllegalAccessException | InvocationTargetException | ServiceIsNotInObjectGraphException e) {

@@ -37,7 +37,7 @@ public abstract class Injector {
         configType = ConfigType.INTROSPECTION;
     }
 
-    public abstract Object getInstance(Class initClass) throws ServiceIsNotInObjectGraphException;
+    public abstract <T> T getInstance(Class initClass) throws ServiceIsNotInObjectGraphException;
 
 
     /**

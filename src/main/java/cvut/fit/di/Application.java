@@ -32,7 +32,7 @@ public class Application {
 
         service2.getCarDao().getRadioDao().getUserService().print();*/
 
-        AConst aConst = (AConst) container.getInstance(AConst.class);
+        AConst aConst = container.getInstance(AConst.class);
 
         aConst.getbConst().print();
 
