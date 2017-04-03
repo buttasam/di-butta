@@ -1,9 +1,10 @@
 package cvut.fit.di.graph;
 
 
-import com.sun.org.apache.xpath.internal.NodeSet;
+import cvut.fit.di.graph.dfs.Status;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * API trida pro operace nad objektovym grafem.
@@ -26,48 +27,46 @@ public class ObjectGraphAPI {
         objectGraph.createNewNode(clazz);
     }
 
-    public void detectCycle(Class clazz) {
+    public boolean detectCycle(Class clazz) {
 
-        HashSet<NodeSet> visited = new HashSet<>();
+        // mapa informaci navic, potrebnych pro dany algoritmus
+        Map<ServiceNode, Status> metaInfo = new HashMap<>();
 
         // osetreni zda je trida v objektovem grafu
         objectGraph.isNodePresent(clazz);
 
         ServiceNode initNode = objectGraph.getNode(clazz);
 
-        dfs(initNode);
+        boolean result = dfs(initNode, metaInfo);
 
-        // vycisteni
-        cleanObjectGraphFlags();
+        metaInfo.forEach((k, v) -> System.out.println(v));
+
+        return result;
     }
 
-    public void dfs(ServiceNode root)
-    {
-        //Avoid infinite loops
-        if(root == null) return;
+    private boolean dfs(ServiceNode root, Map<ServiceNode, Status> metaInfo) {
+        if (root == null) {
+            return false;
+        }
 
-        System.out.print(root.getClazzImpl());
-        root.setVisited(true);
+        System.out.println(root.getClazzImpl());
+        metaInfo.put(root, Status.OPEN);
 
-        //for every child
-        for(ServiceNode n : root.getConstructorChildren())
-        {
-            //if childs state is not visited then recurse
-            if(!n.isVisited())
-            {
-                dfs(n);
+        for (ServiceNode n : root.getConstructorChildren()) {
+            if (metaInfo.get(n) == null) {
+                boolean result = dfs(n, metaInfo);
+                if (!result) {
+                    metaInfo.put(root, Status.CLOSE);
+                }
+                return result;
+            } else if (metaInfo.get(n) == Status.OPEN) {
+                return true;
             }
         }
-    }
 
+        metaInfo.put(root, Status.CLOSE);
 
-    /**
-     * Nastavy priznaky s kterymi pracuji algoritmy na pocatecni hodnotu.
-     * TODO asi blbost, nemelo by to menis stav ServiceNode
-     */
-    private void cleanObjectGraphFlags() {
-        objectGraph.getAllNodes().forEach((k, v) -> v.setDfsStatus(null));
-        objectGraph.getAllNodes().forEach((k, v) -> v.setVisited(false));
+        return false;
     }
 
 }
