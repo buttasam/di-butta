@@ -45,8 +45,6 @@ public class ObjectGraphAPI {
 
         boolean result = dfs(initNode, metaInfo);
 
-        metaInfo.forEach((k, v) -> System.out.println(v));
-
         return result;
     }
 
