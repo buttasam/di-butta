@@ -1,6 +1,6 @@
 package cvut.fit.di;
 
-import cvut.fit.di.builder.injector.NotCycleConstructorInjector;
+import cvut.fit.di.builder.injector.FieldInjector;
 import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.container.DIContainer;
 import cvut.fit.di.exception.AmbiguousConstructorException;
@@ -16,10 +16,10 @@ public class Application {
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, AmbiguousConstructorException, InstantiationException {
 
-        DIContainer container = new DIContainer(new NotCycleConstructorInjector(ConfigType.MANUALLY));
-        container.getAPI().addClazzWithImpl(AInterface.class, AImpl.class);
-        container.getAPI().addClazzWithoutImpl(AConst.class);
-        container.getAPI().addClazzWithoutImpl(BConst.class);
+        DIContainer container = new DIContainer(new FieldInjector(ConfigType.MANUALLY));
+        container.getAPI().addService(AInterface.class, AImpl.class);
+        container.getAPI().addService(AConst.class);
+        container.getAPI().addService(BConst.class);
 
 /*        UserService service = (UserService) container.getInstance(UserService.class);
         service.getCarDao().print();

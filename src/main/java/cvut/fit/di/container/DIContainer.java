@@ -3,6 +3,7 @@ package cvut.fit.di.container;
 import cvut.fit.di.builder.Context;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.SetterInjector;
+import cvut.fit.di.builder.injector.cofig.ConfigType;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraphAPI;
 
@@ -46,6 +47,12 @@ public class DIContainer {
      */
     public DIContainer(Injector injector) {
         this.injector = injector;
+        init();
+    }
+
+    public DIContainer(ConfigType configType) {
+        this.injector = new SetterInjector();
+        injector.setConfigType(configType);
         init();
     }
 

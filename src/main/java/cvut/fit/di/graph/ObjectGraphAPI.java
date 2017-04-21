@@ -24,12 +24,12 @@ public class ObjectGraphAPI {
         this.objectGraph = objectGraph;
     }
 
-    public void addClazzWithImpl(Class clazzInterface, Class clazzImpl) {
+    public void addService(Class clazzInterface, Class clazzImpl) {
         objectGraph.createNewNodeWithImpl(clazzInterface, clazzImpl);
     }
 
 
-    public void addClazzWithoutImpl(Class clazz) {
+    public void addService(Class clazz) {
         objectGraph.createNewNode(clazz);
     }
 

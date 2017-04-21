@@ -3,6 +3,7 @@ package cvut.fit.di.graph;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
+import cvut.fit.di.util.Validator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -108,6 +109,8 @@ public class ObjectGraph {
 
 
     public synchronized ServiceNode createNewNodeWithImpl(Class clazzInterface, Class clazzImpl) {
+        Validator.isClazzImplementationOfInterface(clazzInterface, clazzImpl);
+
         ServiceNode node = new ServiceNode(clazzInterface, clazzImpl);
         allNodes.put(clazzInterface, node);
 

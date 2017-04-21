@@ -23,7 +23,7 @@ public abstract class Injector {
     /**
      * Typ konfigurace objektoveho grafu.
      */
-    ConfigType configType;
+    protected ConfigType configType;
 
     // objektovy graf reprezentujici zavisle tridy
     protected ObjectGraph objectGraph;
@@ -57,6 +57,10 @@ public abstract class Injector {
         if(configType.equals(ConfigType.INTROSPECTION)) {
             objectGraph.initSubgraphByNode(initClass);
         }
+    }
+
+    public void setConfigType(ConfigType configType) {
+        this.configType = configType;
     }
 
 }
