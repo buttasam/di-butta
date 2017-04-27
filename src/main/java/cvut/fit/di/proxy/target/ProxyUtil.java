@@ -1,4 +1,4 @@
-package cvut.fit.di.proxy;
+package cvut.fit.di.proxy.target;
 
 import java.lang.reflect.Proxy;
 

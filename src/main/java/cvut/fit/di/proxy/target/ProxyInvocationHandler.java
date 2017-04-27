@@ -1,10 +1,10 @@
-package cvut.fit.di.proxy;
+package cvut.fit.di.proxy.target;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 
-public class ProxyInvocationHandler implements java.lang.reflect.InvocationHandler {
+public class ProxyInvocationHandler implements InvocationHandler {
 
     private final Object target;
 

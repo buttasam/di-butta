@@ -1,7 +1,7 @@
-package cvut.fit.di.proxy;
+package cvut.fit.di.proxy.target;
 
-import cvut.fit.di.proxy.service.ServiceA;
-import cvut.fit.di.proxy.service.ServiceAImpl;
+import cvut.fit.di.proxy.target.service.ServiceA;
+import cvut.fit.di.proxy.target.service.ServiceAImpl;
 
 /**
  * Created by samik on 27.4.17.
