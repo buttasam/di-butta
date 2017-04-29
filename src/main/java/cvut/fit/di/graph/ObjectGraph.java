@@ -3,7 +3,10 @@ package cvut.fit.di.graph;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
+import cvut.fit.di.exception.service.ServiceHasMoreImplementationsInSamePackage;
+import cvut.fit.di.exception.service.ServiceHasNoImplementationInSamePackage;
 import cvut.fit.di.util.Validator;
+import org.reflections.Reflections;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -101,8 +104,33 @@ public class ObjectGraph {
      * @return
      */
     public synchronized ServiceNode createNewNode(Class clazz) {
-        ServiceNode node = new ServiceNode(clazz);
+
+        ServiceNode node;
+        // pokud je interface
+        if(clazz.isInterface()) {
+
+            // najde jeho implementace ve stejnem balicku a musi byt jedna
+
+            Reflections reflections = new Reflections(clazz.getPackage().getName());
+            Set<Class<?>> classes = reflections.getSubTypesOf(clazz);
+
+            if(classes.size() == 0) {
+                throw new ServiceHasNoImplementationInSamePackage();
+            }
+            if(classes.size() > 1) {
+                throw new ServiceHasMoreImplementationsInSamePackage();
+            }
+
+            Class clazzImpl = classes.iterator().next();
+
+             node = new ServiceNode(clazz, clazzImpl);
+
+        } else {
+            node = new ServiceNode(clazz);
+        }
+
         allNodes.put(clazz, node);
+
 
         return node;
     }

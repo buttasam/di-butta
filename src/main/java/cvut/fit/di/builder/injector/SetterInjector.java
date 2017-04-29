@@ -39,7 +39,7 @@ public class SetterInjector extends Injector {
         if (node != null) {
 
             // ziskej nebo vytvor service
-            Service service = serviceStore.getOrCreateService(initClass);
+            Service service = serviceStore.getOrCreateService(node);
 
             // pokud je singleton a je jiz inicializovana vrat ji
             if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {

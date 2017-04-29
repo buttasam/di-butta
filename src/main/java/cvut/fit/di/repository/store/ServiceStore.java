@@ -1,5 +1,6 @@
 package cvut.fit.di.repository.store;
 
+import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,6 +108,16 @@ public class ServiceStore {
             addService(clazz);
         }
         foundService = findService(clazz);
+        return  foundService.get();
+    }
+
+    public Service getOrCreateService(ServiceNode node) {
+        // hledana service
+        Optional<Service> foundService = findService(node.getClazzImpl());
+        if(!foundService.isPresent()) {
+            addService(node.getClazzImpl());
+        }
+        foundService = findService(node.getClazzImpl());
         return  foundService.get();
     }
 }

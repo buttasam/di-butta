@@ -138,6 +138,7 @@ public class Service<T> {
     private Object lazySingletonInit() {
         if(singletonInstance == null) {
             Creator creator = new Creator();
+            System.out.println(classImpl.getName());
             singletonInstance = creator.createNewInstance(classImpl);
         }
         return singletonInstance;
