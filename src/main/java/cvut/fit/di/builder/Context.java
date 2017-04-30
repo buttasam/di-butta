@@ -5,12 +5,16 @@ import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraph;
+import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
 import cvut.fit.di.repository.store.ServiceStoreFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ * Pomocna trida ktera udrzuje vsechny potrebe informace
+ * spojene s objektovym grafem a kontejnerem.
+ *
  * @author Samuel Butta
  */
 public class Context {
@@ -33,7 +37,7 @@ public class Context {
         finder = new Finder();
 
         serviceStore = ServiceStoreFactory.getServiceStore();
-        objectGraph = new ObjectGraph();
+        objectGraph = ObjectGraphFactory.getObjectGraph();
     }
 
 
@@ -41,4 +45,16 @@ public class Context {
         return injector.getInstance(initClass);
     }
 
+    public ServiceStore getServiceStore() {
+        return serviceStore;
+    }
+
+    /**
+     * Vrati instanci objektoveho grafu
+     *
+     * @return objektovy graf
+     */
+    public ObjectGraph getObjectGraph() {
+        return objectGraph;
+    }
 }

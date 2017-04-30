@@ -5,7 +5,6 @@ import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
 import cvut.fit.di.testEntity.constructor.AConst;
 import cvut.fit.di.testEntity.constructor.BConst;
-import cvut.fit.di.testEntity.constructor.exception.ConstWithMoreInjectConstructors;
 import cvut.fit.di.testEntity.managed.injected.UserService;
 import cvut.fit.di.testEntity.managed.withInterface.Mailer;
 import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailMailer;

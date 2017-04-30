@@ -14,14 +14,25 @@ import java.util.Map;
 public class ObjectGraphAPI {
 
 
+    /**
+     * Instance objektoveho grafu
+     */
     private ObjectGraph objectGraph;
 
-    // TODO odstanit
-    @Deprecated
-    public ObjectGraphAPI() {
-        this.objectGraph = ObjectGraphFactory.getObjectGraph();
+
+    /**
+     * Prazdny konstruktor zamezi vytvoreni
+     * instance bez objektoveho grafu
+     */
+    private ObjectGraphAPI() {
+        // prazdny konstruktor
     }
 
+    /**
+     * Konstruktor s inicializaci objektoveho grafu
+     *
+     * @param objectGraph objektovy graf
+     */
     public ObjectGraphAPI(ObjectGraph objectGraph) {
         this.objectGraph = objectGraph;
     }
@@ -82,7 +93,6 @@ public class ObjectGraphAPI {
             return false;
         }
 
-        System.out.println(root.getClazzImpl());
         metaInfo.put(root, Status.OPEN);
 
         for (ServiceNode n : root.getConstructorChildren()) {

@@ -71,7 +71,7 @@ public class DIContainer {
      */
     private void init() {
         context = new Context(injector);
-        objectGraphAPI = new ObjectGraphAPI();
+        objectGraphAPI = new ObjectGraphAPI(context.getObjectGraph());
     }
 
 
