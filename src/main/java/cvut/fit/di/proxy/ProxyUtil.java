@@ -1,6 +1,5 @@
-package cvut.fit.di.proxy.setter;
+package cvut.fit.di.proxy;
 
-import cvut.fit.di.proxy.setter.service.Instancer;
 
 import java.lang.reflect.Proxy;
 
@@ -12,7 +11,7 @@ public class ProxyUtil {
     public static <T> T createProxy(Class<T> iface) {
         return (T) Proxy.newProxyInstance(
                 iface.getClassLoader(),
-                new Class<?>[] { iface, Instancer.class }, // vraci objekt co implementuje obe rozhrani
+                new Class<?>[] { iface, InstanceSetter.class }, // vraci objekt co implementuje obe rozhrani
                 new ProxyInvocationHandler());
     }
 

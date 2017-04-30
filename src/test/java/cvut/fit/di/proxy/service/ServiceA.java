@@ -1,4 +1,4 @@
-package cvut.fit.di.proxy.target.service;
+package cvut.fit.di.proxy.service;
 
 /**
  * Created by samik on 27.4.17.

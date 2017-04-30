@@ -1,4 +1,4 @@
-package cvut.fit.di.proxy.setter.service;
+package cvut.fit.di.proxy.service;
 
 
 public class ServiceAImpl implements ServiceA {

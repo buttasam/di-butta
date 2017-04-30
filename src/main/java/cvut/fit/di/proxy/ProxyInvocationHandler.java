@@ -1,10 +1,13 @@
-package cvut.fit.di.proxy.setter;
+package cvut.fit.di.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
-
+/**
+ *
+ * @author Samuel Butta
+ */
 public class ProxyInvocationHandler implements InvocationHandler {
 
     private Object target;
