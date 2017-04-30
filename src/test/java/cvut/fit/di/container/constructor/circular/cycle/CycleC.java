@@ -5,6 +5,6 @@ package cvut.fit.di.container.constructor.circular.cycle;
  */
 public interface CycleC {
 
-    void print();
+    String getImplName();
 
 }

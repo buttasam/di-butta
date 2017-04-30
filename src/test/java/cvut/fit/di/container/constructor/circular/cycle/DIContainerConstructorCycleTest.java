@@ -2,6 +2,7 @@ package cvut.fit.di.container.constructor.circular.cycle;
 
 import cvut.fit.di.builder.injector.CycleConstructorInjector;
 import cvut.fit.di.container.DIContainer;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,8 +17,8 @@ public class DIContainerConstructorCycleTest {
 
         CycleA a = container.getInstance(CycleA.class);
 
-        a.getB().print();
-        a.getC().print();
+        Assert.assertEquals(CycleBImpl.class.getName(), a.getB().getImplName());
+        Assert.assertEquals(CycleCImpl.class.getName(), a.getC().getImplName());
     }
 
 }

@@ -16,7 +16,7 @@ public class CycleBImpl implements CycleB {
 
 
     @Override
-    public void print() {
-        System.out.println("cycle B impl");
+    public String getImplName() {
+        return CycleBImpl.class.getName();
     }
 }

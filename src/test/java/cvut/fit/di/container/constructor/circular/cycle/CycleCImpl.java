@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 public class CycleCImpl implements CycleC {
 
     @Override
-    public void print() {
-        System.out.println("cycle C impl");
+    public String getImplName() {
+        return CycleCImpl.class.getName();
     }
 }

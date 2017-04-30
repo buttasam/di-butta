@@ -50,11 +50,9 @@ public class CycleConstructorInjector extends Injector {
 
         // pokud existuje
         if (node != null) {
-
             // vytvor proxy
             T proxy = ProxyUtil.createProxy(initClass);
             proxies.put(initClass, proxy);
-
 
             // konstruktor s anotaci inject
             Constructor constructor = finder.findInjectedConstructor(node.getClazzImpl());
@@ -93,7 +91,7 @@ public class CycleConstructorInjector extends Injector {
                     return null;
                 }
             } else {
-                target = (T) creator.createNewInstance(node.getClazzImpl());
+                target = creator.createNewInstance(node.getClazzImpl());
             }
 
             proxy = ProxyUtil.setInstance(proxy, target);
