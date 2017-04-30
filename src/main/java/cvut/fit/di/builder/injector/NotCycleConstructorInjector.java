@@ -23,7 +23,9 @@ import java.util.stream.Collectors;
  */
 public class NotCycleConstructorInjector extends Injector {
 
-    // priznak, zda je byl hledan cyklus
+    /**
+     * priznak, zda je byl hledan cyklus
+     */
     private boolean cycleWasSearched = false;
 
     public NotCycleConstructorInjector() {
@@ -45,7 +47,6 @@ public class NotCycleConstructorInjector extends Injector {
         // overit zda takova trida existuje v objektovem grafu
         ServiceNode node = objectGraph.getNode(initClass);
 
-        // TODO nalezeni cyklu, odstaneni cyklu
         if (!cycleWasSearched) {
             if (objectGraphAPI.detectConstructorCycle(initClass)) {
                 throw new CircularDependencyFoundException();
@@ -79,10 +80,10 @@ public class NotCycleConstructorInjector extends Injector {
                     Class[] paramTypes = constructor.getParameterTypes();
 
                     // vytvor vsechny argumenty
-
                     params = Arrays.stream(paramTypes).map(p -> {
                         try {
-                            return getInstance(p);
+                            ServiceNode paramNode = objectGraph.getNode(p);
+                            return getInstance(paramNode.getClazzImpl());
                         } catch (ServiceIsNotInObjectGraphException e) {
                             e.printStackTrace();
                             return null;
