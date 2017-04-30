@@ -39,7 +39,7 @@ public class NotCycleConstructorInjector extends Injector {
 
 
     @Override
-    public <T> T getInstance(Class initClass) throws ServiceIsNotInObjectGraphException {
+    public <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException {
 
         // inicializace grafu (podgrafu) introspekci
         initSubgraphByIntrospection(initClass);

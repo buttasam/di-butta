@@ -41,7 +41,7 @@ public class Context {
     }
 
 
-    public <T> T getInstance(Class initClass) throws InvocationTargetException, IllegalAccessException, ServiceIsNotInObjectGraphException {
+    public <T> T getInstance(Class<T> initClass) throws InvocationTargetException, IllegalAccessException, ServiceIsNotInObjectGraphException {
         return injector.getInstance(initClass);
     }
 

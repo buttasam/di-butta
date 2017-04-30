@@ -23,12 +23,9 @@ public class ProxyInvocationHandler implements InvocationHandler {
 
         // porovnani metody
         if(method.isAnnotationPresent(TargetInstanceSetter.class)) {
-            Parameter param = method.getParameters()[0];
-            System.out.println(param.getName());
             this.target = args[0];
             return null;
         } else {
-            System.out.println("calling proxy method");
             return method.invoke(target, args);
         }
     }

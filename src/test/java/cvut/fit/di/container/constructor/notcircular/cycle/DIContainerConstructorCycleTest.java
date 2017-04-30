@@ -1,4 +1,4 @@
-package cvut.fit.di.container.constructor.cycle;
+package cvut.fit.di.container.constructor.notcircular.cycle;
 
 import cvut.fit.di.builder.injector.NotCycleConstructorInjector;
 import cvut.fit.di.container.DIContainer;

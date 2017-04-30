@@ -1,4 +1,4 @@
-package cvut.fit.di.container.constructor.impl;
+package cvut.fit.di.container.constructor.notcircular.impl;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

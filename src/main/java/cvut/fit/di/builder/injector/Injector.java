@@ -43,7 +43,7 @@ public abstract class Injector {
         objectGraphAPI = new ObjectGraphAPI(objectGraph);
     }
 
-    public abstract <T> T getInstance(Class initClass) throws ServiceIsNotInObjectGraphException;
+    public abstract <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException;
 
 
     /**
