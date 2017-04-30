@@ -15,4 +15,12 @@ public class ProxyUtil {
                 new ProxyInvocationHandler());
     }
 
+
+    public static <T> T setInstance(T proxy, T target) {
+        InstanceSetter<T> tmp = (InstanceSetter<T>) proxy;
+        tmp.setInstance(target);
+
+        return proxy;
+    }
+
 }

@@ -1,6 +1,8 @@
 package cvut.fit.di.proxy;
 
 
+import cvut.fit.di.anotation.proxy.TargetInstanceSetter;
+
 /**
  * Pomocne rozhrani s metodou,
  * ktera umozni nastaveni instance pro proxy tridu.
@@ -10,6 +12,7 @@ package cvut.fit.di.proxy;
  */
 public interface InstanceSetter<T> {
 
+    @TargetInstanceSetter
     void setInstance(T instance);
 
 }

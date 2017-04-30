@@ -15,9 +15,7 @@ public class ProxyUtilTest {
         ServiceA proxy = ProxyUtil.createProxy(ServiceA.class);
 
         ServiceA target = new ServiceAImpl();
-
-        InstanceSetter<ServiceA> tmp = (InstanceSetter<ServiceA>) proxy;
-        tmp.setInstance(target);
+        proxy = ProxyUtil.setInstance(proxy, target);
 
         proxy.test();
     }

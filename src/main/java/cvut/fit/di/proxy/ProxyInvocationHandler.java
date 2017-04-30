@@ -1,5 +1,7 @@
 package cvut.fit.di.proxy;
 
+import cvut.fit.di.anotation.proxy.TargetInstanceSetter;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -20,7 +22,7 @@ public class ProxyInvocationHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         // porovnani metody
-        if(method.getName().equals("setInstance")) {
+        if(method.isAnnotationPresent(TargetInstanceSetter.class)) {
             Parameter param = method.getParameters()[0];
             System.out.println(param.getName());
             this.target = args[0];
