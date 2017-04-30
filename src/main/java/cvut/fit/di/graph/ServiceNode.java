@@ -1,6 +1,6 @@
 package cvut.fit.di.graph;
 
-import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.anotation.scope.Prototype;
 import cvut.fit.di.exception.service.UndefinedScopeOfServiceClassException;
 import cvut.fit.di.graph.dfs.Status;
 import cvut.fit.di.repository.entity.ServiceScope;

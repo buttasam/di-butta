@@ -1,6 +1,6 @@
 package cvut.fit.di.testEntity.managed;
 
-import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.anotation.scope.Prototype;
 
 /**
  * @author Samuel Butta

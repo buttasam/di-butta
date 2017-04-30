@@ -1,10 +1,9 @@
 package cvut.fit.di.builder.helper;
 
-import cvut.fit.di.anotation.Prototype;
+import cvut.fit.di.anotation.scope.Prototype;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
-import cvut.fit.di.graph.ServiceNode;
 import org.reflections.Reflections;
 
 import javax.inject.Inject;
