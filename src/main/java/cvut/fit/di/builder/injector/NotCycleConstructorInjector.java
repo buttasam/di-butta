@@ -66,12 +66,7 @@ public class NotCycleConstructorInjector extends Injector {
                 return (T) service.getSingletonInstance();
             } else {
                 // konstruktor s anotaci inject
-                Constructor constructor = null;
-                try {
-                    constructor = finder.findInjectedConstructor(initClass);
-                } catch (AmbiguousConstructorException e) {
-                    e.printStackTrace();
-                }
+                Constructor constructor = finder.findInjectedConstructor(initClass);
 
                 List<Object> params = new ArrayList<>();
 

@@ -6,7 +6,7 @@ package cvut.fit.di.exception;
  *
  * @author Samuel Butta
  */
-public class AmbiguousConstructorException extends Exception {
+public class AmbiguousConstructorException extends RuntimeException {
 
 
     public AmbiguousConstructorException() {
