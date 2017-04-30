@@ -8,6 +8,8 @@ import java.util.Map;
 
 /**
  * API trida pro operace nad objektovym grafem.
+ *
+ * @author Samuel Butta
  */
 public class ObjectGraphAPI {
 
@@ -24,17 +26,37 @@ public class ObjectGraphAPI {
         this.objectGraph = objectGraph;
     }
 
+
+    /**
+     * Pridani sluzby do objektoveho grafu.
+     *
+     * @param clazz typ tridy
+     */
+    public void addService(Class clazz) {
+        objectGraph.createNewNode(clazz);
+    }
+
+
+    /**
+     * Pridani sluzby rozhrani a implementaci do objektoveho grafu.
+     * Klicem je rozhrani.
+     *
+     * @param clazzInterface rozhrani
+     * @param clazzImpl      implementace
+     */
     public void addService(Class clazzInterface, Class clazzImpl) {
         objectGraph.createNewNodeWithImpl(clazzInterface, clazzImpl);
     }
 
 
-    public void addService(Class clazz) {
-        objectGraph.createNewNode(clazz);
-    }
-
-    public boolean detectCycle(Class clazz) {
-
+    /**
+     * Detekuje, zda se v danem objektovem grafu vyskytuje cyklus
+     * v zavislostech v konstruktoru.
+     *
+     * @param clazz vstupni trida
+     * @return true pokud detekuje cyklus
+     */
+    public boolean detectConstructorCycle(Class clazz) {
         // mapa informaci navic, potrebnych pro dany algoritmus
         Map<ServiceNode, Status> metaInfo = new HashMap<>();
 
@@ -48,6 +70,13 @@ public class ObjectGraphAPI {
         return result;
     }
 
+    /**
+     * Privatni pomocna rekutzivni metoda pro hledani cyklu
+     *
+     * @param root     korenovy uzel
+     * @param metaInfo mapa udrzujici stav uzlu
+     * @return true pokud detekuje cyklus
+     */
     private boolean dfs(ServiceNode root, Map<ServiceNode, Status> metaInfo) {
         if (root == null) {
             return false;

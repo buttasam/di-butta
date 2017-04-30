@@ -18,8 +18,8 @@ public class DIContainerConstructorCycleTest {
 
         container.initSubgraph(CycleA.class);
 
-        Assert.assertTrue(container.getAPI().detectCycle(CycleA.class));
-        Assert.assertTrue(container.getAPI().detectCycle(CycleB.class));
+        Assert.assertTrue(container.getAPI().detectConstructorCycle(CycleA.class));
+        Assert.assertTrue(container.getAPI().detectConstructorCycle(CycleB.class));
     }
 
 
@@ -29,7 +29,7 @@ public class DIContainerConstructorCycleTest {
 
         container.initSubgraph(NoCycleA.class);
 
-        Assert.assertFalse(container.getAPI().detectCycle(NoCycleA.class));
+        Assert.assertFalse(container.getAPI().detectConstructorCycle(NoCycleA.class));
     }
 
     @Test(expected = CircularDependencyFoundException.class)

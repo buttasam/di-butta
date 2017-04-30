@@ -11,7 +11,13 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  *
- * Hlavni API trida.
+ * Hlavni trida, ktera reprezentuje kontejner.
+ *
+ * Pouziti muze byt nasledujici.
+ * DIContainer container = new DIContainer();
+ *
+ * Sluzba se z kontejneru ziska metodou getInstance.
+ * container.getInstance(MyService.class);
  *
  * @author Samuel Butta
  */
@@ -29,6 +35,9 @@ public class DIContainer {
     private final Injector injector;
 
 
+    /**
+     * API nad objektovym grafem
+     */
     private ObjectGraphAPI objectGraphAPI;
 
     /**

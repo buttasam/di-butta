@@ -17,7 +17,7 @@ public class DetectCycleTest {
 
         ObjectGraphAPI api = new ObjectGraphAPI();
 
-        api.detectCycle(CycleA.class);
+        api.detectConstructorCycle(CycleA.class);
     }
 
 

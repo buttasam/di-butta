@@ -47,7 +47,7 @@ public class NotCycleConstructorInjector extends Injector {
 
         // TODO nalezeni cyklu, odstaneni cyklu
         if (!cycleWasSearched) {
-            if (objectGraphAPI.detectCycle(initClass)) {
+            if (objectGraphAPI.detectConstructorCycle(initClass)) {
                 throw new CircularDependencyFoundException();
             }
 
