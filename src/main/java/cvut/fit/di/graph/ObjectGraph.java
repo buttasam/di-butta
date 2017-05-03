@@ -17,7 +17,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Objektova reprezentace
+ * Trida reprezentujici objektovy graf
+ *
+ * @author Samuel Butta
  */
 public class ObjectGraph {
 
@@ -26,7 +28,7 @@ public class ObjectGraph {
      * Vsechny uzli grafu
      * Klic je trida. V pripade rozhrani a implementace je klic rozhrani.
      */
-    HashMap<Class, ServiceNode> allNodes;
+    private HashMap<Class, ServiceNode> allNodes;
 
     // priznak urcuje, zda jiz byl objektovy graf inicializovany
     private boolean isInit;
@@ -34,7 +36,7 @@ public class ObjectGraph {
     /**
      * Utility
      */
-    Finder finder;
+    private Finder finder;
 
     public ObjectGraph() {
         this.allNodes = new HashMap<>();
@@ -65,27 +67,22 @@ public class ObjectGraph {
 
             // najde vsechny jeho zavislosti podle filedu
             Set<Field> fields = finder.findInjectedFields(clazz);
-            for(Field field : fields) {
+            for (Field field : fields) {
                 node.addFieldChild(initSubgraphByNode(field.getType()));
             }
 
 
             // najde vsechny jeho zavislosti podle konstruktoru
-            // TODO nekde overit ze ma pouze jeden konstruktor s @inject --> vyhazuje vyjimku
-            try {
-                Constructor constructor = finder.findInjectedConstructor(clazz);
+            Constructor constructor = finder.findInjectedConstructor(clazz);
 
-                if(constructor != null) {
-                    Class[] paramTypes = constructor.getParameterTypes();
+            if (constructor != null) {
+                Class[] paramTypes = constructor.getParameterTypes();
 
-                    Set<ServiceNode> constructorChildren = Arrays.stream(paramTypes).map(this::initSubgraphByNode).collect(Collectors.toSet());
+                Set<ServiceNode> constructorChildren = Arrays.stream(paramTypes).map(this::initSubgraphByNode).collect(Collectors.toSet());
 
-                    node.addConstructorChildren(constructorChildren);
-                }
-
-            } catch (AmbiguousConstructorException e) {
-                e.printStackTrace();
+                node.addConstructorChildren(constructorChildren);
             }
+
         }
 
         return node;
@@ -107,23 +104,23 @@ public class ObjectGraph {
 
         ServiceNode node;
         // pokud je interface
-        if(clazz.isInterface()) {
+        if (clazz.isInterface()) {
 
             // najde jeho implementace ve stejnem balicku a musi byt jedna
 
             Reflections reflections = new Reflections(clazz.getPackage().getName());
             Set<Class<?>> classes = reflections.getSubTypesOf(clazz);
 
-            if(classes.size() == 0) {
+            if (classes.size() == 0) {
                 throw new ServiceHasNoImplementationInSamePackage();
             }
-            if(classes.size() > 1) {
+            if (classes.size() > 1) {
                 throw new ServiceHasMoreImplementationsInSamePackage();
             }
 
             Class clazzImpl = classes.iterator().next();
 
-             node = new ServiceNode(clazz, clazzImpl);
+            node = new ServiceNode(clazz, clazzImpl);
 
         } else {
             node = new ServiceNode(clazz);
@@ -159,7 +156,7 @@ public class ObjectGraph {
      * Pokud neni, vyhodi runtime vyjimku.
      */
     public void isNodePresent(Class clazz) {
-        if(getNode(clazz) == null) {
+        if (getNode(clazz) == null) {
             throw new ServiceIsNotInObjectGraphException();
         }
     }
