@@ -61,7 +61,7 @@ public class ObjectGraphAPITest {
 
         ObjectGraphAPI api = new ObjectGraphAPI(graph);
 
-        Assert.assertEquals(2, api.prototypesCount());
+        Assert.assertEquals(2, api.singletonsCount());
     }
 
 }
