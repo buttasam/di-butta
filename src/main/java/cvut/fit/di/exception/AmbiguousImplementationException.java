@@ -3,7 +3,7 @@ package cvut.fit.di.exception;
 /**
  * @author Samuel Butta
  */
-public class AmbiguousImplementationException extends Exception {
+public class AmbiguousImplementationException extends RuntimeException {
 
 
     public AmbiguousImplementationException() {

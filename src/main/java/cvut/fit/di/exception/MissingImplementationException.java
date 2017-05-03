@@ -3,7 +3,7 @@ package cvut.fit.di.exception;
 /**
  * @author Samuel Butta
  */
-public class MissingImplementationException extends Exception {
+public class MissingImplementationException extends RuntimeException {
 
 
     public MissingImplementationException() {

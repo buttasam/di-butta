@@ -44,10 +44,8 @@ public class Finder {
      * @param packagePrefix
      * @param clazz
      * @return
-     * @throws MissingImplementationException
-     * @throws AmbiguousImplementationException
      */
-    public Class<?> findImplementation(String packagePrefix, Class clazz) throws MissingImplementationException, AmbiguousImplementationException {
+    public Class<?> findImplementation(String packagePrefix, Class clazz) {
         Reflections reflections = new Reflections(packagePrefix);
 
         Set<Class<?>> subtypes = reflections.getSubTypesOf(clazz);
@@ -71,7 +69,7 @@ public class Finder {
      * @throws MissingImplementationException
      * @throws AmbiguousImplementationException
      */
-    public Class<?> findImplementation(Class clazz) throws MissingImplementationException, AmbiguousImplementationException {
+    public Class<?> findImplementation(Class clazz) {
         String packagePrefix = clazz.getPackage().getName();
 
         return findImplementation(packagePrefix, clazz);
@@ -119,7 +117,6 @@ public class Finder {
 
 
     /**
-     *
      * @param clazz
      * @return
      * @throws AmbiguousConstructorException
