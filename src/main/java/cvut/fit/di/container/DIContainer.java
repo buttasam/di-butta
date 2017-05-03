@@ -75,6 +75,8 @@ public class DIContainer {
     }
 
 
+    // TODO odstanit
+    @Deprecated
     public void initSubgraph(Class clazz) {
         injector.initSubgraphByIntrospection(clazz);
     }
@@ -82,7 +84,7 @@ public class DIContainer {
     public <T> T getInstance(Class<T> clazz) {
         try {
             return context.getInstance(clazz);
-        } catch (IllegalAccessException | InvocationTargetException | ServiceIsNotInObjectGraphException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             return null;
         }
