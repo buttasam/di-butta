@@ -2,6 +2,7 @@ package cvut.fit.di.graph;
 
 
 import cvut.fit.di.graph.dfs.Status;
+import cvut.fit.di.repository.entity.ServiceScope;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,9 +87,70 @@ public class ObjectGraphAPI {
      *
      * @return pocet sluzeb
      */
-    public int getServicesCount() {
+    public long servicesCount() {
         return objectGraph.getAllNodes().size();
     }
+
+    /**
+     * Zjisti a vrati pocet sluzeb implementujicich rozhrani
+     *
+     * @return pocet sluzeb
+     */
+    public long interfacesCount() {
+        return objectGraph.getAllNodes()
+                .values()
+                .stream()
+                .filter(n -> (n.getClazzInterface() != null))
+                .count();
+    }
+
+
+    /**
+     * Zjisti a vrati pocet sluzeb bez rozhrani
+     *
+     * @return pocet sluzeb
+     */
+    public long servicesWithoutInterfaceCount() {
+        return objectGraph.getAllNodes()
+                .values()
+                .stream()
+                .filter(n -> (n.getClazzInterface() == null))
+                .count();
+    }
+
+    /**
+     * Vrati pocet sluzeb s prototype scope
+     *
+     * @return pocet sluzeb
+     */
+    public long prototypesCount() {
+        return scopeCount(ServiceScope.PROTOTYPE);
+    }
+
+
+    /**
+     * Vrati pocet sluzeb se singleton scope
+     *
+     * @return pocet sluzeb
+     */
+    public long singletonsCount() {
+        return scopeCount(ServiceScope.SINGLETON);
+    }
+
+    /**
+     * Vrati pocet sluzeb pro dany scope
+     *
+     * @param serviceScope pozadovy scope
+     * @return pocet sluzeb
+     */
+    private long scopeCount(ServiceScope serviceScope) {
+        return objectGraph.getAllNodes()
+                .values()
+                .stream()
+                .filter(n -> (n.getServiceScope().equals(serviceScope)))
+                .count();
+    }
+
 
     /**
      * Privatni pomocna rekutzivni metoda pro hledani cyklu

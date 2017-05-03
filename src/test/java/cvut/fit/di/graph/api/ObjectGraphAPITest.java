@@ -21,8 +21,47 @@ public class ObjectGraphAPITest {
 
         ObjectGraphAPI api = new ObjectGraphAPI(graph);
 
-        Assert.assertEquals(4, api.getServicesCount());
+        Assert.assertEquals(4, api.servicesCount());
     }
 
+    @Test
+    public void testInterfacesCount() {
+        ObjectGraph graph = new ObjectGraph();
+        ServiceNode node = graph.initSubgraphByNode(A.class);
+
+        ObjectGraphAPI api = new ObjectGraphAPI(graph);
+
+        Assert.assertEquals(1, api.interfacesCount());
+    }
+
+    @Test
+    public void testServicesWithoutInterfaceCount() {
+        ObjectGraph graph = new ObjectGraph();
+        ServiceNode node = graph.initSubgraphByNode(A.class);
+
+        ObjectGraphAPI api = new ObjectGraphAPI(graph);
+
+        Assert.assertEquals(3, api.servicesWithoutInterfaceCount());
+    }
+
+    @Test
+    public void testPrototypesCount() {
+        ObjectGraph graph = new ObjectGraph();
+        ServiceNode node = graph.initSubgraphByNode(A.class);
+
+        ObjectGraphAPI api = new ObjectGraphAPI(graph);
+
+        Assert.assertEquals(2, api.prototypesCount());
+    }
+
+    @Test
+    public void testSingletonsCount() {
+        ObjectGraph graph = new ObjectGraph();
+        ServiceNode node = graph.initSubgraphByNode(A.class);
+
+        ObjectGraphAPI api = new ObjectGraphAPI(graph);
+
+        Assert.assertEquals(2, api.prototypesCount());
+    }
 
 }
