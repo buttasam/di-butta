@@ -82,6 +82,15 @@ public class ObjectGraphAPI {
     }
 
     /**
+     * Zjisti a vrati pocet sluzeb spravovanych DI kontejnerem
+     *
+     * @return pocet sluzeb
+     */
+    public int getServicesCount() {
+        return objectGraph.getAllNodes().size();
+    }
+
+    /**
      * Privatni pomocna rekutzivni metoda pro hledani cyklu
      *
      * @param root     korenovy uzel
