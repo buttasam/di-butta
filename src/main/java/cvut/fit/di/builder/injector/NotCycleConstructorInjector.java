@@ -86,12 +86,7 @@ public class NotCycleConstructorInjector extends Injector {
                 }
 
                 if (params.size() != 0) {
-                    try {
-                        return (T) constructor.newInstance(params.toArray());
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
+                    return creator.createNewInstance(constructor, params);
                 } else {
                     return creator.createNewInstance(initClass);
                 }

@@ -6,7 +6,6 @@ import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.proxy.ProxyUtil;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -84,12 +83,7 @@ public class CycleConstructorInjector extends Injector {
             T target = null;
 
             if (params.size() != 0) {
-                try {
-                    target = (T) constructor.newInstance(params.toArray());
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                    return null;
-                }
+                target = creator.createNewInstance(constructor, params);
             } else {
                 target = creator.createNewInstance(node.getClazzImpl());
             }
