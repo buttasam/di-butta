@@ -16,13 +16,6 @@ import javax.inject.Singleton;
 public class Service<T> {
 
 
-    // TODO
-    /**
-     * Pojmenovani service.
-     */
-    private String serviceName;
-
-
     /**
      * Typ rozhrani.
      */
@@ -109,7 +102,6 @@ public class Service<T> {
     }
 
     /**
-     *
      * Vraci instanci podle scopu.
      *
      * @return instance podle scopu
@@ -130,13 +122,12 @@ public class Service<T> {
     }
 
     /**
-     *
      * Lazy inicializace instance pokud se jedna o singleton.
      *
      * @return
      */
     private Object lazySingletonInit() {
-        if(singletonInstance == null) {
+        if (singletonInstance == null) {
             Creator creator = new Creator();
             System.out.println(classImpl.getName());
             singletonInstance = creator.createNewInstance(classImpl);
