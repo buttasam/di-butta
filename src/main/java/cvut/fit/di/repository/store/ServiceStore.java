@@ -1,5 +1,7 @@
 package cvut.fit.di.repository.store;
 
+import cvut.fit.di.exception.ServiceAlreadyExistsException;
+import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 import org.slf4j.Logger;
@@ -37,10 +39,9 @@ public class ServiceStore {
      * @param <T>
      */
     public synchronized <T> void addService(Class<T> serviceClass) {
-        // pokud jiz servicea ve storu je, neprida se, zaloguje se warning
+        // pokud jiz servicea ve storu je, dojte k vyhozeni vyjimky
         if (findService(serviceClass).isPresent()) {
-            // vyhodit vyjimku
-            log.warn("Service of type {} is already in servicestore", serviceClass);
+            throw  new ServiceAlreadyExistsException();
         } else {
             Service service = new Service(serviceClass);
             managedServices.add(service);

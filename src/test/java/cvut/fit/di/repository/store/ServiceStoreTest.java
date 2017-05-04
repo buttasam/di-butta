@@ -1,5 +1,6 @@
 package cvut.fit.di.repository.store;
 
+import cvut.fit.di.exception.ServiceAlreadyExistsException;
 import cvut.fit.di.testEntity.managed.ManagedOne;
 import cvut.fit.di.testEntity.managed.withInterface.Mailer;
 import cvut.fit.di.testEntity.managed.withInterface.SmsMailer;
@@ -14,15 +15,13 @@ import org.junit.Test;
 public class ServiceStoreTest {
 
 
-    @Test
+    @Test(expected = ServiceAlreadyExistsException.class)
     public void testServicesAdding() {
         ServiceStore serviceStore = new ServiceStore();
         serviceStore.addService(ManagedOne.class);
         serviceStore.addService(ManagedOne.class);
 
-
         ManagedOne managedOne = (ManagedOne) serviceStore.getInstance(ManagedOne.class);
-        managedOne.print();
 
         Assert.assertEquals(1, serviceStore.managedServicesCount());
     }
