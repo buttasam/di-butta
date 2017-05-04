@@ -1,10 +1,11 @@
 package cvut.fit.di.container.constructor.circular.cycle;
 
+import cvut.fit.di.anotation.scope.Prototype;
+
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 
-@Singleton
+@Prototype
 public class CycleBImpl implements CycleB {
 
     private CycleA cycleA;

@@ -3,8 +3,7 @@ package cvut.fit.di.container;
 import cvut.fit.di.builder.Context;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.SetterInjector;
-import cvut.fit.di.builder.injector.cofig.ConfigType;
-import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
+import cvut.fit.di.builder.injector.config.ConfigType;
 import cvut.fit.di.graph.ObjectGraphAPI;
 
 import java.lang.reflect.InvocationTargetException;

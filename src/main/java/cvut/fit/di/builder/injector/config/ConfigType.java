@@ -1,4 +1,4 @@
-package cvut.fit.di.builder.injector.cofig;
+package cvut.fit.di.builder.injector.config;
 
 /**
  * Vytvovy typ urcuje, jak bude sestavovan objektovy graf.

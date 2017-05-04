@@ -2,7 +2,7 @@ package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
-import cvut.fit.di.builder.injector.cofig.ConfigType;
+import cvut.fit.di.builder.injector.config.ConfigType;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraph;
 import cvut.fit.di.graph.ObjectGraphAPI;
