@@ -19,7 +19,5 @@ jar {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.24'
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.24'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
 }

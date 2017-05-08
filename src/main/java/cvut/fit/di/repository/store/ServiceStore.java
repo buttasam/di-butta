@@ -4,8 +4,6 @@ import cvut.fit.di.exception.ServiceAlreadyExistsException;
 import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -18,8 +16,6 @@ import java.util.Set;
  */
 public class ServiceStore {
 
-
-    private Logger log = LoggerFactory.getLogger(ServiceStore.class);
 
     /**
      * Mnozina vsech services spravovanych DI frameworkem.
@@ -41,7 +37,7 @@ public class ServiceStore {
     public synchronized <T> void addService(Class<T> serviceClass) {
         // pokud jiz servicea ve storu je, dojte k vyhozeni vyjimky
         if (findService(serviceClass).isPresent()) {
-            throw  new ServiceAlreadyExistsException();
+            throw new ServiceAlreadyExistsException();
         } else {
             Service service = new Service(serviceClass);
             managedServices.add(service);
@@ -84,8 +80,9 @@ public class ServiceStore {
      * Pokusi se najit v ulozisti serviceu.
      * Pokud jiz existuje vrati jeji instanci.
      * Pokud ne, servicea se prida a vrati jeji instance.
-     *
+     * <p>
      * TODO zatim bez rozhrani
+     *
      * @param clazz
      * @return
      */
@@ -97,28 +94,29 @@ public class ServiceStore {
      * Pokusi se najit v ulozisti service.
      * Pokud jiz existuje vrati jeji instanci.
      * Pokud ne, servicea se prida a vrati jeji instance.
-     *
+     * <p>
      * TODO zatim bez rozhrani
+     *
      * @param clazz
      * @return
      */
     public Service getOrCreateService(Class clazz) {
         // hledana service
         Optional<Service> foundService = findService(clazz);
-        if(!foundService.isPresent()) {
+        if (!foundService.isPresent()) {
             addService(clazz);
         }
         foundService = findService(clazz);
-        return  foundService.get();
+        return foundService.get();
     }
 
     public Service getOrCreateService(ServiceNode node) {
         // hledana service
         Optional<Service> foundService = findService(node.getClazzImpl());
-        if(!foundService.isPresent()) {
+        if (!foundService.isPresent()) {
             addService(node.getClazzImpl());
         }
         foundService = findService(node.getClazzImpl());
-        return  foundService.get();
+        return foundService.get();
     }
 }
