@@ -26,4 +26,9 @@ public class CycleAImpl implements CycleA {
     public CycleC getC() {
         return cycleC;
     }
+
+    @Override
+    public void test() {
+        System.out.println("test");
+    }
 }

@@ -7,4 +7,5 @@ public interface CycleB {
 
     String getImplName();
 
+    CycleA getA();
 }

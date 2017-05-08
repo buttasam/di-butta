@@ -57,6 +57,9 @@ public class ObjectGraph {
             // vytvori ho
             node = createNewNode(clazz);
 
+            // nastavi implementaci v pripade rozhrani
+            clazz = node.getClazzImpl();
+
             // najde vsechny jeho zavislosti podle setteru
             Set<Method> setters = finder.findInjectedSetters(clazz);
 
@@ -107,21 +110,9 @@ public class ObjectGraph {
         if (clazz.isInterface()) {
 
             // najde jeho implementace ve stejnem balicku a musi byt jedna
-
-            Reflections reflections = new Reflections(clazz.getPackage().getName());
-            Set<Class<?>> classes = reflections.getSubTypesOf(clazz);
-
-            if (classes.size() == 0) {
-                throw new ServiceHasNoImplementationInSamePackage();
-            }
-            if (classes.size() > 1) {
-                throw new ServiceHasMoreImplementationsInSamePackage();
-            }
-
-            Class clazzImpl = classes.iterator().next();
+            Class<?> clazzImpl = finder.findImplementation(clazz);
 
             node = new ServiceNode(clazz, clazzImpl);
-
         } else {
             node = new ServiceNode(clazz);
         }

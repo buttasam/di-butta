@@ -16,6 +16,11 @@ public class DIContainerConstructorCycleTest {
         DIContainer container = new DIContainer(new CycleConstructorInjector());
 
         CycleA a = container.getInstance(CycleA.class);
+        System.out.println(container.getAPI().servicesCount());
+
+        a.test();
+
+        Assert.assertNotNull(a.getB().getA());
 
         Assert.assertEquals(CycleBImpl.class.getName(), a.getB().getImplName());
         Assert.assertEquals(CycleCImpl.class.getName(), a.getC().getImplName());

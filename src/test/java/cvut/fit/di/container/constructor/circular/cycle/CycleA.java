@@ -8,4 +8,6 @@ public interface CycleA {
     CycleB getB();
 
     CycleC getC();
+
+    void test();
 }

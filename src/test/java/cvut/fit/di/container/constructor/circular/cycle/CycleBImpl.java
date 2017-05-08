@@ -20,4 +20,10 @@ public class CycleBImpl implements CycleB {
     public String getImplName() {
         return CycleBImpl.class.getName();
     }
+
+    @Override
+    public CycleA getA() {
+        return cycleA;
+    }
+
 }

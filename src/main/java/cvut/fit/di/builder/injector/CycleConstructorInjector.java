@@ -68,7 +68,7 @@ public class CycleConstructorInjector extends Injector {
                     try {
                         Object foundProxy = proxies.get(p);
                         if (foundProxy != null) {
-                            return null;
+                            return foundProxy;
                         } else {
                             return getInstance(p);
                         }
