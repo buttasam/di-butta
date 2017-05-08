@@ -3,6 +3,7 @@ package cvut.fit.di.util;
 import cvut.fit.di.exception.service.ServiceAndImplementationDoesNotMatchException;
 import cvut.fit.di.exception.service.ServiceImplementsMoreInterfacesException;
 import cvut.fit.di.exception.service.ServiceMustImplementInterfaceException;
+import cvut.fit.di.graph.ObjectGraph;
 
 /**
  * Pomocna trida pro overeni ruznych podminek.

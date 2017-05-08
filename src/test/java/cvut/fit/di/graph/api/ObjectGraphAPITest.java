@@ -64,4 +64,15 @@ public class ObjectGraphAPITest {
         Assert.assertEquals(2, api.singletonsCount());
     }
 
+
+    @Test
+    public void testAllServicesHasInterface() {
+        ObjectGraph graph = new ObjectGraph();
+        ServiceNode node = graph.initSubgraphByNode(A.class);
+
+        ObjectGraphAPI api = new ObjectGraphAPI(graph);
+
+        Assert.assertFalse(api.allServicesHasInterface());
+    }
+
 }

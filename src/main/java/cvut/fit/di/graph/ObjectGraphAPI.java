@@ -118,6 +118,16 @@ public class ObjectGraphAPI {
                 .count();
     }
 
+
+    /**
+     *  Overi ze vsechny tridy implmentuji rozhrani
+     *
+     * @return true pokud ano
+     */
+    public boolean allServicesHasInterface() {
+        return servicesCount() == interfacesCount();
+    }
+
     /**
      * Vrati pocet sluzeb s prototype scope
      *
