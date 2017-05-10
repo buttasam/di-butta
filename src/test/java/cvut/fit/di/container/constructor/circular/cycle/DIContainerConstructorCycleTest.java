@@ -18,9 +18,18 @@ public class DIContainerConstructorCycleTest extends AbstractCleanupTest {
         DIContainer container = new DIContainer(new CycleConstructorInjector());
 
         CycleA a = container.getInstance(CycleA.class);
-        System.out.println(container.getAPI().servicesCount());
+        CycleA a2 = container.getInstance(CycleA.class);
 
-        a.test();
+        // porovnani singletonu
+        Assert.assertEquals(a.hashCode(), a2.hashCode());
+
+
+        CycleB b = container.getInstance(CycleB.class);
+        CycleB b2 = container.getInstance(CycleB.class);
+
+        // porovnani prototype - porovnani pres hashCode kvuli
+        Assert.assertNotEquals(b.hashCode(), b2.hashCode());
+
 
         Assert.assertNotNull(a.getB().getA());
 

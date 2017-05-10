@@ -95,8 +95,10 @@ public class CycleConstructorInjector extends Injector {
             } else {
                 if (params.size() != 0) {
                     target = creator.createNewInstance(constructor, params);
+                    service.setSingletonInstance(target);
                 } else {
                     target = creator.createNewInstance(node.getClazzImpl());
+                    service.setSingletonInstance(target);
                 }
             }
 

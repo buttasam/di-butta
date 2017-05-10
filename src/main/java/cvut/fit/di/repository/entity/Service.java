@@ -138,4 +138,9 @@ public class Service<T> {
     public T getSingletonInstance() {
         return singletonInstance;
     }
+
+
+    public void setSingletonInstance(T singletonInstance) {
+        this.singletonInstance = singletonInstance;
+    }
 }
