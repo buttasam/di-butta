@@ -125,6 +125,8 @@ public class ObjectGraphAPI {
      * @return true pokud ano
      */
     public boolean allServicesHasInterface() {
+        System.out.println(servicesCount());
+        System.out.println(interfacesCount());
         return servicesCount() == interfacesCount();
     }
 

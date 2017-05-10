@@ -19,4 +19,8 @@ public class ServiceStoreFactory {
         return instance;
     }
 
+    public static void reinit() {
+        instance = new ServiceStore();
+    }
+
 }

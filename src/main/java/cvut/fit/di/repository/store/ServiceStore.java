@@ -1,7 +1,6 @@
 package cvut.fit.di.repository.store;
 
 import cvut.fit.di.exception.ServiceAlreadyExistsException;
-import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 
@@ -10,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Service je stejne jako v JavaEE definovaná - trida/sluzba kterou spravuje DI kontejner
+ * Service je trida/sluzba kterou spravuje DI kontejner
  * <p>
  * Trida udruje informace o managed (spravovanych) services.
  */

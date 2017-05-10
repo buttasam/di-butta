@@ -1,5 +1,6 @@
 package cvut.fit.di.container.constructor.circular.cycle;
 
+import cvut.fit.di.AbstractCleanupTest;
 import cvut.fit.di.builder.injector.CycleConstructorInjector;
 import cvut.fit.di.container.DIContainer;
 import cvut.fit.di.exception.service.AllServiceMustImplementInterfaceException;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import java.lang.reflect.InvocationTargetException;
 
 
-public class DIContainerConstructorCycleTest {
+public class DIContainerConstructorCycleTest extends AbstractCleanupTest {
 
     @Test
     public void testCycleConstructorDI() throws InvocationTargetException, IllegalAccessException {

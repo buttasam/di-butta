@@ -5,6 +5,8 @@ import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.exception.service.AllServiceMustImplementInterfaceException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.proxy.ProxyUtil;
+import cvut.fit.di.repository.entity.Service;
+import cvut.fit.di.repository.entity.ServiceScope;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -83,12 +85,19 @@ public class CycleConstructorInjector extends Injector {
             }
 
             // vytvoreni skutecneho objektu
+            Service service = serviceStore.getOrCreateService(node);
+
             T target = null;
 
-            if (params.size() != 0) {
-                target = creator.createNewInstance(constructor, params);
+            // pokud je singleton a je jiz inicializovana vrat ji
+            if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
+                target = (T) service.getSingletonInstance();
             } else {
-                target = creator.createNewInstance(node.getClazzImpl());
+                if (params.size() != 0) {
+                    target = creator.createNewInstance(constructor, params);
+                } else {
+                    target = creator.createNewInstance(node.getClazzImpl());
+                }
             }
 
             proxy = ProxyUtil.setInstance(proxy, target);

@@ -16,4 +16,8 @@ public class ObjectGraphFactory {
         return instance;
     }
 
+
+    public static void reinit() {
+        instance = new ObjectGraph();
+    }
 }
