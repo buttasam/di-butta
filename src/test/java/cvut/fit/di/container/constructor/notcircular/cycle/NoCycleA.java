@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 
 
 @Singleton
-public class NoCycleA {
+class NoCycleA {
 
     private NoCycleB cycleB;
 

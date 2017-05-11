@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 
 @Singleton
-public class NoCycleC {
+class NoCycleC {
 
 
 }

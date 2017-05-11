@@ -1,4 +1,4 @@
-package cvut.fit.di.container.constructor.notcircular.cycle;
+package cvut.fit.di.graph.api;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -9,7 +9,9 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 
-
+/**
+ * @author Samuel Butta
+ */
 public class DIContainerConstructorCycleTest extends AbstractCleanupTest {
 
     @Test
@@ -29,7 +31,6 @@ public class DIContainerConstructorCycleTest extends AbstractCleanupTest {
 
         // porovnani prototype - porovnani pres hashCode kvuli
         Assert.assertNotEquals(b.hashCode(), b2.hashCode());
-
 
         Assert.assertNotNull(a.getB().getA());
 

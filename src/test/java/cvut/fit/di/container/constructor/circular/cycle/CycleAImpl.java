@@ -3,12 +3,14 @@ package cvut.fit.di.container.constructor.circular.cycle;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-
+/**
+ * @author Samuel Butta
+ */
 @Singleton
 public class CycleAImpl implements CycleA {
 
     private CycleB cycleB;
-    private  CycleC cycleC;
+    private CycleC cycleC;
 
     @Inject
     public CycleAImpl(CycleB cycleB, CycleC cycleC) {

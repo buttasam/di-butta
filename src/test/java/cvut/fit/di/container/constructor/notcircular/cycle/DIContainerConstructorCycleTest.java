@@ -1,6 +1,5 @@
 package cvut.fit.di.container.constructor.notcircular.cycle;
 
-import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.NotCycleConstructorInjector;
 import cvut.fit.di.container.DIContainer;
 import cvut.fit.di.exception.CircularDependencyFoundException;
@@ -9,7 +8,9 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 
-
+/**
+ * @author Samuel Butta
+ */
 public class DIContainerConstructorCycleTest {
 
     @Test
