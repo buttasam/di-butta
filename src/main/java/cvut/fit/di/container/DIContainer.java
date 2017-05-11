@@ -33,7 +33,6 @@ public class DIContainer {
      */
     private final Injector injector;
 
-
     /**
      * API nad objektovym grafem
      */
@@ -73,12 +72,6 @@ public class DIContainer {
         objectGraphAPI = new ObjectGraphAPI(context.getObjectGraph());
     }
 
-
-    // TODO odstanit
-    @Deprecated
-    public void initSubgraph(Class clazz) {
-        injector.initSubgraphByIntrospection(clazz);
-    }
 
     public <T> T getInstance(Class<T> clazz) {
         try {

@@ -1,5 +1,6 @@
 package cvut.fit.di.container.constructor.notcircular.cycle;
 
+import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.builder.injector.NotCycleConstructorInjector;
 import cvut.fit.di.container.DIContainer;
 import cvut.fit.di.exception.CircularDependencyFoundException;
@@ -13,10 +14,10 @@ public class DIContainerConstructorCycleTest {
 
     @Test
     public void testObjectGraphAPIDetectCycleConstructorDI() throws InvocationTargetException, IllegalAccessException {
+        NotCycleConstructorInjector injector = new NotCycleConstructorInjector();
+        DIContainer container = new DIContainer(injector);
 
-        DIContainer container = new DIContainer(new NotCycleConstructorInjector());
-
-        container.initSubgraph(CycleA.class);
+        injector.initSubgraphByIntrospection(CycleA.class);
 
         Assert.assertTrue(container.getAPI().detectConstructorCycle(CycleA.class));
         Assert.assertTrue(container.getAPI().detectConstructorCycle(CycleB.class));
@@ -25,16 +26,20 @@ public class DIContainerConstructorCycleTest {
 
     @Test
     public void testObjectGraphAPIDetectNotCycleConstructorDI() throws InvocationTargetException, IllegalAccessException {
-        DIContainer container = new DIContainer(new NotCycleConstructorInjector());
+        NotCycleConstructorInjector injector = new NotCycleConstructorInjector();
+        DIContainer container = new DIContainer(injector);
 
-        container.initSubgraph(NoCycleA.class);
+        injector.initSubgraphByIntrospection(NoCycleA.class);
 
         Assert.assertFalse(container.getAPI().detectConstructorCycle(NoCycleA.class));
     }
 
     @Test(expected = CircularDependencyFoundException.class)
     public void testDetectCycleConstructorDI() throws InvocationTargetException, IllegalAccessException {
-        DIContainer container = new DIContainer(new NotCycleConstructorInjector());
+        NotCycleConstructorInjector injector = new NotCycleConstructorInjector();
+        DIContainer container = new DIContainer(injector);
+
+        injector.initSubgraphByIntrospection(NoCycleA.class);
 
         CycleA cycleA = container.getInstance(CycleA.class);
     }

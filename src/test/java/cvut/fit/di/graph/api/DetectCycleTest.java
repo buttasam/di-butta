@@ -13,8 +13,11 @@ public class DetectCycleTest {
 
     @Test
     public void testDetectCycle() {
-        DIContainer container = new DIContainer(new NotCycleConstructorInjector());
-        container.initSubgraph(CycleA.class);
+
+        NotCycleConstructorInjector injector = new NotCycleConstructorInjector();
+        DIContainer container = new DIContainer(injector);
+
+        injector.initSubgraphByIntrospection(CycleA.class);
 
         ObjectGraphAPI api = new ObjectGraphAPI(ObjectGraphFactory.getObjectGraph());
 
