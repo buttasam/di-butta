@@ -3,7 +3,6 @@ package cvut.fit.di.builder;
 import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.builder.injector.Injector;
-import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraph;
 import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
@@ -12,7 +11,7 @@ import cvut.fit.di.repository.store.ServiceStoreFactory;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * Pomocna trida ktera udrzuje vsechny potrebe informace
+ * Pomocna trida ktera udrzuje potrebe informace
  * spojene s objektovym grafem a kontejnerem.
  *
  * @author Samuel Butta
@@ -30,6 +29,10 @@ public class Context {
 
     private Injector injector;
 
+    private Context() {
+        // prazdny konstruktor
+    }
+
     public Context(Injector injector) {
         this.injector = injector;
 
@@ -41,10 +44,24 @@ public class Context {
     }
 
 
-    public <T> T getInstance(Class<T> initClass) throws InvocationTargetException, IllegalAccessException, ServiceIsNotInObjectGraphException {
+    /**
+     * Na prislusnem injektoru pozada o vytvoreni instance.
+     *
+     * @param initClass poradovana trida
+     * @param <T>       typovy parametr
+     * @return instance
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    public <T> T getInstance(Class<T> initClass) throws InvocationTargetException, IllegalAccessException {
         return injector.getInstance(initClass);
     }
 
+    /**
+     * Vrati instanci uloziste sluzeb
+     *
+     * @return uloziste sluzeb
+     */
     public ServiceStore getServiceStore() {
         return serviceStore;
     }
@@ -56,5 +73,32 @@ public class Context {
      */
     public ObjectGraph getObjectGraph() {
         return objectGraph;
+    }
+
+    /**
+     * Vrati instanci Creator
+     *
+     * @return creator
+     */
+    public Creator getCreator() {
+        return creator;
+    }
+
+    /**
+     * Vrati instanci Finder
+     *
+     * @return finder
+     */
+    public Finder getFinder() {
+        return finder;
+    }
+
+    /**
+     * Vrati instanci Injector
+     *
+     * @return injector
+     */
+    public Injector getInjector() {
+        return injector;
     }
 }

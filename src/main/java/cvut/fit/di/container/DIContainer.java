@@ -9,12 +9,11 @@ import cvut.fit.di.graph.ObjectGraphAPI;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- *
  * Hlavni trida, ktera reprezentuje kontejner.
- *
+ * <p>
  * Pouziti muze byt nasledujici.
  * DIContainer container = new DIContainer();
- *
+ * <p>
  * Sluzba se z kontejneru ziska metodou getInstance.
  * container.getInstance(MyService.class);
  *
@@ -24,7 +23,7 @@ public class DIContainer {
 
 
     /**
-     * Servisni trida, ktera predava
+     * Pomocna servisni trida.
      */
     private Context context;
 
@@ -40,7 +39,7 @@ public class DIContainer {
 
     /**
      * Inicializace probiha po zavolani konstruktoru.
-     * Vychozi injektor je nastaven na SetterInjector
+     * Vychozi injektor je nastaven na SetterInjector a automatickou konfiguraci.
      */
     public DIContainer() {
         this.injector = new SetterInjector();
@@ -49,7 +48,6 @@ public class DIContainer {
 
 
     /**
-     *
      * @param injector
      */
     public DIContainer(Injector injector) {
@@ -57,6 +55,9 @@ public class DIContainer {
         init();
     }
 
+    /**
+     * @param configType
+     */
     public DIContainer(ConfigType configType) {
         this.injector = new SetterInjector();
         injector.setConfigType(configType);
@@ -73,6 +74,13 @@ public class DIContainer {
     }
 
 
+    /**
+     * Zakladni metoda pro ziskani instance
+     *
+     * @param clazz typ instance
+     * @param <T>   typovy parametr
+     * @return instanci tridy
+     */
     public <T> T getInstance(Class<T> clazz) {
         try {
             return context.getInstance(clazz);
@@ -83,8 +91,13 @@ public class DIContainer {
     }
 
 
+    /**
+     * Vraci API nad objektovym grafem.
+     *
+     * @return isntance objektoveho grafu
+     */
     public ObjectGraphAPI getAPI() {
         return objectGraphAPI;
     }
-    
+
 }
