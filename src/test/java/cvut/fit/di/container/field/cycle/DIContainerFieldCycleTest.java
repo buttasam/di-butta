@@ -24,6 +24,4 @@ public class DIContainerFieldCycleTest {
         Assert.assertEquals((B) container.getInstance(B.class), b);
     }
 
-
-
 }

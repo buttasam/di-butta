@@ -5,9 +5,12 @@ import cvut.fit.di.repository.store.ServiceStoreFactory;
 import org.junit.Before;
 
 /**
+ * Abstraktni predek, ktery pred spustenim kazdeho testu
+ * znovu inicalizuje objketovy graf a uloziste sluzeb.
+ *
  * @author Samuel Butta
  */
-public class AbstractCleanupTest {
+public abstract class AbstractCleanupTest {
 
     @Before
     public void setUp() {

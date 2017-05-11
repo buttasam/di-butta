@@ -1,7 +1,7 @@
 package cvut.fit.di.repository.entity;
 
-import cvut.fit.di.testEntity.scope.PrototypeEntity;
-import cvut.fit.di.testEntity.scope.SingletonEntity;
+import cvut.fit.di.commonEntity.scope.PrototypeEntity;
+import cvut.fit.di.commonEntity.scope.SingletonEntity;
 import org.junit.Assert;
 import org.junit.Test;
 

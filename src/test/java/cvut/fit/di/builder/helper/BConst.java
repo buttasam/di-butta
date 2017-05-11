@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.constructor;
+package cvut.fit.di.builder.helper;
 
 /**
  * @author Samuel Butta

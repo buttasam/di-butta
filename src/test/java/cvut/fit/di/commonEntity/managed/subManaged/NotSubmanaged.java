@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed.subManaged;
+package cvut.fit.di.commonEntity.managed.subManaged;
 
 /**
  * @author Samuel Butta

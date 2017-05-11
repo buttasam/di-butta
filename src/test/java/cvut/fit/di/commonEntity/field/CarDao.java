@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.field;
+package cvut.fit.di.commonEntity.field;
 
 import cvut.fit.di.anotation.scope.Prototype;
 

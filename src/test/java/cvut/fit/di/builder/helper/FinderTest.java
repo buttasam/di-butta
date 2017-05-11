@@ -3,12 +3,10 @@ package cvut.fit.di.builder.helper;
 import cvut.fit.di.exception.AmbiguousConstructorException;
 import cvut.fit.di.exception.AmbiguousImplementationException;
 import cvut.fit.di.exception.MissingImplementationException;
-import cvut.fit.di.testEntity.constructor.AConst;
-import cvut.fit.di.testEntity.constructor.BConst;
-import cvut.fit.di.testEntity.managed.injected.UserService;
-import cvut.fit.di.testEntity.managed.withInterface.Mailer;
-import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailMailer;
-import cvut.fit.di.testEntity.managed.withInterface.unique.UniqueMailer;
+import cvut.fit.di.commonEntity.managed.injected.UserService;
+import cvut.fit.di.commonEntity.managed.withInterface.Mailer;
+import cvut.fit.di.commonEntity.managed.withInterface.unique.UniqueMailMailer;
+import cvut.fit.di.commonEntity.managed.withInterface.unique.UniqueMailer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,8 +22,8 @@ import java.util.Set;
 public class FinderTest {
 
 
-    private static final String MANAGE_TEST_ENTITY_PACKAGE = "cvut.fit.di.testEntity.managed";
-    private static final String MANAGE_TEST_ENTITY_SUBPACKAGE = "cvut.fit.di.testEntity.managed.subManaged";
+    private static final String MANAGE_TEST_ENTITY_PACKAGE = "cvut.fit.di.commonEntity.managed";
+    private static final String MANAGE_TEST_ENTITY_SUBPACKAGE = "cvut.fit.di.commonEntity.managed.subManaged";
 
     private Finder finder;
 
@@ -77,7 +75,7 @@ public class FinderTest {
 
     @Test
     public void testFindInjectedFields() {
-        Set<Field> fields = finder.findInjectedFields(cvut.fit.di.testEntity.field.UserService.class);
+        Set<Field> fields = finder.findInjectedFields(cvut.fit.di.commonEntity.field.UserService.class);
 
         Assert.assertEquals(1, fields.size());
 

@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed.subManaged;
+package cvut.fit.di.commonEntity.managed.subManaged;
 
 import cvut.fit.di.anotation.scope.Prototype;
 
@@ -7,5 +7,5 @@ import cvut.fit.di.anotation.scope.Prototype;
  */
 
 @Prototype
-public class SubmanagedOne {
+public class SubmanagedTwo {
 }

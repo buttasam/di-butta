@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed.injected;
+package cvut.fit.di.commonEntity.managed.injected;
 
 import javax.inject.Inject;
 

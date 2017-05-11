@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed.withInterface;
+package cvut.fit.di.commonEntity.managed.withInterface;
 
 import javax.inject.Singleton;
 

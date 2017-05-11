@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed.withInterface;
+package cvut.fit.di.commonEntity.managed.withInterface.unique;
 
 import javax.inject.Singleton;
 
@@ -7,7 +7,7 @@ import javax.inject.Singleton;
  */
 
 @Singleton
-public class MailMailer implements Mailer {
+public class UniqueMailMailer implements UniqueMailer {
 
     @Override
     public void send() {

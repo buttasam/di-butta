@@ -1,11 +1,11 @@
 package cvut.fit.di.repository.store;
 
 import cvut.fit.di.exception.service.ServiceAlreadyExistsException;
-import cvut.fit.di.testEntity.managed.ManagedOne;
-import cvut.fit.di.testEntity.managed.withInterface.Mailer;
-import cvut.fit.di.testEntity.managed.withInterface.SmsMailer;
-import cvut.fit.di.testEntity.scope.PrototypeEntity;
-import cvut.fit.di.testEntity.scope.SingletonEntity;
+import cvut.fit.di.commonEntity.managed.ManagedOne;
+import cvut.fit.di.commonEntity.managed.withInterface.Mailer;
+import cvut.fit.di.commonEntity.managed.withInterface.SmsMailer;
+import cvut.fit.di.commonEntity.scope.PrototypeEntity;
+import cvut.fit.di.commonEntity.scope.SingletonEntity;
 import org.junit.Assert;
 import org.junit.Test;
 

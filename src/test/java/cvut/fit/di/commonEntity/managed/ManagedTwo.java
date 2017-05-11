@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.scope;
+package cvut.fit.di.commonEntity.managed;
 
 import cvut.fit.di.anotation.scope.Prototype;
 
@@ -6,5 +6,5 @@ import cvut.fit.di.anotation.scope.Prototype;
  * @author Samuel Butta
  */
 @Prototype
-public class PrototypeEntity {
+public class ManagedTwo {
 }

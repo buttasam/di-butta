@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed.withInterface.unique;
+package cvut.fit.di.commonEntity.managed.withInterface.unique;
 
 /**
  * @author Samuel Butta

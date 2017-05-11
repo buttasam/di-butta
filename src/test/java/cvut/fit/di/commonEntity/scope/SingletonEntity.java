@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.scope;
+package cvut.fit.di.commonEntity.scope;
 
 import javax.inject.Singleton;
 

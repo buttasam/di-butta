@@ -1,4 +1,4 @@
-package cvut.fit.di.testEntity.managed;
+package cvut.fit.di.commonEntity.managed;
 
 import cvut.fit.di.anotation.scope.Prototype;
 
