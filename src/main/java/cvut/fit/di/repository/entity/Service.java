@@ -6,10 +6,9 @@ import cvut.fit.di.builder.helper.Creator;
 import javax.inject.Singleton;
 
 /**
- * Reprezentuje Service.
+ * Reprezentuje ulozenou sluzbu.
  * Udrzuje informaci o rozhrani a implementaci.
  * Implementace je prave jedna.
- * Muze byt pojmenovata (String).
  *
  * @author Samuel Butta
  */
@@ -26,11 +25,6 @@ public class Service<T> {
      */
     private Class classImpl;
 
-    /**
-     * Priznak, ktery urcuje zda ma servicea rozhrani, ktere implementuje.
-     */
-    private boolean hasInterface;
-
 
     /**
      * Ulozena instance, pokud se jedna o singleton.
@@ -38,7 +32,7 @@ public class Service<T> {
     private T singletonInstance;
 
     /**
-     * Enum urcuje scope (dobu zivota) servicey.
+     * Enum urcuje scope service.
      */
     private ServiceScope serviceScope;
 
@@ -54,7 +48,6 @@ public class Service<T> {
      */
     public Service(Class classImpl) {
         this.classImpl = classImpl;
-        this.hasInterface = false;
         findAndSetServiceScope(classImpl);
     }
 
@@ -69,7 +62,6 @@ public class Service<T> {
         this.classInterface = classInterface;
         this.classImpl = classImpl;
 
-        this.hasInterface = true;
         findAndSetServiceScope(classImpl);
     }
 
@@ -102,9 +94,9 @@ public class Service<T> {
     }
 
     /**
-     * Vraci instanci podle scopu.
+     * Vraci instanci podle scope.
      *
-     * @return instance podle scopu
+     * @return instance podle scope
      */
     public Object getInstance() {
         Object result = null;
@@ -124,7 +116,7 @@ public class Service<T> {
     /**
      * Lazy inicializace instance pokud se jedna o singleton.
      *
-     * @return
+     * @return insntace singletonu
      */
     private Object lazySingletonInit() {
         if (singletonInstance == null) {

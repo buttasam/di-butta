@@ -120,7 +120,7 @@ public class ObjectGraphAPI {
 
 
     /**
-     *  Overi ze vsechny tridy implmentuji rozhrani
+     * Overi ze vsechny tridy implmentuji rozhrani
      *
      * @return true pokud ano
      */
