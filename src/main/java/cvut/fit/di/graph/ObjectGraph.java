@@ -1,7 +1,7 @@
 package cvut.fit.di.graph;
 
 import cvut.fit.di.builder.helper.Finder;
-import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
+import cvut.fit.di.exception.service.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.util.Validator;
 
 import java.lang.reflect.Constructor;

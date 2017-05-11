@@ -1,4 +1,4 @@
-package cvut.fit.di.exception;
+package cvut.fit.di.exception.service;
 
 /**
  * @author Samuel Butta

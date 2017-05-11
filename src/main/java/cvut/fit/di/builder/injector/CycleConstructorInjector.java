@@ -1,7 +1,7 @@
 package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.config.ConfigType;
-import cvut.fit.di.exception.ServiceIsNotInObjectGraphException;
+import cvut.fit.di.exception.service.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.exception.service.AllServiceMustImplementInterfaceException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.proxy.ProxyUtil;

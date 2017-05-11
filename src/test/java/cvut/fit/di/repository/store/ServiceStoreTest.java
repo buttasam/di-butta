@@ -1,6 +1,6 @@
 package cvut.fit.di.repository.store;
 
-import cvut.fit.di.exception.ServiceAlreadyExistsException;
+import cvut.fit.di.exception.service.ServiceAlreadyExistsException;
 import cvut.fit.di.testEntity.managed.ManagedOne;
 import cvut.fit.di.testEntity.managed.withInterface.Mailer;
 import cvut.fit.di.testEntity.managed.withInterface.SmsMailer;

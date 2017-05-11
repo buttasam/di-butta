@@ -1,6 +1,6 @@
 package cvut.fit.di.repository.store;
 
-import cvut.fit.di.exception.ServiceAlreadyExistsException;
+import cvut.fit.di.exception.service.ServiceAlreadyExistsException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
 
