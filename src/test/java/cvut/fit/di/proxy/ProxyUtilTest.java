@@ -1,7 +1,5 @@
 package cvut.fit.di.proxy;
 
-import cvut.fit.di.proxy.service.ServiceA;
-import cvut.fit.di.proxy.service.ServiceAImpl;
 import org.junit.Test;
 
 /**

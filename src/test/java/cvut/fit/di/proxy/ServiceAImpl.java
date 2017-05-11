@@ -1,7 +1,7 @@
-package cvut.fit.di.proxy.service;
+package cvut.fit.di.proxy;
 
 
-public class ServiceAImpl implements ServiceA {
+class ServiceAImpl implements ServiceA {
 
     @Override
     public void test() {

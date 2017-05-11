@@ -7,7 +7,7 @@ import javax.inject.Singleton;
  * @author Samuel Butta
  */
 @Singleton
-public class ConstWithMoreInjectConstructors {
+class ConstWithMoreInjectConstructors {
 
     public ServiceA a;
     public ServiceB b;
