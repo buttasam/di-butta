@@ -33,18 +33,17 @@ public class Finder {
     public Set<Class<?>> findManagedServices(String packagePrefix) {
         Reflections reflections = new Reflections(packagePrefix);
 
-        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Prototype.class);
-
-        return annotated;
+        return reflections.getTypesAnnotatedWith(Prototype.class);
     }
 
     /**
      * Najde ve vsech podbaliccich podle parametru packagePrefix.
      *
-     * @param packagePrefix
-     * @param clazz
-     * @return
+     * @param packagePrefix prefix balicku, kterem je implementace hledana
+     * @param clazz typ rozhrani
+     * @return prislusna implementace
      */
+    @SuppressWarnings("unchecked")
     public Class<?> findImplementation(String packagePrefix, Class clazz) {
         Reflections reflections = new Reflections(packagePrefix);
 
@@ -62,10 +61,10 @@ public class Finder {
 
 
     /**
-     * Vyhleda implementace rozhrani
+     * Vyhleda implementace rozhrani v balicku, v kterem se nachazi prislusna trida.
      *
-     * @param clazz
-     * @return
+     * @param clazz typ rozhrani
+     * @return implementace
      * @throws MissingImplementationException
      * @throws AmbiguousImplementationException
      */

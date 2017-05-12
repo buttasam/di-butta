@@ -21,8 +21,9 @@ public class Creator {
      * @param clazz typ tridy
      * @return nove vytvorena instance
      */
+    @SuppressWarnings("unchecked")
     public <T> T createNewInstance(Class clazz) {
-        Class<?> c = null;
+        Class<?> c;
         try {
             c = Class.forName(clazz.getName());
             Constructor<?> cons = c.getConstructor();
@@ -33,6 +34,7 @@ public class Creator {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public <T> T createNewInstance(Constructor constructor, List<Object> params) {
         try {
             return (T) constructor.newInstance(params.toArray());

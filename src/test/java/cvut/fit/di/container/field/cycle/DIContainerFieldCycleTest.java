@@ -15,13 +15,13 @@ public class DIContainerFieldCycleTest {
 
         DIContainer container = new DIContainer(new FieldInjector());
 
-        A a = (A) container.getInstance(A.class);
+        A a = container.getInstance(A.class);
         B b = a.getB();
 
         Assert.assertNotNull(a);
         Assert.assertNotNull(b);
 
-        Assert.assertEquals((B) container.getInstance(B.class), b);
+        Assert.assertEquals(container.getInstance(B.class), b);
     }
 
 }

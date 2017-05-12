@@ -5,8 +5,4 @@ package cvut.fit.di.commonEntity.field;
  */
 public class RadioDao {
 
-    public void print() {
-        System.out.println("radio dao");
-    }
-
 }

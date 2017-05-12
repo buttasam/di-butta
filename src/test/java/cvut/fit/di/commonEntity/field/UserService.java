@@ -20,10 +20,4 @@ public class UserService {
         return carDao;
     }
 
-
-    public void print() {
-        System.out.println("user service");
-    }
-
-
 }

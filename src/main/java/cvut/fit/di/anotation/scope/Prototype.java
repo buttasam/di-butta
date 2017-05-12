@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Definice scopu, ktery rika,
+ * Definice scope, ktery rika,
  * ze se vzdy vytvari nova instance.
  *
  * @author Samuel Butta

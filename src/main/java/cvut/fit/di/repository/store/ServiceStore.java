@@ -99,6 +99,7 @@ public class ServiceStore {
      * @param clazz
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Service getOrCreateService(Class clazz) {
         // hledana service
         Optional<Service> foundService = findService(clazz);
@@ -109,6 +110,7 @@ public class ServiceStore {
         return foundService.get();
     }
 
+    @SuppressWarnings("unchecked")
     public Service getOrCreateService(ServiceNode node) {
         // hledana service
         Optional<Service> foundService = findService(node.getClazzImpl());
