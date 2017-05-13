@@ -16,6 +16,7 @@ public class DIContainerConstructorImplTest {
     public void testImplWithInterface() {
         DIContainer container = new DIContainer(new NotCycleConstructorInjector());
         A a = container.getInstance(A.class);
+        B b = container.getInstance(B.class);
 
         Assert.assertEquals("test", a.getB().test());
     }

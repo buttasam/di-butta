@@ -16,6 +16,7 @@ public class DIContainerFieldImplTest {
     public void testImplWithInterface() {
         DIContainer container = new DIContainer(new FieldInjector());
         A a = container.getInstance(A.class);
+        B b = container.getInstance(B.class);
 
         Assert.assertEquals("test", a.getB().test());
     }
