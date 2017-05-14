@@ -110,17 +110,17 @@ public class Service<T> {
         switch (serviceScope) {
             case PROTOTYPE:
                 Creator creator = new Creator();
-                if(constructor == null || params == null || params.isEmpty()) {
-                    result = creator.createNewInstance(classImpl);
-                } else {
+                if (constructorHasParams(constructor, params)) {
                     result = creator.createNewInstance(constructor, params);
+                } else {
+                    result = creator.createNewInstance(classImpl);
                 }
                 break;
             case SINGLETON:
-                if(constructor == null || params == null || params.isEmpty()) {
-                    result = lazySingletonInit();
-                } else {
+                if (constructorHasParams(constructor, params)) {
                     result = lazySingletonInit(constructor, params);
+                } else {
+                    result = lazySingletonInit();
                 }
                 break;
         }
@@ -133,19 +133,29 @@ public class Service<T> {
      * @return insntace singletonu
      */
     private Object lazySingletonInit() {
-        if (singletonInstance == null) {
-            Creator creator = new Creator();
-            singletonInstance = creator.createNewInstance(classImpl);
-        }
-        return singletonInstance;
+        return lazySingletonInit(null, null);
     }
 
     private Object lazySingletonInit(Constructor constructor, List<Object> params) {
         if (singletonInstance == null) {
             Creator creator = new Creator();
-            singletonInstance = creator.createNewInstance(constructor, params);
+            if (constructorHasParams(constructor, params)) {
+                singletonInstance = creator.createNewInstance(constructor, params);
+            } else {
+                singletonInstance = creator.createNewInstance(classImpl);
+            }
         }
         return singletonInstance;
+    }
+
+    /**
+     * Vraci true, pokud konstruktor a parametry nejsou null
+     * a parametry nejsou praznde
+     *
+     * @return
+     */
+    private boolean constructorHasParams(Constructor constructor, List<Object> params) {
+        return constructor != null && params != null && !params.isEmpty();
     }
 
     public T getSingletonInstance() {
@@ -153,7 +163,4 @@ public class Service<T> {
     }
 
 
-    public void setSingletonInstance(T singletonInstance) {
-        this.singletonInstance = singletonInstance;
-    }
 }
