@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Pomocna trida pro hledani pomoci reflexe.
+ * Pomocna trida pro hledani konstruktu pomoci reflexe.
  *
  * @author Samuel Butta
  */

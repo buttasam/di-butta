@@ -75,7 +75,9 @@ public class ObjectGraph {
             if (constructor != null) {
                 Class[] paramTypes = constructor.getParameterTypes();
 
-                Set<ServiceNode> constructorChildren = Arrays.stream(paramTypes).map(this::initSubgraphByNode).collect(Collectors.toSet());
+                Set<ServiceNode> constructorChildren = Arrays.stream(paramTypes)
+                        .map(this::initSubgraphByNode)
+                        .collect(Collectors.toSet());
 
                 node.addConstructorChildren(constructorChildren);
             }

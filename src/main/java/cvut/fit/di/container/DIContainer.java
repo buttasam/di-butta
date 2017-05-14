@@ -10,10 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * Hlavni trida, ktera reprezentuje DI kontejner.
- * <p>
  * Pouziti muze byt nasledujici.
  * DIContainer container = new DIContainer();
- * <p>
  * Sluzba se z kontejneru ziska metodou getInstance.
  * container.getInstance(MyService.class);
  *

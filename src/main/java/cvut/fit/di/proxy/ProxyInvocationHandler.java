@@ -7,11 +7,16 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
 /**
+ * Implementace proxy handleru.
+ * Urzuje instanci skutecneho objektu.
  *
  * @author Samuel Butta
  */
 public class ProxyInvocationHandler implements InvocationHandler {
 
+    /**
+     * Skutecny objekt, jehoz metody jsou volany proxy tridou.
+     */
     private Object target;
 
     public ProxyInvocationHandler() {
@@ -22,7 +27,7 @@ public class ProxyInvocationHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         // porovnani metody
-        if(method.isAnnotationPresent(TargetInstanceSetter.class)) {
+        if (method.isAnnotationPresent(TargetInstanceSetter.class)) {
             this.target = args[0];
             return null;
         } else {

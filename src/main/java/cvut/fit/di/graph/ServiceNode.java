@@ -11,6 +11,8 @@ import java.util.Set;
 
 /**
  * Trida reprezentuje jeden uzel objektoveho grafu.
+ *
+ * @author Samuel Butta
  */
 public class ServiceNode {
 
@@ -94,6 +96,7 @@ public class ServiceNode {
 
     /**
      * Vraci pocet pro setter injektaz
+     *
      * @return pocet potomku
      */
     public int setterChildrenSize() {
@@ -102,6 +105,7 @@ public class ServiceNode {
 
     /**
      * Vraci pocet pro field injektaz
+     *
      * @return pocet potomku
      */
     public int fieldChildrenSize() {
@@ -110,6 +114,7 @@ public class ServiceNode {
 
     /**
      * Vraci pocet pro constructor injektaz
+     *
      * @return pocet potomku
      */
     public int constructorChildrenSize() {
