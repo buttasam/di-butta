@@ -38,22 +38,25 @@ public class CycleConstructorInjector extends Injector {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException {
-
-        // inicializace grafu (podgrafu) introspekci
+        // inicializace grafu (podgrafu) v pripade introspekci
         initSubgraphByIntrospection(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
         ServiceNode node = objectGraph.getNode(initClass);
 
+        // overit zda vsechny sluzby implementuji rozhrani
         if (!objectGraphAPI.allServicesHasInterface()) {
             throw new AllServiceMustImplementInterfaceException();
         }
 
         // pokud existuje
         if (node != null) {
-            // vytvor proxy
+            // vytvoreni a ulozeni proxy
             T proxy = ProxyUtil.createProxy(initClass);
             proxies.put(initClass, proxy);
 
@@ -63,9 +66,7 @@ public class CycleConstructorInjector extends Injector {
             // vsechny jeho parametry jsou proxy tridy
             List<Object> params = new ArrayList<>();
 
-
             if (constructor != null) {
-
                 Class[] paramTypes = constructor.getParameterTypes();
 
                 params = Arrays.stream(paramTypes).map(p -> {
@@ -87,7 +88,6 @@ public class CycleConstructorInjector extends Injector {
             Service service = serviceStore.getOrCreateService(node);
 
             T target = null;
-
             // pokud je singleton a je jiz inicializovana vrat ji
             if (service.singletonAvailable()) {
                 target = (T) service.getSingletonInstance();

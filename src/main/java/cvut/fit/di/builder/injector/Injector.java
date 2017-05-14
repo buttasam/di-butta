@@ -36,6 +36,14 @@ public abstract class Injector {
         configType = ConfigType.INTROSPECTION;
     }
 
+    /**
+     * Rekurzivni metoda, v ktere dojde k inicializaci objektoveho grafu a inicializaci objketu.
+     *
+     * @param initClass typ pozadovane instance
+     * @param <T>       typovy parametr
+     * @return instance daneho typu
+     * @throws ServiceIsNotInObjectGraphException
+     */
     public abstract <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException;
 
 
