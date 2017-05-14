@@ -9,6 +9,10 @@ import java.lang.reflect.Field;
 import java.util.Set;
 
 /**
+ * Injektor pro injektaz pomoci atributu.
+ * Objektovy graf muze obsahovat cyklickou zavislost.
+ * Atributy mohou mit libovolny modifikator pristupu.
+ *
  * @author Samuel Butta
  */
 public class FieldInjector extends Injector {
@@ -23,6 +27,9 @@ public class FieldInjector extends Injector {
         this.configType = configType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object getInstance(Class initClass) {
         objectGraph.initSubgraphByNode(initClass);
