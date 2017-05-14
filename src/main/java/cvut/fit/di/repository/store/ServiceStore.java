@@ -45,10 +45,6 @@ public class ServiceStore {
 
     /**
      * Pridava service s implementaci.
-     *
-     * @param serviceInterface
-     * @param serviceImpl
-     * @param <T>
      */
     public synchronized <T> void addService(Class<T> serviceInterface, Class<? extends T> serviceImpl) {
         // pokus se najit tuto service
@@ -74,7 +70,6 @@ public class ServiceStore {
     private <T> Optional<Service> findService(Class<T> serviceClass) {
         return managedServices.stream().filter(b -> b.getClassImpl().equals(serviceClass)).findFirst();
     }
-
 
 
     /**

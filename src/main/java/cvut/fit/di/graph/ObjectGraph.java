@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Trida reprezentujici objektovy graf
+ * Trida reprezentujici objektovy graf.
  *
  * @author Samuel Butta
  */
@@ -21,28 +21,27 @@ public class ObjectGraph {
 
 
     /**
-     * Vsechny uzli grafu
-     * Klic je trida. V pripade rozhrani a implementace je klic rozhrani.
+     * Vsechny uzli grafu. Klicem je trida.
+     * V pripade rozhrani a implementace je klic rozhrani.
      */
     private HashMap<Class, ServiceNode> allNodes;
 
-    // priznak urcuje, zda jiz byl objektovy graf inicializovany
-    private boolean isInit;
-
     /**
-     * Utility
+     * Pomocne tridy.
      */
     private Finder finder;
 
     public ObjectGraph() {
         this.allNodes = new HashMap<>();
         finder = new Finder();
-        isInit = false;
     }
 
 
     /**
-     * Inicializuje podgraf podle vstupni tridy.
+     * Rekurzivni metoda, ktera inicializuje podgraf podle vstupni tridy.
+     *
+     * @param clazz typ vstupni tridy
+     * @return servise node pro vstupni tridu
      */
     public ServiceNode initSubgraphByNode(Class clazz) {
         // pokusi se najit dany node
@@ -70,7 +69,6 @@ public class ObjectGraph {
                 node.addFieldChild(initSubgraphByNode(field.getType()));
             }
 
-
             // najde vsechny jeho zavislosti podle konstruktoru
             Constructor constructor = finder.findInjectedConstructor(clazz);
 
@@ -81,23 +79,28 @@ public class ObjectGraph {
 
                 node.addConstructorChildren(constructorChildren);
             }
-
         }
 
         return node;
     }
 
+    /**
+     * Vrati node podle typu tridy.
+     *
+     * @param clazz typ tridy
+     * @return uzel grafu
+     */
     public ServiceNode getNode(Class clazz) {
         return allNodes.get(clazz);
     }
 
 
     /**
-     * Vytvori novy classNode podle tridy
-     * a prida ho do mnoziny vsech nodu
+     * Vytvori novy uzel podle tridy
+     * a prida ho do mnoziny vsech uzlu.
      *
-     * @param clazz
-     * @return
+     * @param clazz typ tridy
+     * @return uzel grafu
      */
     public synchronized ServiceNode createNewNode(Class clazz) {
 
@@ -120,6 +123,13 @@ public class ObjectGraph {
     }
 
 
+    /**
+     * Vytvori uzel grafu, ktery musi implementovat rozhrani.
+     *
+     * @param clazzInterface typ rozhrani
+     * @param clazzImpl typ implementace
+     * @return uzel grafu
+     */
     public synchronized ServiceNode createNewNodeWithImpl(Class clazzInterface, Class clazzImpl) {
         Validator.isClazzImplementationOfInterface(clazzInterface, clazzImpl);
 
@@ -132,7 +142,7 @@ public class ObjectGraph {
     /**
      * Package private metoda
      *
-     * @return
+     * @return vsechny uzly grafu
      */
     HashMap<Class, ServiceNode> getAllNodes() {
         return allNodes;
