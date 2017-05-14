@@ -75,19 +75,7 @@ public class ServiceStore {
         return managedServices.stream().filter(b -> b.getClassImpl().equals(serviceClass)).findFirst();
     }
 
-    /**
-     * Pokusi se najit v ulozisti serviceu.
-     * Pokud jiz existuje vrati jeji instanci.
-     * Pokud ne, servicea se prida a vrati jeji instance.
-     * <p>
-     * TODO zatim bez rozhrani
-     *
-     * @param clazz
-     * @return
-     */
-    public Object getOrCreateInstance(Class clazz) {
-        return getOrCreateService(clazz).getInstance();
-    }
+
 
     /**
      * Pokusi se najit v ulozisti service.
@@ -99,17 +87,6 @@ public class ServiceStore {
      * @param clazz
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public Service getOrCreateService(Class clazz) {
-        // hledana service
-        Optional<Service> foundService = findService(clazz);
-        if (!foundService.isPresent()) {
-            addService(clazz);
-        }
-        foundService = findService(clazz);
-        return foundService.get();
-    }
-
     @SuppressWarnings("unchecked")
     public Service getOrCreateService(ServiceNode node) {
         // hledana service

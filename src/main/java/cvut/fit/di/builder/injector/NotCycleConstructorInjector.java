@@ -57,14 +57,14 @@ public class NotCycleConstructorInjector extends Injector {
         if (node != null) {
 
             // ziskej nebo vytvor service
-            Service service = serviceStore.getOrCreateService(initClass);
+            Service service = serviceStore.getOrCreateService(node);
 
             // pokud je singleton a je jiz inicializovana vrat ji
             if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
                 return (T) service.getSingletonInstance();
             } else {
                 // konstruktor s anotaci inject
-                Constructor constructor = finder.findInjectedConstructor(initClass);
+                Constructor constructor = finder.findInjectedConstructor(node.getClazzImpl());
 
                 List<Object> params = new ArrayList<>();
 
@@ -87,7 +87,7 @@ public class NotCycleConstructorInjector extends Injector {
                 if (params.size() != 0) {
                     return creator.createNewInstance(constructor, params);
                 } else {
-                    return creator.createNewInstance(initClass);
+                    return creator.createNewInstance(node.getClazzImpl());
                 }
             }
 
