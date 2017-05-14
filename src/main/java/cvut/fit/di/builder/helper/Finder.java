@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Trida pomoci reflexe hleda services
+ * Pomocna trida pro hledani pomoci reflexe.
  *
  * @author Samuel Butta
  */
@@ -40,7 +40,7 @@ public class Finder {
      * Najde ve vsech podbaliccich podle parametru packagePrefix.
      *
      * @param packagePrefix prefix balicku, kterem je implementace hledana
-     * @param clazz typ rozhrani
+     * @param clazz         typ rozhrani
      * @return prislusna implementace
      */
     @SuppressWarnings("unchecked")
@@ -65,8 +65,8 @@ public class Finder {
      *
      * @param clazz typ rozhrani
      * @return implementace
-     * @throws MissingImplementationException
-     * @throws AmbiguousImplementationException
+     * @throws MissingImplementationException   chybejici implemetace
+     * @throws AmbiguousImplementationException vice nez jedna implementace
      */
     public Class<?> findImplementation(Class clazz) {
         String packagePrefix = clazz.getPackage().getName();
@@ -74,10 +74,12 @@ public class Finder {
         return findImplementation(packagePrefix, clazz);
     }
 
+
     /**
      * Najde a vrati mnozinu setterů anotovanych @Inject
      *
-     * @param clazz
+     * @param clazz typ tridy
+     * @return mnozina setteru
      */
     public Set<Method> findInjectedSetters(Class clazz) {
         Set<Method> methods = Arrays.stream(clazz.getMethods())
@@ -89,14 +91,12 @@ public class Finder {
 
 
     /**
-     * Vrati mnozinu filedu @Inject
+     * Vrati mnozinu filed s anotaci Inject
      *
-     * @param clazz
-     * @return
+     * @param clazz typ tridy
+     * @return mnozina field
      */
     public Set<Field> findInjectedFields(Class clazz) {
-        Creator creator = new Creator();
-
         Set<Field> fields = Arrays.stream(clazz.getDeclaredFields())
                 .filter(f -> f.isAnnotationPresent(Inject.class))
                 .collect(Collectors.toSet());
@@ -116,9 +116,11 @@ public class Finder {
 
 
     /**
-     * @param clazz
-     * @return
-     * @throws AmbiguousConstructorException
+     * Najde konstruktor s anotaci Inject.
+     *
+     * @param clazz typ tridy
+     * @return konstruktor
+     * @throws AmbiguousConstructorException je nalezeno vice konstruktoru s anotaci Inject
      */
     public Constructor findInjectedConstructor(Class clazz) throws AmbiguousConstructorException {
         List<Constructor> constructors = Arrays.stream(clazz.getConstructors())
