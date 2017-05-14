@@ -9,7 +9,7 @@ import cvut.fit.di.graph.ObjectGraphAPI;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * Hlavni trida, ktera reprezentuje kontejner.
+ * Hlavni trida, ktera reprezentuje DI kontejner.
  * <p>
  * Pouziti muze byt nasledujici.
  * DIContainer container = new DIContainer();
@@ -23,7 +23,8 @@ public class DIContainer {
 
 
     /**
-     * Pomocna servisni trida.
+     * Udruzje kontext, tedy predevsim instanci obejktoveho grafu a uloziste sluzeb.
+     * Dale obsahuje pomocne sluzby.
      */
     private Context context;
 
@@ -33,7 +34,7 @@ public class DIContainer {
     private final Injector injector;
 
     /**
-     * API nad objektovym grafem
+     * API nad objektovym grafem.
      */
     private ObjectGraphAPI objectGraphAPI;
 
@@ -56,6 +57,8 @@ public class DIContainer {
     }
 
     /**
+     * Injektor je nastaven na vychozi - setter inijnection.
+     *
      * @param configType typ konfigurace
      */
     public DIContainer(ConfigType configType) {
@@ -81,12 +84,7 @@ public class DIContainer {
      * @return instanci tridy
      */
     public <T> T getInstance(Class<T> clazz) {
-        try {
-            return context.getInstance(clazz);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return context.getInstance(clazz);
     }
 
 

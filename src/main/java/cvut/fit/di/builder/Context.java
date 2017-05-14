@@ -6,26 +6,37 @@ import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.graph.ObjectGraph;
 import cvut.fit.di.repository.store.ServiceStore;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
- * Pomocna trida ktera udrzuje potrebe informace
- * spojene s objektovym grafem a kontejnerem.
+ * Trida udruzje kontext, tedy predevsim instanci obejktoveho grafu a uloziste sluzeb.
+ * Dale obsahuje pomocne sluzby.
  *
  * @author Samuel Butta
  */
 public class Context {
 
 
+    /**
+     * Uloziste sluzeb.
+     */
+    private ServiceStore serviceStore;
+
+    /**
+     * Objektovy graf reprezentujici zavisle tridy.
+     */
+    private ObjectGraph objectGraph;
+
+
+    /**
+     * Instance injektoru.
+     */
+    private Injector injector;
+
+    /**
+     * Pomocne tridy.
+     */
     private Creator creator;
     private Finder finder;
 
-    private ServiceStore serviceStore;
-
-    // objektovy graf reprezentujici zavisle tridy
-    private ObjectGraph objectGraph;
-
-    private Injector injector;
 
     private Context() {
         // prazdny konstruktor
@@ -47,15 +58,13 @@ public class Context {
 
 
     /**
-     * Na prislusnem injektoru pozada o vytvoreni instance.
+     * Na prislusnem injektoru pozada o ziskani instance.
      *
      * @param initClass poradovana trida
      * @param <T>       typovy parametr
      * @return instance
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
      */
-    public <T> T getInstance(Class<T> initClass) throws InvocationTargetException, IllegalAccessException {
+    public <T> T getInstance(Class<T> initClass) {
         return injector.getInstance(initClass);
     }
 
