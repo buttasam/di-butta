@@ -4,7 +4,6 @@ import cvut.fit.di.builder.injector.config.ConfigType;
 import cvut.fit.di.exception.service.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.repository.entity.Service;
-import cvut.fit.di.repository.entity.ServiceScope;
 
 import java.lang.reflect.Field;
 import java.util.Set;
@@ -38,7 +37,7 @@ public class FieldInjector extends Injector {
             Service service = serviceStore.getOrCreateService(node);
 
             // pokud je singleton a je jiz inicializovana vrat ji
-            if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
+            if (service.singletonAvailable()) {
                 return service.getSingletonInstance();
             } else {
                 //jinak vytvorit novou
@@ -47,7 +46,6 @@ public class FieldInjector extends Injector {
                 Set<Field> fields = finder.findInjectedFields(initClass);
 
                 for (Field field : fields) {
-                    // TODO pouze u private a protected (pak vratit ?)
                     // nastavit field jako zapisovatelny
                     field.setAccessible(true);
                     Class classType = field.getType();

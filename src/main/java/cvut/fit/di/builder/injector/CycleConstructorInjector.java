@@ -1,12 +1,11 @@
 package cvut.fit.di.builder.injector;
 
 import cvut.fit.di.builder.injector.config.ConfigType;
-import cvut.fit.di.exception.service.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.exception.service.AllServiceMustImplementInterfaceException;
+import cvut.fit.di.exception.service.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ServiceNode;
 import cvut.fit.di.proxy.ProxyUtil;
 import cvut.fit.di.repository.entity.Service;
-import cvut.fit.di.repository.entity.ServiceScope;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -90,7 +89,7 @@ public class CycleConstructorInjector extends Injector {
             T target = null;
 
             // pokud je singleton a je jiz inicializovana vrat ji
-            if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
+            if (service.singletonAvailable()) {
                 target = (T) service.getSingletonInstance();
             } else {
                 target = (T) service.getInstance(constructor, params);
