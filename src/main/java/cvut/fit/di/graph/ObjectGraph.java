@@ -127,7 +127,7 @@ public class ObjectGraph {
      * Vytvori uzel grafu, ktery musi implementovat rozhrani.
      *
      * @param clazzInterface typ rozhrani
-     * @param clazzImpl typ implementace
+     * @param clazzImpl      typ implementace
      * @return uzel grafu
      */
     public synchronized ServiceNode createNewNodeWithImpl(Class clazzInterface, Class clazzImpl) {
@@ -151,6 +151,8 @@ public class ObjectGraph {
     /**
      * Overi zda je uzel pro danou tridu pritomny v objektovem grafu.
      * Pokud neni, vyhodi runtime vyjimku.
+     *
+     * @param clazz typ tridy
      */
     public void isNodePresent(Class clazz) {
         if (getNode(clazz) == null) {

@@ -164,9 +164,7 @@ public class Service<T> {
 
 
     /**
-     * pokud je singleton a instance je jiz inicializovana
-     *
-     * @return
+     * @return true pokud je singleton a instance je jiz inicializovana
      */
     public boolean singletonAvailable() {
         return getServiceScope().equals(ServiceScope.SINGLETON) && getSingletonInstance() != null;

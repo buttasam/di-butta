@@ -56,16 +56,15 @@ public abstract class Injector {
      * @param initClass typ pozadovane instance
      * @param <T>       typovy parametr
      * @return instance daneho typu
-     * @throws ServiceIsNotInObjectGraphException
      */
-    public abstract <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException;
+    public abstract <T> T getInstance(Class<T> initClass);
 
 
     /**
      * Rekurzivni metoda nastavi podgraf pokud je
      * configType nastaven na hodnotu ConfigType.INTROSPECTION.
      *
-     * @param initClass
+     * @param initClass typ vstupni tridy
      */
     public void initSubgraphByIntrospection(Class initClass) {
         // inicializace grafu (podgrafu) introspekci

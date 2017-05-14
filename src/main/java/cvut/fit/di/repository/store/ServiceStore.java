@@ -10,8 +10,9 @@ import java.util.Set;
 
 /**
  * Service je trida/sluzba kterou spravuje DI kontejner
- * <p>
  * Trida udruje informace o managed (spravovanych) services.
+ *
+ * @author Samuel Butta
  */
 public class ServiceStore {
 
@@ -28,10 +29,10 @@ public class ServiceStore {
 
 
     /**
-     * Pridava do storu service bez implementace.
+     * Pridava do uloziste service bez implementace.
      *
-     * @param serviceClass
-     * @param <T>
+     * @param serviceClass typ tridy
+     * @param <T>          typovy parametr
      */
     public synchronized <T> void addService(Class<T> serviceClass) {
         // pokud jiz servicea ve storu je, dojte k vyhozeni vyjimky
@@ -44,7 +45,11 @@ public class ServiceStore {
     }
 
     /**
-     * Pridava service s implementaci.
+     * Pridava do uloziste service s implementaci.
+     *
+     * @param serviceInterface typ rozhrani
+     * @param serviceImpl      typ implementace
+     * @param <T>              typovy parametr
      */
     public synchronized <T> void addService(Class<T> serviceInterface, Class<? extends T> serviceImpl) {
         // pokus se najit tuto service
@@ -73,14 +78,10 @@ public class ServiceStore {
 
 
     /**
-     * Pokusi se najit v ulozisti service.
-     * Pokud jiz existuje vrati jeji instanci.
-     * Pokud ne, servicea se prida a vrati jeji instance.
-     * <p>
-     * TODO zatim bez rozhrani
+     * Ziska, pripadne vytvori a prida sluzbu pro danou implementaci.
      *
-     * @param clazz
-     * @return
+     * @param node uzel grafu
+     * @return sluzba
      */
     @SuppressWarnings("unchecked")
     public Service getOrCreateService(ServiceNode node) {

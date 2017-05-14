@@ -19,6 +19,7 @@ public class Creator {
      * Pokud nastane chyba vypise se vyjimka, vrati null.
      *
      * @param clazz typ tridy
+     * @param <T>   typovy parametr
      * @return nove vytvorena instance
      */
     @SuppressWarnings("unchecked")
@@ -39,6 +40,7 @@ public class Creator {
      *
      * @param constructor konstruktor
      * @param params      parametry vkladane do konstruktoru
+     * @param <T>         typovy parametr
      * @return nove vytvorena instance
      */
     @SuppressWarnings("unchecked")
