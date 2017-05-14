@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
+ * Injektor pro injektaz pomoci setteru.
+ * Objektovy graf muze obsahovat cyklickou zavislost.
+ *
  * @author Samuel Butta
  */
 public class SetterInjector extends Injector {
@@ -25,10 +28,11 @@ public class SetterInjector extends Injector {
         this.configType = configType;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object getInstance(Class initClass) {
-
         this.initSubgraphByIntrospection(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
@@ -36,7 +40,6 @@ public class SetterInjector extends Injector {
 
         // pokud existuje
         if (node != null) {
-
             // ziskej nebo vytvor service
             Service service = serviceStore.getOrCreateService(node);
 

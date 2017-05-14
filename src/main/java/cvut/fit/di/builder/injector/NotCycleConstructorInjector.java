@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * Injektor pro konstruktorovou injektaz.
+ * Cyklicke zavislesti nejsou povoleny.
  * Pokud dojde k nalezni cyklu, vyhodi vyjimku.
  *
  * @author Samuel Butta
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 public class NotCycleConstructorInjector extends Injector {
 
     /**
-     * priznak, zda je byl hledan cyklus
+     * Pomocny priznak, kteri urcuje zda je byl hledan cyklus.
      */
     private boolean cycleWasSearched = false;
 
@@ -34,27 +35,27 @@ public class NotCycleConstructorInjector extends Injector {
         this.configType = configType;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException {
-
         // inicializace grafu (podgrafu) introspekci
         initSubgraphByIntrospection(initClass);
 
         // overit zda takova trida existuje v objektovem grafu
         ServiceNode node = objectGraph.getNode(initClass);
 
+        // pokud cyklus nebyl hledan, dojde k detekci cyklu
         if (!cycleWasSearched) {
             if (objectGraphAPI.detectConstructorCycle(initClass)) {
                 throw new CircularDependencyFoundException();
             }
-
             cycleWasSearched = false;
         }
 
         // pokud existuje
         if (node != null) {
-
             // ziskej nebo vytvor service
             Service service = serviceStore.getOrCreateService(node);
 
@@ -62,9 +63,7 @@ public class NotCycleConstructorInjector extends Injector {
             if (service.singletonAvailable()) {
                 return (T) service.getSingletonInstance();
             } else {
-                // konstruktor s anotaci inject
                 Constructor constructor = finder.findInjectedConstructor(node.getClazzImpl());
-
                 List<Object> params = new ArrayList<>();
 
                 if (constructor != null) {

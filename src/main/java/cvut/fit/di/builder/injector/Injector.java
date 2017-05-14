@@ -9,13 +9,17 @@ import cvut.fit.di.graph.ObjectGraphAPI;
 import cvut.fit.di.repository.store.ServiceStore;
 
 /**
+ * Abstraktni predek vsech injektoru.
+ * Pro pripadnou vlastni implementaci je nutne prekryt a naimplementovat metodu getInstance.
+ *
  * @author Samuel Butta
  */
 public abstract class Injector {
 
-    protected Creator creator;
-    protected Finder finder;
 
+    /**
+     * Uloziste sluzeb.
+     */
     protected ServiceStore serviceStore;
 
     /**
@@ -23,11 +27,21 @@ public abstract class Injector {
      */
     protected ConfigType configType;
 
-    // objektovy graf reprezentujici zavisle tridy
+    /**
+     * Objektovy graf reprezentujici zavisle tridy.
+     */
     protected ObjectGraph objectGraph;
 
-    // API dostupne pro vsechny potomky Injectoru
+    /**
+     * API dostupne pro vsechny potomky Injectoru.
+     */
     protected ObjectGraphAPI objectGraphAPI;
+
+    /**
+     * Pomocne sluzby.
+     */
+    protected Creator creator;
+    protected Finder finder;
 
     public Injector() {
         creator = new Creator();
@@ -37,7 +51,7 @@ public abstract class Injector {
     }
 
     /**
-     * Rekurzivni metoda, v ktere dojde k inicializaci objektoveho grafu a inicializaci objketu.
+     * Rekurzivni metoda, v ktere dojde k inicializaci objektoveho grafu a inicializaci objektu.
      *
      * @param initClass typ pozadovane instance
      * @param <T>       typovy parametr
@@ -60,19 +74,36 @@ public abstract class Injector {
         }
     }
 
+    /**
+     * Nastavi typ konfigurace.
+     *
+     * @param configType typ konfigurace
+     */
     public void setConfigType(ConfigType configType) {
         this.configType = configType;
     }
 
-
+    /**
+     * Nastavi instanci uloziste.
+     *
+     * @param serviceStore instance uloziste
+     */
     public void setServiceStore(ServiceStore serviceStore) {
         this.serviceStore = serviceStore;
     }
 
+    /**
+     * Nastavi objektovy graf
+     *
+     * @param objectGraph instance objektoveho grafu
+     */
     public void setObjectGraph(ObjectGraph objectGraph) {
         this.objectGraph = objectGraph;
     }
 
+    /**
+     * Inicializuje API nad objektovym grafem.
+     */
     public void initObjectGraphAPI() {
         this.objectGraphAPI = new ObjectGraphAPI(objectGraph);
     }
