@@ -6,9 +6,7 @@ import cvut.fit.di.builder.injector.config.ConfigType;
 import cvut.fit.di.exception.service.ServiceIsNotInObjectGraphException;
 import cvut.fit.di.graph.ObjectGraph;
 import cvut.fit.di.graph.ObjectGraphAPI;
-import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
-import cvut.fit.di.repository.store.ServiceStoreFactory;
 
 /**
  * @author Samuel Butta
@@ -35,12 +33,7 @@ public abstract class Injector {
         creator = new Creator();
         finder = new Finder();
 
-        serviceStore = ServiceStoreFactory.getServiceStore();
-        objectGraph = ObjectGraphFactory.getObjectGraph();
-
         configType = ConfigType.INTROSPECTION;
-
-        objectGraphAPI = new ObjectGraphAPI(objectGraph);
     }
 
     public abstract <T> T getInstance(Class<T> initClass) throws ServiceIsNotInObjectGraphException;
@@ -54,7 +47,7 @@ public abstract class Injector {
      */
     public void initSubgraphByIntrospection(Class initClass) {
         // inicializace grafu (podgrafu) introspekci
-        if(configType.equals(ConfigType.INTROSPECTION)) {
+        if (configType.equals(ConfigType.INTROSPECTION)) {
             objectGraph.initSubgraphByNode(initClass);
         }
     }
@@ -63,4 +56,16 @@ public abstract class Injector {
         this.configType = configType;
     }
 
+
+    public void setServiceStore(ServiceStore serviceStore) {
+        this.serviceStore = serviceStore;
+    }
+
+    public void setObjectGraph(ObjectGraph objectGraph) {
+        this.objectGraph = objectGraph;
+    }
+
+    public void initObjectGraphAPI() {
+        this.objectGraphAPI = new ObjectGraphAPI(objectGraph);
+    }
 }

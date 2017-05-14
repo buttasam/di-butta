@@ -48,7 +48,7 @@ public class DIContainer {
 
 
     /**
-     * @param injector
+     * @param injector instance injektoru, podle ktere se rozlisuje typ injektaze
      */
     public DIContainer(Injector injector) {
         this.injector = injector;
@@ -56,7 +56,7 @@ public class DIContainer {
     }
 
     /**
-     * @param configType
+     * @param configType typ konfigurace
      */
     public DIContainer(ConfigType configType) {
         this.injector = new SetterInjector();
@@ -66,7 +66,6 @@ public class DIContainer {
 
     /**
      * Zakladni inicializacni metoda.
-     * Vola buildera, ktery vytvori objektovy graf.
      */
     private void init() {
         context = new Context(injector);

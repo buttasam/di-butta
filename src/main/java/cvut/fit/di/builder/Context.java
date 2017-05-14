@@ -4,9 +4,7 @@ import cvut.fit.di.builder.helper.Creator;
 import cvut.fit.di.builder.helper.Finder;
 import cvut.fit.di.builder.injector.Injector;
 import cvut.fit.di.graph.ObjectGraph;
-import cvut.fit.di.graph.ObjectGraphFactory;
 import cvut.fit.di.repository.store.ServiceStore;
-import cvut.fit.di.repository.store.ServiceStoreFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -39,8 +37,12 @@ public class Context {
         creator = new Creator();
         finder = new Finder();
 
-        serviceStore = ServiceStoreFactory.getServiceStore();
-        objectGraph = ObjectGraphFactory.getObjectGraph();
+        serviceStore = new ServiceStore();
+        objectGraph = new ObjectGraph();
+
+        injector.setObjectGraph(objectGraph);
+        injector.setServiceStore(serviceStore);
+        injector.initObjectGraphAPI();
     }
 
 
