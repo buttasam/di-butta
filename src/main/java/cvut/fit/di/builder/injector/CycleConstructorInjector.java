@@ -48,7 +48,7 @@ public class CycleConstructorInjector extends Injector {
         // overit zda takova trida existuje v objektovem grafu
         ServiceNode node = objectGraph.getNode(initClass);
 
-        if(!objectGraphAPI.allServicesHasInterface()) {
+        if (!objectGraphAPI.allServicesHasInterface()) {
             throw new AllServiceMustImplementInterfaceException();
         }
 
@@ -93,13 +93,7 @@ public class CycleConstructorInjector extends Injector {
             if (service.getServiceScope().equals(ServiceScope.SINGLETON) && service.getSingletonInstance() != null) {
                 target = (T) service.getSingletonInstance();
             } else {
-                if (params.size() != 0) {
-                    target = creator.createNewInstance(constructor, params);
-                    service.setSingletonInstance(target);
-                } else {
-                    target = creator.createNewInstance(node.getClazzImpl());
-                    service.setSingletonInstance(target);
-                }
+                target = (T) service.getInstance(constructor, params);
             }
 
             proxy = ProxyUtil.setInstance(proxy, target);

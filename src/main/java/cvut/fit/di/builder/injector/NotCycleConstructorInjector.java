@@ -84,15 +84,7 @@ public class NotCycleConstructorInjector extends Injector {
                     }).collect(Collectors.toList());
                 }
 
-                if (params.size() != 0) {
-                    Object instance = creator.createNewInstance(constructor, params);
-                    service.setSingletonInstance(instance);
-                    return (T) instance;
-                } else {
-                    Object instance = creator.createNewInstance(node.getClazzImpl());
-                    service.setSingletonInstance(instance);
-                    return (T) instance;
-                }
+                return (T) service.getInstance(constructor, params);
             }
 
         } else {

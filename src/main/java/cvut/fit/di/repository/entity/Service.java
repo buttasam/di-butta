@@ -4,6 +4,8 @@ import cvut.fit.di.anotation.scope.Prototype;
 import cvut.fit.di.builder.helper.Creator;
 
 import javax.inject.Singleton;
+import java.lang.reflect.Constructor;
+import java.util.List;
 
 /**
  * Reprezentuje ulozenou sluzbu.
@@ -99,15 +101,27 @@ public class Service<T> {
      * @return instance podle scope
      */
     public Object getInstance() {
+        return getInstance(null, null);
+    }
+
+    public Object getInstance(Constructor constructor, List<Object> params) {
         Object result = null;
 
         switch (serviceScope) {
             case PROTOTYPE:
                 Creator creator = new Creator();
-                result = creator.createNewInstance(classImpl);
+                if(constructor == null || params == null || params.isEmpty()) {
+                    result = creator.createNewInstance(classImpl);
+                } else {
+                    result = creator.createNewInstance(constructor, params);
+                }
                 break;
             case SINGLETON:
-                result = lazySingletonInit();
+                if(constructor == null || params == null || params.isEmpty()) {
+                    result = lazySingletonInit();
+                } else {
+                    result = lazySingletonInit(constructor, params);
+                }
                 break;
         }
         return result;
@@ -122,6 +136,14 @@ public class Service<T> {
         if (singletonInstance == null) {
             Creator creator = new Creator();
             singletonInstance = creator.createNewInstance(classImpl);
+        }
+        return singletonInstance;
+    }
+
+    private Object lazySingletonInit(Constructor constructor, List<Object> params) {
+        if (singletonInstance == null) {
+            Creator creator = new Creator();
+            singletonInstance = creator.createNewInstance(constructor, params);
         }
         return singletonInstance;
     }
