@@ -10,8 +10,8 @@ import javax.inject.Singleton;
 public class SmsMailer implements Mailer {
 
     @Override
-    public void send() {
-        System.out.println("sms mailer");
+    public String send() {
+        return SmsMailer.class.toString();
     }
 
 }

@@ -5,5 +5,5 @@ package cvut.fit.di.commonEntity.managed.withInterface;
  */
 public interface Mailer {
 
-    void send();
+    String send();
 }

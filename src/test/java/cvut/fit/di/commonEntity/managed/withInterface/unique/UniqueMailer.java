@@ -5,5 +5,5 @@ package cvut.fit.di.commonEntity.managed.withInterface.unique;
  */
 public interface UniqueMailer {
 
-    void send();
+    String test();
 }

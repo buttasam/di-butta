@@ -1,5 +1,6 @@
 package cvut.fit.di.proxy;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -15,7 +16,7 @@ public class ProxyUtilTest {
         ServiceA target = new ServiceAImpl();
         proxy = ProxyUtil.setInstance(proxy, target);
 
-        proxy.test();
+        Assert.assertEquals(ServiceAImpl.class.toString(), proxy.test());
     }
 
 }

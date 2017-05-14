@@ -9,5 +9,5 @@ public interface CycleA {
 
     CycleC getC();
 
-    void test();
+    String test();
 }

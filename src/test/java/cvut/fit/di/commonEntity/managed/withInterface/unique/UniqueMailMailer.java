@@ -10,8 +10,8 @@ import javax.inject.Singleton;
 public class UniqueMailMailer implements UniqueMailer {
 
     @Override
-    public void send() {
-        System.out.println("mail mailer");
+    public String test() {
+        return UniqueMailMailer.class.toString();
     }
 
 }

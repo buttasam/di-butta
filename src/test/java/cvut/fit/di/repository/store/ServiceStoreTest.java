@@ -23,6 +23,7 @@ public class ServiceStoreTest {
 
         ManagedOne managedOne = (ManagedOne) serviceStore.getInstance(ManagedOne.class);
 
+        Assert.assertEquals(ManagedOne.class.toString(), managedOne.test());
         Assert.assertEquals(1, serviceStore.managedServicesCount());
     }
 

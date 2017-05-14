@@ -5,6 +5,6 @@ package cvut.fit.di.proxy;
  */
 interface ServiceA {
 
-    void test();
+    String test();
 
 }

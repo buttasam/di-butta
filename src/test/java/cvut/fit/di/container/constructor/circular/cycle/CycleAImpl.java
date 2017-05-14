@@ -30,7 +30,7 @@ public class CycleAImpl implements CycleA {
     }
 
     @Override
-    public void test() {
-        System.out.println("test");
+    public String test() {
+        return CycleAImpl.class.toString();
     }
 }
