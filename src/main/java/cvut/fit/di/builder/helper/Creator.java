@@ -34,6 +34,13 @@ public class Creator {
         }
     }
 
+    /**
+     * Vytvori novou instanci podle daneho konstruktoru a seznamu parametru.
+     *
+     * @param constructor konstruktor
+     * @param params      parametry vkladane do konstruktoru
+     * @return nove vytvorena instance
+     */
     @SuppressWarnings("unchecked")
     public <T> T createNewInstance(Constructor constructor, List<Object> params) {
         try {
